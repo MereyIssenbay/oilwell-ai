@@ -1,0 +1,13 @@
+# OilWell AI project settings. Role files are auto-discovered in .codex/agents/.
+# Verified against current official Codex documentation on 2026-11-09:
+# https://learn.chatgpt.com/docs/agent-configuration/subagents
+# https://learn.chatgpt.com/docs/config-file/config-reference
+# This limit permits three spawned-agent threads in addition to the primary.
+# Model, provider, permissions, and credentials inherit from the parent/user configuration.
+
+[features]
+multi_agent = true
+
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 3

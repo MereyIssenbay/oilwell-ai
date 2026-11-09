@@ -1,0 +1,529 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OilWell AI canonical prediction",
+  "description": "Design contract v1.0.0. Semantic invariants and registry validation are also required; see docs/API_CONTRACT.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "prediction_id",
+    "timestamp",
+    "well_id",
+    "event_type",
+    "confidence",
+    "confidence_kind",
+    "model_version",
+    "feature_spec_version",
+    "policy_version",
+    "sensor_evidence",
+    "alert_status",
+    "abstention_reason",
+    "window",
+    "quality",
+    "provenance",
+    "execution"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "prediction_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "timestamp": {
+      "$ref": "#/$defs/utc"
+    },
+    "well_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^3w:2\\.0\\.0:(real|simulated|drawn):[A-Za-z0-9_-]+$"
+    },
+    "event_type": {
+      "enum": [
+        "normal",
+        "abrupt_increase_of_bsw",
+        "spurious_closure_of_dhsv",
+        "severe_slugging",
+        "flow_instability",
+        "rapid_productivity_loss",
+        "quick_restriction_in_pck",
+        "scaling_in_pck",
+        "hydrate_in_production_line",
+        "hydrate_in_service_line",
+        "unknown"
+      ]
+    },
+    "confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "confidence_kind": {
+      "enum": [
+        "raw_probability",
+        "calibrated_probability",
+        "unavailable"
+      ]
+    },
+    "model_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "feature_spec_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "policy_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "sensor_evidence": {
+      "type": "array",
+      "maxItems": 128,
+      "items": {
+        "$ref": "#/$defs/sensor_evidence"
+      }
+    },
+    "alert_status": {
+      "enum": [
+        "normal",
+        "watch",
+        "alert",
+        "insufficient_data"
+      ]
+    },
+    "abstention_reason": {
+      "enum": [
+        null,
+        "insufficient_history",
+        "missing_required_sensors",
+        "invalid_data",
+        "low_confidence",
+        "unsupported_input"
+      ]
+    },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end",
+        "sample_count",
+        "expected_sample_count"
+      ],
+      "properties": {
+        "start": {
+          "$ref": "#/$defs/utc"
+        },
+        "end": {
+          "$ref": "#/$defs/utc"
+        },
+        "sample_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "expected_sample_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "missing_fraction",
+        "warnings"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "valid",
+            "degraded",
+            "invalid"
+          ]
+        },
+        "missing_fraction": {
+          "$ref": "#/$defs/fraction"
+        },
+        "warnings": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dataset_name",
+        "dataset_version",
+        "dataset_revision",
+        "data_manifest_id",
+        "scope_manifest_id",
+        "source_instance_id",
+        "source_path",
+        "source_sha256",
+        "source_kind",
+        "well_identity_kind",
+        "source_timestamp",
+        "time_basis",
+        "preprocessing_version",
+        "model_artifact_sha256"
+      ],
+      "properties": {
+        "dataset_name": {
+          "const": "3W"
+        },
+        "dataset_version": {
+          "const": "2.0.0"
+        },
+        "dataset_revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "data_manifest_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "scope_manifest_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "source_instance_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "source_path": {
+          "type": "string",
+          "maxLength": 512,
+          "pattern": "^dataset/[0-9]/[A-Za-z0-9_-]+\\.parquet$"
+        },
+        "source_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "source_kind": {
+          "enum": [
+            "real",
+            "simulated",
+            "drawn"
+          ]
+        },
+        "well_identity_kind": {
+          "enum": [
+            "anonymized_well",
+            "synthetic_instance"
+          ]
+        },
+        "source_timestamp": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "time_basis": {
+          "enum": [
+            "source_naive_assumed_utc",
+            "source_utc_verified"
+          ]
+        },
+        "preprocessing_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "model_artifact_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "replay_id",
+        "sequence",
+        "speed_multiplier",
+        "generated_at"
+      ],
+      "properties": {
+        "mode": {
+          "const": "historical_replay"
+        },
+        "replay_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "speed_multiplier": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 20
+        },
+        "generated_at": {
+          "$ref": "#/$defs/utc"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "const": "unknown"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "confidence": {
+            "type": "null"
+          },
+          "confidence_kind": {
+            "const": "unavailable"
+          },
+          "alert_status": {
+            "const": "insufficient_data"
+          },
+          "abstention_reason": {
+            "enum": [
+              "insufficient_history",
+              "missing_required_sensors",
+              "invalid_data",
+              "low_confidence",
+              "unsupported_input"
+            ]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "confidence": {
+            "type": "number"
+          },
+          "confidence_kind": {
+            "enum": [
+              "raw_probability",
+              "calibrated_probability"
+            ]
+          },
+          "alert_status": {
+            "enum": [
+              "normal",
+              "watch",
+              "alert"
+            ]
+          },
+          "abstention_reason": {
+            "type": "null"
+          },
+          "sensor_evidence": {
+            "minItems": 1,
+            "contains": {
+              "type": "object",
+              "required": [
+                "value"
+              ],
+              "properties": {
+                "value": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "quality": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "valid",
+                  "degraded"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "alert_status": {
+            "const": "normal"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "event_type": {
+            "const": "normal"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "provenance": {
+            "properties": {
+              "source_kind": {
+                "const": "real"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "provenance": {
+            "properties": {
+              "well_identity_kind": {
+                "const": "anonymized_well"
+              }
+            }
+          },
+          "well_id": {
+            "pattern": "^3w:2\\.0\\.0:real:"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "provenance": {
+            "properties": {
+              "well_identity_kind": {
+                "const": "synthetic_instance"
+              }
+            }
+          },
+          "well_id": {
+            "pattern": "^3w:2\\.0\\.0:(simulated|drawn):"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "utc": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "Z$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "fraction": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "sensor_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "sensor_name",
+        "statistic",
+        "value",
+        "unit",
+        "window_start",
+        "window_end",
+        "missing_fraction",
+        "method"
+      ],
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "sensor_name": {
+          "enum": [
+            "ABER-CKGL",
+            "ABER-CKP",
+            "ESTADO-DHSV",
+            "ESTADO-M1",
+            "ESTADO-M2",
+            "ESTADO-PXO",
+            "ESTADO-SDV-GL",
+            "ESTADO-SDV-P",
+            "ESTADO-W1",
+            "ESTADO-W2",
+            "ESTADO-XO",
+            "P-ANULAR",
+            "P-JUS-BS",
+            "P-JUS-CKGL",
+            "P-JUS-CKP",
+            "P-MON-CKGL",
+            "P-MON-CKP",
+            "P-MON-SDV-P",
+            "P-PDG",
+            "PT-P",
+            "P-TPT",
+            "QBS",
+            "QGL",
+            "T-JUS-CKP",
+            "T-MON-CKP",
+            "T-PDG",
+            "T-TPT"
+          ]
+        },
+        "statistic": {
+          "enum": [
+            "latest",
+            "mean",
+            "min",
+            "max",
+            "std",
+            "slope"
+          ]
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "window_start": {
+          "$ref": "#/$defs/utc"
+        },
+        "window_end": {
+          "$ref": "#/$defs/utc"
+        },
+        "missing_fraction": {
+          "$ref": "#/$defs/fraction"
+        },
+        "method": {
+          "const": "observed_summary"
+        }
+      }
+    }
+  }
+}

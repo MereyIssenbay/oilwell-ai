@@ -1,0 +1,67 @@
+# Local credentials and environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+.aws/
+
+# Python and tooling
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+*.egg-info/
+
+# Frontend and builds
+node_modules/
+dist/
+build/
+coverage/
+.vite/
+playwright-report/
+test-results/
+
+# Data and generated artifacts: retain only scaffolding
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/manifests/local/
+ml/artifacts/*
+!ml/artifacts/.gitkeep
+ml/runs/*
+!ml/runs/.gitkeep
+llm/index/*
+!llm/index/.gitkeep
+*.parquet
+*.feather
+*.pkl
+*.pickle
+*.joblib
+*.onnx
+
+# Local service state
+.local/
+.cache/
+volumes/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Editor and OS state; project .codex config is intentionally versioned
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini

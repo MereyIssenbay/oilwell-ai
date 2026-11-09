@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0.0",
+  "prediction_id": "00000000-0000-4000-8000-000000000001",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "well_id": "3w:2.0.0:simulated:example-only",
+  "event_type": "unknown",
+  "confidence": null,
+  "confidence_kind": "unavailable",
+  "model_version": "example-only-no-trained-model",
+  "feature_spec_version": "example-only",
+  "policy_version": "example-only",
+  "sensor_evidence": [],
+  "alert_status": "insufficient_data",
+  "abstention_reason": "insufficient_history",
+  "window": {
+    "start": "2026-01-01T00:00:00Z",
+    "end": "2026-01-01T00:00:00Z",
+    "sample_count": 0,
+    "expected_sample_count": 1
+  },
+  "quality": {
+    "status": "invalid",
+    "missing_fraction": 1,
+    "warnings": [
+      "SYNTHETIC_CONTRACT_FIXTURE_NOT_DATA_OR_MODEL_OUTPUT"
+    ]
+  },
+  "provenance": {
+    "dataset_name": "3W",
+    "dataset_version": "2.0.0",
+    "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+    "data_manifest_id": "example-only-not-acquired",
+    "scope_manifest_id": "example-only",
+    "source_instance_id": "example-only-not-a-registered-instance",
+    "source_path": "dataset/1/SIMULATED_EXAMPLE.parquet",
+    "source_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "source_kind": "simulated",
+    "well_identity_kind": "synthetic_instance",
+    "source_timestamp": "2026-01-01 00:00:00",
+    "time_basis": "source_naive_assumed_utc",
+    "preprocessing_version": "example-only",
+    "model_artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "execution": {
+    "mode": "historical_replay",
+    "replay_id": "00000000-0000-4000-8000-000000000002",
+    "sequence": 1,
+    "speed_multiplier": 1,
+    "generated_at": "2026-11-09T00:00:00Z"
+  }
+}
