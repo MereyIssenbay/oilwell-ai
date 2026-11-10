@@ -1,6 +1,6 @@
 # OilWell AI architecture
 
-Status: Phase 0 design, 2026-11-09. No application, database, trained model or dataset is present. Phase 1 requires approval. Decisions are recorded in [DECISIONS.md](DECISIONS.md); upstream facts are in [DATASET_METADATA.md](DATASET_METADATA.md).
+Architecture established in Phase 0 on 2026-11-09. Phase 1 on 2026-11-10 implemented bounded raw acquisition and audit only; see [DATASET_AUDIT.md](DATASET_AUDIT.md). No application, database, preprocessing pipeline or trained model is present. All other components below remain planned. Decisions are recorded in [DECISIONS.md](DECISIONS.md); upstream facts are in [DATASET_METADATA.md](DATASET_METADATA.md).
 
 ## Product boundary and MVP
 
@@ -90,7 +90,7 @@ Track replay lag, worker heartbeat, inference duration, queue/event backlog, inv
 
 ## Repository layout
 
-Only documentation/configuration and empty ownership placeholders exist in Phase 0. Folders below define later implementation boundaries; they do not indicate completed services.
+Phase 0 established documentation/configuration and ownership placeholders. Phase 1 adds root data scripts, manifests, raw sources, reports and acquisition/validation tests. Folders below define implementation boundaries; they do not indicate completed application services.
 
 ```text
 oilwell-ai/
@@ -98,6 +98,7 @@ oilwell-ai/
   README.md                     # entry point and phase gate
   .gitignore
   .env.example
+  requirements-data.txt        # pinned Phase 1 audit environment
   .codex/config.toml
   .codex/agents/*.toml           # six project roles
   data/{raw,interim,processed,manifests}/
@@ -107,6 +108,8 @@ oilwell-ai/
   llm/{evidence,prompts,providers,index}/
   tests/{data,ml,backend,frontend,llm,contract,integration,e2e,qa}/
   scripts/{data,ml}/
+  scripts/{download_data.py,validate_data.py}
+  reports/data_summary.json
   docs/{contracts,reviews}/
 ```
 

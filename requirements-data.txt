@@ -1,0 +1,14 @@
+# Exact Phase 1 audit environment; Python 3.11+ (executed on Python 3.13.3).
+# Direct dependencies and resolved transitive dependencies are pinned.
+numpy==2.2.6
+pandas==2.2.3
+pyarrow==26.0.1
+python-dateutil==4.0.0
+pytz==2026.6
+tzdata==2026.6
+pytest==9.1.1
+colorama==0.4.6
+iniconfig==2.3.1
+packaging==26.3
+pluggy==1.7.0
+Pygments==2.21.0

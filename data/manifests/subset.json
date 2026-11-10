@@ -1,0 +1,467 @@
+{
+  "schema_version": "1.0.0",
+  "status": "complete",
+  "dataset": {
+    "repository": "https://github.com/petrobras/3W",
+    "revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+    "version": "2.0.0",
+    "license": "CC-BY-4.0",
+    "code_license": "Apache-2.0",
+    "attribution": "Petrobras and the 3W contributors",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "selection": {
+    "strategy": "smallest_per_available_event_origin_stratum_then_new_real_wells",
+    "version": "1.0.0",
+    "tie_break": "source_path_ascending",
+    "random_seed": null,
+    "extra_real_wells_requested": 4,
+    "max_files": 30,
+    "max_bytes": 104857600,
+    "selected_file_count": 23,
+    "selected_data_bytes": 10719108,
+    "inventory": {
+      "file_count": 2228,
+      "bytes": 1873131359,
+      "by_origin": {
+        "drawn": 20,
+        "real": 1119,
+        "simulated": 1089
+      },
+      "by_event_directory": {
+        "0": 594,
+        "1": 128,
+        "2": 38,
+        "3": 106,
+        "4": 343,
+        "5": 450,
+        "6": 221,
+        "7": 46,
+        "8": 95,
+        "9": 207
+      },
+      "available_strata": [
+        {
+          "event_code": 0,
+          "source_kind": "real",
+          "files": 594
+        },
+        {
+          "event_code": 1,
+          "source_kind": "drawn",
+          "files": 10
+        },
+        {
+          "event_code": 1,
+          "source_kind": "real",
+          "files": 4
+        },
+        {
+          "event_code": 1,
+          "source_kind": "simulated",
+          "files": 114
+        },
+        {
+          "event_code": 2,
+          "source_kind": "real",
+          "files": 22
+        },
+        {
+          "event_code": 2,
+          "source_kind": "simulated",
+          "files": 16
+        },
+        {
+          "event_code": 3,
+          "source_kind": "real",
+          "files": 32
+        },
+        {
+          "event_code": 3,
+          "source_kind": "simulated",
+          "files": 74
+        },
+        {
+          "event_code": 4,
+          "source_kind": "real",
+          "files": 343
+        },
+        {
+          "event_code": 5,
+          "source_kind": "real",
+          "files": 11
+        },
+        {
+          "event_code": 5,
+          "source_kind": "simulated",
+          "files": 439
+        },
+        {
+          "event_code": 6,
+          "source_kind": "real",
+          "files": 6
+        },
+        {
+          "event_code": 6,
+          "source_kind": "simulated",
+          "files": 215
+        },
+        {
+          "event_code": 7,
+          "source_kind": "drawn",
+          "files": 10
+        },
+        {
+          "event_code": 7,
+          "source_kind": "real",
+          "files": 36
+        },
+        {
+          "event_code": 8,
+          "source_kind": "real",
+          "files": 14
+        },
+        {
+          "event_code": 8,
+          "source_kind": "simulated",
+          "files": 81
+        },
+        {
+          "event_code": 9,
+          "source_kind": "real",
+          "files": 57
+        },
+        {
+          "event_code": 9,
+          "source_kind": "simulated",
+          "files": 150
+        }
+      ]
+    },
+    "limitations": [
+      "Purposive size-biased audit subset, not a prevalence estimate.",
+      "No train/validation/test partitions; no training suitability claim.",
+      "Directory/origin coverage does not prove row-label or phase coverage."
+    ]
+  },
+  "provenance": {
+    "tree_url": "https://api.github.com/repos/petrobras/3W/git/trees/914af287b1cf3e5207dce0da1e9dc08361c9adeb?recursive=1",
+    "tree_response_sha256": "8019ae8493caebbfb3f87b06278f3b7e664df1cdbf6012761c11553da5ec38ac",
+    "created_at": "2026-11-10T06:24:02.768900Z",
+    "transformations": "None; original downloaded file bytes are retained unchanged."
+  },
+  "metadata": [
+    {
+      "source_path": "dataset/dataset.ini",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/dataset.ini",
+      "size_bytes": 4699,
+      "git_blob_sha1": "4c4799e80e04a9cf8b10cb3f9a23f1c487797cc9",
+      "sha256": "c5ffad72bc1c46bccffa1e18412f2ddb87ca0e96eb7d2dfba92a4bc38a45bba2"
+    },
+    {
+      "source_path": "3W_DATASET_STRUCTURE.md",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/3W_DATASET_STRUCTURE.md",
+      "size_bytes": 1330,
+      "git_blob_sha1": "c9b72b1c1d13ebc9696e4eb9a1c76fb2ef170706",
+      "sha256": "4e61fb13dbc303b5a80acbb1ec3ba1e2a3621b01455f557ecb0908418362b578"
+    },
+    {
+      "source_path": "README.md",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/README.md",
+      "size_bytes": 11458,
+      "git_blob_sha1": "e3c7a128dfe43593bf66cf514fada806ec851c37",
+      "sha256": "4fc516c12b5c87879c216107554fa38205b4003fd7eae712562c95b524ec740a"
+    },
+    {
+      "source_path": "dataset/README.md",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/README.md",
+      "size_bytes": 3721,
+      "git_blob_sha1": "f0508402f2ce452435f961847287362365f6cb91",
+      "sha256": "8081cce1af323266434d901c3896f7cc77b6e110853093f16ac130162046825a"
+    },
+    {
+      "source_path": "dataset/LICENSE-CC-BY",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/LICENSE-CC-BY",
+      "size_bytes": 18650,
+      "git_blob_sha1": "2f244ac814036ecd9ba9f69782e89ce6b1dca9eb",
+      "sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661"
+    },
+    {
+      "source_path": "LICENSE.md",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/LICENSE.md",
+      "size_bytes": 11355,
+      "git_blob_sha1": "08950ff65004b1d6718ac13dbbfebc642af3d198",
+      "sha256": "b82d5408ee0b4e796bc8dbbef96c72584be7cc758f0489876f81dd493f2d03c1"
+    },
+    {
+      "source_path": "CITATION.md",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/CITATION.md",
+      "size_bytes": 1391,
+      "git_blob_sha1": "86861ddcedbead65a291cccf58f192d6b5531560",
+      "sha256": "b9395170a4c3b1cf8f65f7e056a29f1dbaf9487142419e91b7323ee938ee6b56"
+    },
+    {
+      "source_path": "toolkit/ThreeWToolkit/utils/downloader.py",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/toolkit/ThreeWToolkit/utils/downloader.py",
+      "size_bytes": 5931,
+      "git_blob_sha1": "bb6836a35b13fed4bf43c5953df80324966de358",
+      "sha256": "8c39b46ced77d93e4ab831a1792ca5d65499f88e4bb0866ec9e5f7dc1463a7a9"
+    }
+  ],
+  "files": [
+    {
+      "source_path": "dataset/0/WELL-00002_20131214190030.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/0/WELL-00002_20131214190030.parquet",
+      "size_bytes": 88321,
+      "git_blob_sha1": "7d17ceb209558f54235b561b77dfbb0fec83056f",
+      "sha256": "85beb567d3323a10501711f7e115ebdb5a6b82fdf5cbde818aed64858cc0c867",
+      "source_kind": "real",
+      "event_code": 0,
+      "well_identifier": "WELL-00002",
+      "source_instance_id": "3w:8c4342c6ec4956bb26d1d3f327a7e0d26b842af5e4236ec64e8845e058fa2376"
+    },
+    {
+      "source_path": "dataset/0/WELL-00005_20170910020004.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/0/WELL-00005_20170910020004.parquet",
+      "size_bytes": 122465,
+      "git_blob_sha1": "de8ee5d9fa68da2eddfbd2d71d967677e0e8d777",
+      "sha256": "acd72cd0967dfdb619c17c349fe7738ad5b01abaa6e073fb5349852eb8273554",
+      "source_kind": "real",
+      "event_code": 0,
+      "well_identifier": "WELL-00005",
+      "source_instance_id": "3w:a5d9fe5c7fa8885363974ce24acbe5c47d146a86e8001c782190e119bc99a544"
+    },
+    {
+      "source_path": "dataset/0/WELL-00006_20170223200000.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/0/WELL-00006_20170223200000.parquet",
+      "size_bytes": 187624,
+      "git_blob_sha1": "27e6f08257ea08542f839143fd14e1641488be98",
+      "sha256": "21813bc53a50728d6d550fbc625936ab830193e3b01187d310c498f5a2af3dae",
+      "source_kind": "real",
+      "event_code": 0,
+      "well_identifier": "WELL-00006",
+      "source_instance_id": "3w:624bb25b04f3ac466c9fb599cdcea9dcaa341160e16e9443b070cbd7726b469f"
+    },
+    {
+      "source_path": "dataset/0/WELL-00008_20170816230146.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/0/WELL-00008_20170816230146.parquet",
+      "size_bytes": 130964,
+      "git_blob_sha1": "7e17bb05d61609757dd1db478754eca9630fb01c",
+      "sha256": "4cdbe289610013cbce34334febabd7267190ccd1e664eb0700933e009740dcaa",
+      "source_kind": "real",
+      "event_code": 0,
+      "well_identifier": "WELL-00008",
+      "source_instance_id": "3w:2f2adddcccf3c82167c67ae404f3f9b72e3b689a8c298c922064e5ae9b8fcd12"
+    },
+    {
+      "source_path": "dataset/1/DRAWN_00008.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/1/DRAWN_00008.parquet",
+      "size_bytes": 237071,
+      "git_blob_sha1": "c5e8d25a9b6ecfb482f30bb4c4e90dedfbe2afa9",
+      "sha256": "6c7d930ebdc424a62dba5e2ff64901d32ac90eac6ce68f813347de131ac79db0",
+      "source_kind": "drawn",
+      "event_code": 1,
+      "well_identifier": null,
+      "source_instance_id": "3w:a5c7673f77c2ecd9de5dd928a25615221f9d1d964e9f221a0a1c9d7554c668b7"
+    },
+    {
+      "source_path": "dataset/1/SIMULATED_00041.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/1/SIMULATED_00041.parquet",
+      "size_bytes": 803624,
+      "git_blob_sha1": "44d559c0e118cc1ac49e8a2ea8c6e228daf63ebd",
+      "sha256": "13e62d619d19aed2ff70173ad1a5ff3b31cb9da2cfd86304c68d7cfbecdb1ee7",
+      "source_kind": "simulated",
+      "event_code": 1,
+      "well_identifier": null,
+      "source_instance_id": "3w:fe47a871168d9d105bbc3be8b89efd60cfa8f1fb0cb88a1f1f17cb1db310e364"
+    },
+    {
+      "source_path": "dataset/1/WELL-00002_20140126180030.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/1/WELL-00002_20140126180030.parquet",
+      "size_bytes": 193801,
+      "git_blob_sha1": "a80e8402c14230fc6957a89f7aea6294d4e044e0",
+      "sha256": "fc5862ae8a6ee73b7cb4844ede90d481785c8941c846e93694887fc53c7db0b1",
+      "source_kind": "real",
+      "event_code": 1,
+      "well_identifier": "WELL-00002",
+      "source_instance_id": "3w:52a37a0952e64983ba9a2a9d585d56aed7bf2c55b609cfa930fd9baf66953731"
+    },
+    {
+      "source_path": "dataset/2/SIMULATED_00016.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/2/SIMULATED_00016.parquet",
+      "size_bytes": 747467,
+      "git_blob_sha1": "2352be9a20de9dd487328a224a16338fde48c585",
+      "sha256": "9c8c17da78eca2739694b3deb94e17c02bdaeb0719848fb49ed995546563957c",
+      "source_kind": "simulated",
+      "event_code": 2,
+      "well_identifier": null,
+      "source_instance_id": "3w:908f0a7ffcc00dab1dab9a4776e1bf57e4f95f273c1c86877389836721083ca9"
+    },
+    {
+      "source_path": "dataset/2/WELL-00011_20140530083203.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/2/WELL-00011_20140530083203.parquet",
+      "size_bytes": 115343,
+      "git_blob_sha1": "a220d4f8fb655b1a5030817206d53fe09f62d269",
+      "sha256": "3c371ca8b5645e99e58625ee412736ca95ef469948605519dc6a115719e60be1",
+      "source_kind": "real",
+      "event_code": 2,
+      "well_identifier": "WELL-00011",
+      "source_instance_id": "3w:3b7750afe480cb1d04361795d4a5cded832ae3a05d5ef30f533d440c81bfb4cf"
+    },
+    {
+      "source_path": "dataset/3/SIMULATED_00045.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/3/SIMULATED_00045.parquet",
+      "size_bytes": 461713,
+      "git_blob_sha1": "6dfa6762eb7b99a6bd5d5b8c8af433c31376180d",
+      "sha256": "4c663346ca209648420b2898936d4acd34e52380dfb6407a41f4eb004fd3d13d",
+      "source_kind": "simulated",
+      "event_code": 3,
+      "well_identifier": null,
+      "source_instance_id": "3w:18d354757119f8b2e8587c976d0e530e45339bdd4449b4353627bf731a31abe2"
+    },
+    {
+      "source_path": "dataset/3/WELL-00001_20170320120025.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/3/WELL-00001_20170320120025.parquet",
+      "size_bytes": 468294,
+      "git_blob_sha1": "bb4d668a5055f0eeae39b6564033aafa98744bea",
+      "sha256": "1ba4c1385ff94b09d5bf9e424bebc77d05b61e99469b4f22a305e6722dc86672",
+      "source_kind": "real",
+      "event_code": 3,
+      "well_identifier": "WELL-00001",
+      "source_instance_id": "3w:d68c116498825185f2e7b1c5b972bf9dcd8bb0734c2e1d03ff0120ab8d15c810"
+    },
+    {
+      "source_path": "dataset/4/WELL-00002_20140121070214.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/4/WELL-00002_20140121070214.parquet",
+      "size_bytes": 89777,
+      "git_blob_sha1": "c60d533e467c11427cdb09c48c69ae70fa248ae2",
+      "sha256": "4fcb5e85d481d38d962f43307026bfbc036862cf6a71fc249daeb087409bac4a",
+      "source_kind": "real",
+      "event_code": 4,
+      "well_identifier": "WELL-00002",
+      "source_instance_id": "3w:f6dfc1ba48716c3b327db2b73695f0de8c5a339f32a5cf48a44f85fed2c962a3"
+    },
+    {
+      "source_path": "dataset/4/WELL-00010_20180428130249.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/4/WELL-00010_20180428130249.parquet",
+      "size_bytes": 129975,
+      "git_blob_sha1": "e3bdbad76af3b6d3109d86118f37545efea817c2",
+      "sha256": "d5efcf34a24e7363285cb6d2ea1d570c9b5a9127e8a2b0c2cc5aa626fe258cf2",
+      "source_kind": "real",
+      "event_code": 4,
+      "well_identifier": "WELL-00010",
+      "source_instance_id": "3w:7870d4a23aebe2356f1c45d4a5f165946fb1a4414d86467c212fff5b3b6d038b"
+    },
+    {
+      "source_path": "dataset/5/SIMULATED_00337.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/5/SIMULATED_00337.parquet",
+      "size_bytes": 374062,
+      "git_blob_sha1": "92a41dc2cb7918afae56979cf45abf62652af6c3",
+      "sha256": "1a4e4e30a52a4fab932ddd3804ce4cfd3019001cd4f276cc21c318ee90c93642",
+      "source_kind": "simulated",
+      "event_code": 5,
+      "well_identifier": null,
+      "source_instance_id": "3w:4b21b1eed42f00dd92d83d6c37a54bbcfb8cb9f1b61a1983581eb1221d0383c9"
+    },
+    {
+      "source_path": "dataset/5/WELL-00016_20180426131710.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/5/WELL-00016_20180426131710.parquet",
+      "size_bytes": 266362,
+      "git_blob_sha1": "b2151fb33304cd14650929f6bf7f6fb9b7595b15",
+      "sha256": "dc1366b1d1b7b9f9c403ad173a48b9a4685b8bed50a4f3e7cb3bd115ca654dc6",
+      "source_kind": "real",
+      "event_code": 5,
+      "well_identifier": "WELL-00016",
+      "source_instance_id": "3w:f0f7253fa367583f3b34cd49a0b42ab2e4628e9563c542a13c1b3ab17f2de51a"
+    },
+    {
+      "source_path": "dataset/6/SIMULATED_00119.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/6/SIMULATED_00119.parquet",
+      "size_bytes": 357112,
+      "git_blob_sha1": "ea45ecfe6dd78ddb3bbb84da146f072a34cc060e",
+      "sha256": "344e7541e61d2f1267a9d086fd6f78d81ba8322eae1e92df74b2a91580d1330c",
+      "source_kind": "simulated",
+      "event_code": 6,
+      "well_identifier": null,
+      "source_instance_id": "3w:a21e3c111cb22c6a2ff5ddf98522f45319fe4b054dd810599b74f9898195996e"
+    },
+    {
+      "source_path": "dataset/6/WELL-00004_20171031181500.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/6/WELL-00004_20171031181500.parquet",
+      "size_bytes": 93401,
+      "git_blob_sha1": "19fbfd07b06cec169dc5bde556ec124d31f44c9a",
+      "sha256": "0ce2320e895a9c26c160d388539566bbc1ebe4a247775ed5dcb3dedc3d361d4f",
+      "source_kind": "real",
+      "event_code": 6,
+      "well_identifier": "WELL-00004",
+      "source_instance_id": "3w:3d4edd8fc259e5275387ac769322333279cf0b6852808124207136ecadb96276"
+    },
+    {
+      "source_path": "dataset/7/DRAWN_00009.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/7/DRAWN_00009.parquet",
+      "size_bytes": 737624,
+      "git_blob_sha1": "d84e9702a4e61761e7c832def0ff7c3ce649cf9d",
+      "sha256": "5b79533ae2392e4f9b275ef019d652aaa643ea186060c87286e80ad09891979b",
+      "source_kind": "drawn",
+      "event_code": 7,
+      "well_identifier": null,
+      "source_instance_id": "3w:22aee0b1d7babe9bf4a25d8d1f4523532cd7e5ea6a404149f087b601ad28a614"
+    },
+    {
+      "source_path": "dataset/7/WELL-00024_20160920153331.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/7/WELL-00024_20160920153331.parquet",
+      "size_bytes": 510370,
+      "git_blob_sha1": "900122cb1e9238835ff291bddaed945f9afff2c0",
+      "sha256": "5eac279ff21c0850bccb4b0947997081d1bbddfce126063faba3af696375045e",
+      "source_kind": "real",
+      "event_code": 7,
+      "well_identifier": "WELL-00024",
+      "source_instance_id": "3w:948809463bb4f4b5fd741b02208f228947f13838221d9e0d8e274a1cbd5e4a5d"
+    },
+    {
+      "source_path": "dataset/8/SIMULATED_00006.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/8/SIMULATED_00006.parquet",
+      "size_bytes": 656285,
+      "git_blob_sha1": "927e7a52b441de2dff209da13425899d3caf236d",
+      "sha256": "a3089800d7c5bc71617f890da38e5279ebd7ecac90b78958c555607bec6f8a6c",
+      "source_kind": "simulated",
+      "event_code": 8,
+      "well_identifier": null,
+      "source_instance_id": "3w:95fa86429d859a7992255954ccecf23116a5f4bbdd9e0eb5411a1a40acdacddd"
+    },
+    {
+      "source_path": "dataset/8/WELL-00029_20201020231724.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/8/WELL-00029_20201020231724.parquet",
+      "size_bytes": 2593859,
+      "git_blob_sha1": "496b383ec49ab4395f4454a484150ab594a3c8a4",
+      "sha256": "ebfb814d1fe7098a551ccddf4cf6321e5593b0dfdb669abbe091499c467d1851",
+      "source_kind": "real",
+      "event_code": 8,
+      "well_identifier": "WELL-00029",
+      "source_instance_id": "3w:64972b03c1941eaf0f7c2442387da91a66c48f312a9a5c529972a8d462c04073"
+    },
+    {
+      "source_path": "dataset/9/SIMULATED_00119.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/9/SIMULATED_00119.parquet",
+      "size_bytes": 1215143,
+      "git_blob_sha1": "7d184b04ecda9827e8bf7a61a9ee97cadf152e97",
+      "sha256": "3a64ad5b1e7484340c32bfe00392556df4bd26152459b1f9ae95df7c5c69a7b2",
+      "source_kind": "simulated",
+      "event_code": 9,
+      "well_identifier": null,
+      "source_instance_id": "3w:38e0b898c657f5ca799e495cd2ef9941f0892ff0f3e256620c6a9f78f7137215"
+    },
+    {
+      "source_path": "dataset/9/WELL-00036_20190930013035.parquet",
+      "local_path": "data/raw/3w/2.0.0/914af287b1cf3e5207dce0da1e9dc08361c9adeb/dataset/9/WELL-00036_20190930013035.parquet",
+      "size_bytes": 138451,
+      "git_blob_sha1": "a986ea4b9b0a47e29b9950ad52b6b5beda2a8a47",
+      "sha256": "bf1e50c5bbbe4f191f8fa7d5a381634263fd1f87685dd125b39a9d8b20de7681",
+      "source_kind": "real",
+      "event_code": 9,
+      "well_identifier": "WELL-00036",
+      "source_instance_id": "3w:7582c1361d1dc8813d6320e37c764e5d2389dfec8a4dab231770b970eb13c266"
+    }
+  ],
+  "completed_at": "2026-11-10T06:24:24.463181Z"
+}

@@ -1,6 +1,8 @@
 # Milestones, dependencies and acceptance
 
-Phase 0 is the only authorized work. All implementation milestones below are planned and gated. Approval to begin Phase 1 authorizes the data foundation only, not every later phase. The orchestrator records each subsequent scope approval in [PROGRESS.md](PROGRESS.md).
+Phase 0 is complete. The user approved a bounded Phase 1 acquisition/audit on 2026-11-10, now completed; preprocessing and training were explicitly excluded. All subsequent implementation remains gated. The orchestrator records scope approvals in [PROGRESS.md](PROGRESS.md).
+
+The original M1 below includes later modeling-cohort/split readiness. The requested Phase 1 audit does not satisfy those additional gates: the size-biased subset has sparse real groups, missing target phases and unknown labels. No split or final model scope was created. A further approved data expansion/cohort decision must resolve these prerequisites before M2; Phase 1 completion is not authorization to proceed automatically.
 
 ## Dependency graph
 

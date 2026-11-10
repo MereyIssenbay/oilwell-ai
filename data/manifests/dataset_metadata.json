@@ -1,0 +1,242 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_version": "2.0.0",
+  "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+  "source_path": "dataset/dataset.ini",
+  "source_sha256": "c5ffad72bc1c46bccffa1e18412f2ddb87ca0e96eb7d2dfba92a4bc38a45bba2",
+  "sensor_columns": [
+    {
+      "name": "ABER-CKGL",
+      "description": "Opening of the GLCK (gas lift choke) [%]",
+      "unit_or_domain": "%"
+    },
+    {
+      "name": "ABER-CKP",
+      "description": "Opening of the PCK (production choke) [%]",
+      "unit_or_domain": "%"
+    },
+    {
+      "name": "ESTADO-DHSV",
+      "description": "State of the DHSV (downhole safety valve) [0, 0.5, or 1]",
+      "unit_or_domain": "0, 0.5, or 1"
+    },
+    {
+      "name": "ESTADO-M1",
+      "description": "State of the PMV (production master valve) [0, 0.5, or 1]",
+      "unit_or_domain": "0, 0.5, or 1"
+    },
+    {
+      "name": "ESTADO-M2",
+      "description": "State of the AMV (annulus master valve) [0, 0.5, or 1]",
+      "unit_or_domain": "0, 0.5, or 1"
+    },
+    {
+      "name": "ESTADO-PXO",
+      "description": "State of the PXO (pig-crossover) valve [0, 0.5, or 1]",
+      "unit_or_domain": "0, 0.5, or 1"
+    },
+    {
+      "name": "ESTADO-SDV-GL",
+      "description": "State of the gas lift SDV (shutdown valve) [0, 0.5, or 1]",
+      "unit_or_domain": "0, 0.5, or 1"
+    },
+    {
+      "name": "ESTADO-SDV-P",
+      "description": "State of the production SDV (shutdown valve) [0, 0.5, or 1]",
+      "unit_or_domain": "0, 0.5, or 1"
+    },
+    {
+      "name": "ESTADO-W1",
+      "description": "State of the PWV (production wing valve) [0, 0.5, or 1]",
+      "unit_or_domain": "0, 0.5, or 1"
+    },
+    {
+      "name": "ESTADO-W2",
+      "description": "State of the AWV (annulus wing valve) [0, 0.5, or 1]",
+      "unit_or_domain": "0, 0.5, or 1"
+    },
+    {
+      "name": "ESTADO-XO",
+      "description": "State of the XO (crossover) valve [0, 0.5, or 1]",
+      "unit_or_domain": "0, 0.5, or 1"
+    },
+    {
+      "name": "P-ANULAR",
+      "description": "Pressure in the well annulus [Pa]",
+      "unit_or_domain": "Pa"
+    },
+    {
+      "name": "P-JUS-BS",
+      "description": "Downstream pressure of the SP (service pump) [Pa]",
+      "unit_or_domain": "Pa"
+    },
+    {
+      "name": "P-JUS-CKGL",
+      "description": "Downstream pressure of the GLCK (gas lift choke) [Pa]",
+      "unit_or_domain": "Pa"
+    },
+    {
+      "name": "P-JUS-CKP",
+      "description": "Downstream pressure of the PCK (production choke) [Pa]",
+      "unit_or_domain": "Pa"
+    },
+    {
+      "name": "P-MON-CKGL",
+      "description": "Upstream pressure of the GLCK (gas lift choke) [Pa]",
+      "unit_or_domain": "Pa"
+    },
+    {
+      "name": "P-MON-CKP",
+      "description": "Upstream pressure of the PCK (production choke) [Pa]",
+      "unit_or_domain": "Pa"
+    },
+    {
+      "name": "P-MON-SDV-P",
+      "description": "Upstream pressure of the production SDV (shutdown valve) [Pa]",
+      "unit_or_domain": "Pa"
+    },
+    {
+      "name": "P-PDG",
+      "description": "Downhole pressure at the PDG (permanent downhole gauge) [Pa]",
+      "unit_or_domain": "Pa"
+    },
+    {
+      "name": "PT-P",
+      "description": "Subsea Xmas-tree pressure downstream of the PWV (production wing valve) in the production line [Pa]",
+      "unit_or_domain": "Pa"
+    },
+    {
+      "name": "P-TPT",
+      "description": "Subsea Xmas-tree pressure at the TPT (temperature and pressure transducer) [Pa]",
+      "unit_or_domain": "Pa"
+    },
+    {
+      "name": "QBS",
+      "description": "Flow rate at the SP (service pump) [m3/s]",
+      "unit_or_domain": "m3/s"
+    },
+    {
+      "name": "QGL",
+      "description": "Gas lift flow rate [m3/s]",
+      "unit_or_domain": "m3/s"
+    },
+    {
+      "name": "T-JUS-CKP",
+      "description": "Downstream temperature of the PCK (production choke) [oC]",
+      "unit_or_domain": "oC"
+    },
+    {
+      "name": "T-MON-CKP",
+      "description": "Upstream temperature of the PCK (production choke) [oC]",
+      "unit_or_domain": "oC"
+    },
+    {
+      "name": "T-PDG",
+      "description": "Downhole temperature at the PDG (permanent downhole gauge) [oC]",
+      "unit_or_domain": "oC"
+    },
+    {
+      "name": "T-TPT",
+      "description": "Subsea Xmas-tree temperature at the TPT (temperature and pressure transducer) [oC]",
+      "unit_or_domain": "oC"
+    }
+  ],
+  "target_columns": [
+    "class"
+  ],
+  "auxiliary_label_columns": [
+    "state"
+  ],
+  "index_columns": [
+    "timestamp"
+  ],
+  "excluded_feature_metadata": [
+    "class",
+    "state",
+    "timestamp",
+    "source_path",
+    "source_kind",
+    "event_code",
+    "well_identifier",
+    "source_instance_id"
+  ],
+  "events": [
+    {
+      "name": "NORMAL",
+      "label": 0,
+      "description": "Normal Operation",
+      "transient": false,
+      "transient_label": null
+    },
+    {
+      "name": "ABRUPT_INCREASE_OF_BSW",
+      "label": 1,
+      "description": "Abrupt Increase of BSW",
+      "transient": true,
+      "transient_label": 101
+    },
+    {
+      "name": "SPURIOUS_CLOSURE_OF_DHSV",
+      "label": 2,
+      "description": "Spurious Closure of DHSV",
+      "transient": true,
+      "transient_label": 102
+    },
+    {
+      "name": "SEVERE_SLUGGING",
+      "label": 3,
+      "description": "Severe Slugging",
+      "transient": false,
+      "transient_label": null
+    },
+    {
+      "name": "FLOW_INSTABILITY",
+      "label": 4,
+      "description": "Flow Instability",
+      "transient": false,
+      "transient_label": null
+    },
+    {
+      "name": "RAPID_PRODUCTIVITY_LOSS",
+      "label": 5,
+      "description": "Rapid Productivity Loss",
+      "transient": true,
+      "transient_label": 105
+    },
+    {
+      "name": "QUICK_RESTRICTION_IN_PCK",
+      "label": 6,
+      "description": "Quick Restriction in PCK",
+      "transient": true,
+      "transient_label": 106
+    },
+    {
+      "name": "SCALING_IN_PCK",
+      "label": 7,
+      "description": "Scaling in PCK",
+      "transient": true,
+      "transient_label": 107
+    },
+    {
+      "name": "HYDRATE_IN_PRODUCTION_LINE",
+      "label": 8,
+      "description": "Hydrate in Production Line",
+      "transient": true,
+      "transient_label": 108
+    },
+    {
+      "name": "HYDRATE_IN_SERVICE_LINE",
+      "label": 9,
+      "description": "Hydrate in Service Line",
+      "transient": true,
+      "transient_label": 109
+    }
+  ],
+  "state_semantics": {
+    "description": "Well operational status",
+    "code_mapping": null,
+    "limitation": "dataset.ini does not define state code meanings; see independent audit of descriptor."
+  },
+  "source_timezone": null,
+  "transformations": "None"
+}

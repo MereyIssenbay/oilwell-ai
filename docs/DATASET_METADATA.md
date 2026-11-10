@@ -2,6 +2,8 @@
 
 Verified on 2026-11-09 from upstream documentation, configuration, loader source and Git tree metadata only. No telemetry files were downloaded or inspected. These findings are the acquisition specification, not a completed data audit.
 
+**Phase 1 update, 2026-11-10:** the [measured audit](DATASET_AUDIT.md) now covers 23 original files. Their actual types are Pandas `float64` sensors, nullable `Int16` labels and a naive `datetime64[ns]` index, differing from the prose below. It also found 50,400 null values in each label and four entirely missing sensor columns. This document retains the Phase 0 metadata baseline; measured subset findings and limitations take precedence over assumptions about actual bytes.
+
 ## Version and authoritative sources
 
 - Repository: [petrobras/3W](https://github.com/petrobras/3W).
@@ -12,7 +14,7 @@ Verified on 2026-11-09 from upstream documentation, configuration, loader source
 
 ## Storage and observation schema
 
-Instances live in `dataset/0/` through `dataset/9/`, one Parquet file per instance, written using pyarrow/Brotli. The documented index is `timestamp`; the 27 sensor variables use nullable `Float64`; `class` and `state` use nullable `Int64`. The actual Parquet physical schema and index representation remain to be checked in Phase 1.
+Instances live in `dataset/0/` through `dataset/9/`, one Parquet file per instance, written using pyarrow/Brotli. The documented index is `timestamp`; documentation describes 27 nullable `Float64` sensor variables and nullable `Int64` labels. Phase 1 instead measured Arrow double/Pandas `float64` sensors and Arrow int16/Pandas `Int16` labels in every selected file, with a physical `timestamp[ns]` field restored as the named index. No coercion was applied.
 
 | Documented unit/domain | Exact upstream sensor columns |
 | --- | --- |
@@ -28,7 +30,7 @@ Version 2 removed `T-JUS-CKGL`, added 20 variables and added event 9. The descri
 
 ## Labels
 
-`class` is the per-observation event label. The enclosing directory supplies instance-level context, not the ground truth of every row. `state` is an operational-status label whose value mapping still requires validation. Neither label belongs in sensor features.
+`class` is the per-observation event label. The enclosing directory supplies instance-level context, not the ground truth of every row. `state` is an operational-status label. The [Phase 1 audit](DATASET_AUDIT.md) confirms its 0-8 code mapping from the primary author manuscript; the ini itself does not contain that mapping. Neither label belongs in sensor features.
 
 | Base code | Exact upstream event name | Valid transient code | Canonical `event_type` |
 | --- | --- | --- | --- |
@@ -81,7 +83,7 @@ The complete pinned recursive Git tree (`truncated=false`) contains 2,228 paths 
 
 Do not instantiate the upstream loader during Phase 0: it can automatically download missing files even when `force_download=False`. Its default `load_file` removes only `class`; `state` can remain in the feature matrix. Our adapter must explicitly allowlist sensor variables and exclude `class`, `state`, file/directory names, well identifiers and origin indicators from prediction features.
 
-Phase 1 must audit Parquet schema, timestamp semantics, row-label support, missingness by sensor/class/origin, duplicates and overlapping intervals, operational state codes, and usable independent groups. Split real data by anonymized well across directories when feasible, keep related/overlapping instances together, and create windows only after splitting. If insufficient wells prevent independent partitions, declare the limitation and revise scope rather than claim unseen-well performance. Synthetic/drawn augmentation is optional and training-only; real validation/test remain separate.
+Phase 1 audited actual schema, timestamp ordering, row-label support, missingness, duplicates, overlapping selected intervals and operational state codes. The bounded audit does not establish an independent modeling cohort. In later approved work, split real data by anonymized well across directories when feasible, keep related/overlapping instances together, and create windows only after splitting. If insufficient wells prevent independent partitions, declare the limitation and revise scope rather than claim unseen-well performance. Synthetic/drawn augmentation is optional and training-only; real validation/test remain separate.
 
 Release notes report closing label gaps in real data, while the descriptor permits unknown labels generally. Keep null handling and verify coverage after acquisition; do not assume either statement proves the selected cohort is complete.
 

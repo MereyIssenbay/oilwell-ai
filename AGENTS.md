@@ -2,7 +2,7 @@
 
 ## Phase gate and source of truth
 
-- Current authorization: **Phase 0 only** (architecture, contracts, repository scaffolding, agent configuration, and static verification). Stop when those deliverables are complete. Phase 1 requires the user's explicit approval.
+- Current authorization: **Phase 1 only**, approved by the user on 2026-11-10: bounded dataset acquisition, inspection, automated validation and provenance reporting. Stop after Phase 1; do not implement preprocessing, features or model training. Later phases require explicit approval.
 - Do not download, clone, sample, or ingest the 3W telemetry, train models, install application services, or implement product features during Phase 0. Reading upstream documentation and metadata is allowed.
 - Read `docs/PROGRESS.md`, `docs/DECISIONS.md`, and the relevant contract before work. Record unresolved assumptions instead of silently converting them into facts.
 - Upstream dataset metadata and a pinned acquisition manifest govern ingestion. Never assume the historical CSV/eight-sensor layout. Preserve original names, labels, units, time semantics, origins, and source checksums.
@@ -22,6 +22,7 @@ The main orchestrator owns integration, task assignment, interface decisions, ro
 | `qa_reviewer` | `tests/contract/`, `tests/integration/`, `tests/e2e/`, `tests/qa/`, `docs/reviews/` | Independent contract, leakage, security, reliability and end-to-end review |
 
 - Ownership grants no automatic permission to begin a later phase. Restrict each turn to its assigned files and approved milestone.
+- Phase 1 assignment exception: the orchestrator may assign `scripts/download_data.py` to `data_engineer`; `scripts/validate_data.py`, `reports/data_summary.json`, root dependency files and consolidated audit/progress documents remain orchestrator-owned. QA owns its independent review/tests. Record any subsequent transfer explicitly.
 - Never assign concurrent writers to the same file. Reserve files before editing; release ownership at handoff. Separate test ownership by the table above. All shared contract and root configuration changes go through the orchestrator.
 - All agents share the working tree. Do not revert, overwrite, clean, reset, or remove another contributor's work. Read current files before editing and report conflicting changes.
 - Subagents do not spawn further agents. Report cross-boundary needs to the orchestrator; propose a patch or contract change without editing the other owner's files.
@@ -59,5 +60,5 @@ The main orchestrator owns integration, task assignment, interface decisions, ro
 
 - Use Python 3.11+, type annotations, Pydantic validation, deterministic random seeds and UTC transport timestamps with an explicit source time basis. Format and lint using pinned project tooling once introduced.
 - Run checks appropriate to the change. Prefer meaningful contract, leakage, causal-window, replay/restart and evidence-grounding tests over tests that merely mirror implementation.
-- No application tests exist in Phase 0. Static TOML/schema/link checks are not model evaluation, end-to-end tests or a deployment smoke test.
+- Phase 0 had no application tests. Phase 1 acquisition/validation tests must be reported separately from model evaluation, application end-to-end tests or deployment smoke tests.
 - Each handoff records files changed, decisions, commands run and actual outcomes, limitations/blockers, and next dependencies. Update `docs/PROGRESS.md` through the orchestrator. Stop at the approved phase boundary.
