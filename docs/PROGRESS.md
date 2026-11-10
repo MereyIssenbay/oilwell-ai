@@ -8,6 +8,7 @@ Updated: 2026-11-10 (Asia/Oral).
 - **Phase 1: complete**, authorized and executed on 2026-11-10. Bounded acquisition, inspection, automated validation, provenance documentation and independent integrity review only.
 - **Phase 2 EDA: complete**, authorized and executed on 2026-11-10. Actual-data exploration, charts, hypotheses, split recommendation and independent leakage review only. This user request supersedes the original roadmap's Phase 2 model-training schedule. Work stops here; additional acquisition, production preprocessing, training and application implementation require a new approval.
 - **Phase 3 preprocessing: complete**, authorized and executed on 2026-11-10. Reusable, deterministic grouped splitting, causal features and train-only preprocessing statistics, with independent leakage review. No model training or additional telemetry acquisition. Current-data partitions remain development diagnostics. Stop here pending the user's next phase approval.
+- **Phase 4 baseline: complete**, authorized and executed on 2026-11-10. Naive references, Logistic Regression and Isolation Forest were compared on the unchanged development validation split, with independent experimental review. No test predictions, tuning, additional acquisition or application implementation. The software baseline is reproducible; detector acceptance remains withheld. Stop here pending user approval of further work.
 
 ## Phase 0 delivered design
 
@@ -157,14 +158,71 @@ Full regression command: `.venv/Scripts/python.exe -m pytest tests/data tests/qa
 
 Resolved review findings: derive real well/origin/event/source identity from the pinned original path rather than trust mutable manifest fields; validate persisted split relationships beyond a checksum; remove a circular public import; verify eligible endpoint support in protected mode. The loader parses the same verified bytes to avoid a second unverified read. No unresolved Phase 3 software blocker remains. CLI publication is atomic per file; summary hashes must identify a completed artifact set after any interrupted run.
 
+## Phase 4 deliverables and verified results
+
+The orchestrator delegated model implementation and its tests/artifacts to `ml_engineer`, and independent experimental tests/review to `qa_reviewer`. Root retained the fixed protocol, dependencies, shared documentation and integration. Disjoint ownership was maintained; both agents returned ownership after review. User authorization superseded the earlier no-training gate for this bounded baseline experiment only.
+
+Delivered:
+
+- [Training entry point](../ml/train_baseline.py), [evaluation and temporal alarm accounting](../ml/evaluate.py) and [27 implementation tests](../tests/test_training.py).
+- [46 independent experimental tests](../tests/qa/test_baseline_integrity.py) and [review](reviews/PHASE_4.md).
+- [Frozen experiment protocol](../reports/baseline/PROTOCOL.md), [results and charts](../reports/baseline/README.md), [exact metrics](../reports/baseline/metrics.json), comparison/minority/failure/PR-point CSVs, [experiment manifest](../reports/baseline/experiment_manifest.json) and [repeat verification](../reports/baseline/verification.json).
+- [Pinned baseline dependencies](../requirements-baseline.txt). Trusted local model bundle, copied preprocessing/split and full validation predictions remain ignored under `ml/artifacts/baseline/` and `ml/runs/baseline/`.
+
+Final run: `d8386c526a40f56133b5`. Frozen split fingerprint: `643ecb9867ceaf6daff093f11a2e1b0a2b3066cbe2ce614b4ad1ecf81ff82062`. Dataset pin, source selection, Phase 3 windows, 120 retained features and preprocessing statistics are unchanged. Python 3.13.3, scikit-learn 1.9.1, seed 42 and single-thread fitting were used; all installed versions, code/base revision, input hashes, fitted parameters and split identifiers are recorded in the manifest. Python 3.11 compatibility was considered in dependency selection but that runtime was not executed.
+
+The fixed task is binary normal/undesirable detection. Eligible train support is 7,649 windows (3,541 normal, 4,108 abnormal); validation is the identical 16,518 windows for every model (7,724 normal, 8,794 abnormal), across three real source instances/published well IDs. Training abnormal families are 3/4/5/7; validation families are 2/8, both unseen in training. This is a cross-family development diagnostic, not a supported closed-set event classifier. Simulated/drawn validation support is zero and metrics are explicitly null. No test rows entered fitting, prediction, metrics or selection; whole-file integrity hashes do not constitute test evaluation.
+
+Always-normal is a constant reference; train-majority chooses always-abnormal using training labels only. Logistic Regression uses fixed C=1, liblinear L2, class weights normal:1/abnormal:2, max_iter=2000 and score threshold 0.5. Isolation Forest uses 200 trees, max_samples=256 and contamination=0.05, fitting only the 3,541 known-normal train windows. Its score threshold comes from the fitted training offset. Shared preprocessing was fitted on all train endpoints, including abnormal/unknown labels; the entire Isolation Forest pipeline is not normal-only fitted. There was no hyperparameter search or validation threshold selection. Scores remain uncalibrated.
+
+| Model | Precision | Recall | F1 | Average precision (AP) | Trapezoidal PR-AUC | Confusion matrix `[[TN,FP],[FN,TP]]` |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Always normal | undefined | 0 | 0 | 0.532388909 | 0.766194455 | `[[7724,0],[8794,0]]` |
+| Train majority | 0.532388909 | 1 | 0.694848293 | 0.532388909 | 0.766194455 | `[[0,7724],[0,8794]]` |
+| Logistic Regression | 0.956609485 | 0.539003866 | 0.689504691 | 0.935984905 | 0.935969617 | `[[7509,215],[4054,4740]]` |
+| Isolation Forest | 0.535729516 | 1 | 0.697687334 | 0.735504085 | 0.735485774 | `[[103,7621],[0,8794]]` |
+
+Values above are rounded; the linked JSON contains full-precision values and denominators. AP and trapezoidal area are distinct: constant-score AP equals prevalence, while linear interpolation yields a larger area without ranking ability. Confusion plots use a common count scale; PR plots show step curves and fixed operating points.
+
+Failure analysis: Logistic Regression detects 135/152 minority-family-2 windows (recall 0.888157895) and 4,605/8,642 family-8 windows (0.532862763), with one source/well per family. Its 4,054 misses are dominated by family 8. All 215 false positives occur on WELL-00011 and cover every eligible normal endpoint on that well. Isolation Forest detects all abnormal windows but falsely flags 7,621/7,724 normal windows. Twenty-one deterministic failure examples retain source timestamps/scores; no physical cause is inferred. Other event families have no validation support.
+
+Offline temporal accounting covers 175,818 seconds (48.838333333 hours), including 77,260 normal seconds (21.461111111 hours), 87,935 abnormal and 10,623 unknown. Held decisions are bounded by the next endpoint, source end and raw gaps. Unknown target labels preserve prediction episode continuity; unavailable inputs and coverage boundaries censor onsets.
+
+| Model | Confirmed false onsets | Per covered replay hour | Per normal hour | Normal alarm occupancy |
+| --- | ---: | ---: | ---: | ---: |
+| Always normal | 0 | 0 | 0 | 0% |
+| Train majority | 0 | 0 | 0 | 100% |
+| Logistic Regression | 0 | 0 | 0 | 2.794460264% |
+| Isolation Forest | 5 | 0.102378596 | 0.232979550 | 98.666839244% |
+
+Zero confirmed new false onsets does not mean zero false alarms: Logistic Regression's initial positive episode is censored, yet it alarms for 2,159 normal seconds. Always-abnormal has three censored initial starts and occupies all normal time. These are offline source-time diagnostics, not an executed application replay.
+
+| Verification | Actual outcome | Scope / limitation |
+| --- | --- | --- |
+| `.venv/Scripts/python.exe -m ml.train_baseline` | Final fixed run completed; Logistic Regression converged in 10 iterations | No tuning, advanced model, test inference or canonical API prediction produced |
+| Two consecutive final runs | **14 report/model/prediction artifacts byte-identical**; recorded hashes independently reconciled | Same pinned inputs, code, parameters and environment; no cross-platform bitwise claim |
+| New implementation and independent QA tests | **73 passed in 6.53 seconds**, zero failed/skipped: 27 implementation + 46 QA | Split/fit isolation, target consistency, absent support, ranking metrics, temporal exposure, censoring and abstention |
+| Root final regression | **214 passed in 15.19 seconds**, zero failed/skipped | All prior 141 tests plus 73 new cases; no application/end-to-end/deployment tests |
+| Independent actual-output audit | All 70,332 prediction rows, exact fit IDs, pooled/source/family metrics, episode counts, exposure and 21 failure examples reconciled | AP independently reconstructed within `1e-15`; no test outcomes read |
+| Saved-model and input integrity | Reloaded scores/decisions exact; all 23 original Parquet hashes and frozen processed inputs unchanged | Estimator parameters, 120-feature schema, protocol/code/dependency/artifact hashes verified |
+| Visual review | Both final figures inspected by reviewer; final PR also inspected by model owner | No chart-derived threshold selection |
+| Root final repository/provenance audit | PASS: 120 Git-visible files, 110 text files, 199 valid local links, 12 strict JSON/notebook files, seven TOML files, four new Python syntax checks and 60 installed dependency pins matched | All 14 final artifact hashes matched; 31 original files and five final model/prediction artifacts remain ignored; prior Phase 1-3 code/data reports/manifests/pins unchanged |
+| Dependency and whitespace checks | `pip check`: no broken requirements; `git diff --check`: exit 0; separate UTF-8/newline/whitespace audit passed | Git emitted LF-to-CRLF notices only; no commit made |
+
+Full regression command: `.venv/Scripts/python.exe -m pytest tests/data tests/qa tests/test_data_pipeline.py tests/test_training.py -q -p no:cacheprovider --basetemp <unique-workspace-temp-path> --tb=short`. Root used `.local/pytest-phase4-<UUID>` and narrow execution escalation for the existing Windows fixture ACL restriction. Dependency installation also required narrow network escalation. No services were installed or started.
+
+QA resolved four defects before final delivery: inconsistent target/eligibility context, overlapping decision-hold exposure, missing episode censoring across raw gaps, and estimator calls on entirely unavailable validation inputs. No unresolved software blocker remains. The five Phase 2 hypotheses were not executed as controlled ablations. Binary baseline scores are not drop-in canonical event-family API predictions; no shared API contract changed.
+
+**Readiness:** the reproducible software baseline is complete and suitable for further explicitly approved experiments. Neither fitted detector is accepted for monitoring: Logistic Regression misses about 46.1% of abnormal windows; Isolation Forest is close to always-alarm. Protected data, independent family/group support and a declared recall/false-alarm acceptance policy remain necessary. No post-hoc threshold or performance target was invented to pass this gate.
+
 ## Blockers and unresolved evidence
 
-No blocker remains for the requested acquisition/audit, EDA or preprocessing phases. The original roadmap's broader M1 modeling-cohort/evaluation acceptance remains unresolved: most selected undesirable families occur in only one real well group, and no selected real row contains family 9. Phase 3 now supplies an executable diagnostic split and preprocessing, but the inspected subset cannot supply a pristine, class-supported three-way multiclass evaluation. No protected final-test cohort, accepted model scope or trained detector exists. Further approved data work must establish sufficient independent real groups and usable label/sensor coverage before a model evaluation claim.
+No software blocker remains for the completed Phases 1-4. The original roadmap's broader M1 modeling-cohort/evaluation acceptance remains unresolved: most selected undesirable families occur in only one real well group, and no selected real row contains family 9. The executable split, preprocessing and fitted binary baselines support development diagnostics; the inspected subset cannot supply a pristine, class-supported three-way multiclass evaluation. No protected final-test cohort or accepted monitoring detector exists. Further approved data work must establish sufficient independent real groups and usable label/sensor coverage before generalization claims.
 
-Residual limitations: unknown source timezone and physical-identity equivalence; structural/origin-dependent sensor missingness; initial null target/status labels; absent steady code 7; documentation-versus-file dtype discrepancy; 40 real filename IDs in pinned inventory versus 42 wells in release notes; possible wider-corpus overlaps/near-duplicates and upstream interpolation. Thresholds, calibration, model performance and provider selection remain future decisions.
+Residual limitations: unknown source timezone and physical-identity equivalence; structural/origin-dependent sensor missingness; initial null target/status labels; absent steady code 7; documentation-versus-file dtype discrepancy; 40 real filename IDs in pinned inventory versus 42 wells in release notes; possible wider-corpus overlaps/near-duplicates and upstream interpolation. Phase 4 measured fixed diagnostic operating points only. Operational threshold selection, calibration, protected-cohort performance and provider selection remain future decisions.
 
 The independent review prompted two integrated corrections: snapshots and events now expose ongoing alert episodes independently of abstaining predictions, and provider packets explicitly exclude class-bearing source paths/IDs/manifests. Explanation episode evidence is captured at prediction time to exclude future outcomes. See ADR-018/019 and the API contract.
 
 ## Next action
 
-**Stop: Phase 3 is complete. Await the user's next phase approval.** Recommended next work is explicit task/cohort readiness: choose supportable families, obtain adequate fresh real groups if authorized, freeze the protected evaluation manifest and define evidence eligibility. Only a separately approved modeling phase should test the five hypotheses and establish a scikit-learn baseline before considering XGBoost. No model training or further acquisition is authorized by this handoff.
+**Stop after Phase 4 and wait for the user's approval.** Recommended next scope: establish adequate fresh real groups and event coverage, agree on detection scope and recall/false-alarm criteria, then authorize a separate experiment/calibration plan. Preserve existing split/preprocessing/results and test restrictions. No additional acquisition, XGBoost, application or deployment work is authorized by the completed phase.

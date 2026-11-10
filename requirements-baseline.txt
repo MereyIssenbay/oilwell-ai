@@ -1,0 +1,16 @@
+# Phase 4 baseline and figures; Python 3.11+ (executed on 3.13.3).
+# Reuse data/preprocessing pins. Plotting pins match the Phase 2 environment.
+-r requirements-pipeline.txt
+scikit-learn==1.9.1
+scipy==1.17.1
+joblib==1.6.0
+cloudpickle==3.1.2
+narwhals==2.28.0
+threadpoolctl==3.8.0
+matplotlib==3.11.2
+contourpy==1.4.0
+cycler==0.12.1
+fonttools==4.68.0
+kiwisolver==1.5.1
+pillow==13.0.0
+pyparsing==3.3.3

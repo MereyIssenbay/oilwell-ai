@@ -1,0 +1,508 @@
+{
+  "artifacts": {
+    "models": {
+      "path": "ml/artifacts/baseline/d8386c526a40f56133b5/models.joblib",
+      "sha256": "50e5b29f5d401d923000b78ab454d2290f53db5c24491923034942538748713e"
+    },
+    "predictions": {
+      "path": "ml/runs/baseline/d8386c526a40f56133b5/validation_predictions.parquet",
+      "sha256": "daacad72c44d7cb8c09d13cc554ab62224d29289bcc8de02b9c7ed8f6253e883"
+    },
+    "preprocessor": {
+      "path": "ml/artifacts/baseline/d8386c526a40f56133b5/preprocessor.json",
+      "sha256": "9c42996b13b84c010e6c9ebb8d25a8e0b83330f899f8a3ad70c9401ba2e74dcd"
+    }
+  },
+  "feature_names": [
+    "ABER-CKGL__mean",
+    "ABER-CKGL__std",
+    "ABER-CKGL__min",
+    "ABER-CKGL__max",
+    "ABER-CKGL__rate",
+    "ABER-CKGL__trend",
+    "ABER-CKP__mean",
+    "ABER-CKP__std",
+    "ABER-CKP__min",
+    "ABER-CKP__max",
+    "ABER-CKP__rate",
+    "ABER-CKP__trend",
+    "ESTADO-DHSV__mean",
+    "ESTADO-DHSV__std",
+    "ESTADO-DHSV__min",
+    "ESTADO-DHSV__max",
+    "ESTADO-DHSV__rate",
+    "ESTADO-DHSV__trend",
+    "ESTADO-M1__mean",
+    "ESTADO-M1__std",
+    "ESTADO-M1__min",
+    "ESTADO-M1__max",
+    "ESTADO-M1__rate",
+    "ESTADO-M1__trend",
+    "ESTADO-M2__mean",
+    "ESTADO-M2__std",
+    "ESTADO-M2__min",
+    "ESTADO-M2__max",
+    "ESTADO-M2__rate",
+    "ESTADO-M2__trend",
+    "ESTADO-PXO__mean",
+    "ESTADO-PXO__std",
+    "ESTADO-PXO__min",
+    "ESTADO-PXO__max",
+    "ESTADO-PXO__rate",
+    "ESTADO-PXO__trend",
+    "ESTADO-SDV-GL__mean",
+    "ESTADO-SDV-GL__std",
+    "ESTADO-SDV-GL__min",
+    "ESTADO-SDV-GL__max",
+    "ESTADO-SDV-GL__rate",
+    "ESTADO-SDV-GL__trend",
+    "ESTADO-SDV-P__mean",
+    "ESTADO-SDV-P__std",
+    "ESTADO-SDV-P__min",
+    "ESTADO-SDV-P__max",
+    "ESTADO-SDV-P__rate",
+    "ESTADO-SDV-P__trend",
+    "ESTADO-W1__mean",
+    "ESTADO-W1__std",
+    "ESTADO-W1__min",
+    "ESTADO-W1__max",
+    "ESTADO-W1__rate",
+    "ESTADO-W1__trend",
+    "ESTADO-W2__mean",
+    "ESTADO-W2__std",
+    "ESTADO-W2__min",
+    "ESTADO-W2__max",
+    "ESTADO-W2__rate",
+    "ESTADO-W2__trend",
+    "ESTADO-XO__mean",
+    "ESTADO-XO__std",
+    "ESTADO-XO__min",
+    "ESTADO-XO__max",
+    "ESTADO-XO__rate",
+    "ESTADO-XO__trend",
+    "P-ANULAR__mean",
+    "P-ANULAR__std",
+    "P-ANULAR__min",
+    "P-ANULAR__max",
+    "P-ANULAR__rate",
+    "P-ANULAR__trend",
+    "P-JUS-CKGL__mean",
+    "P-JUS-CKGL__std",
+    "P-JUS-CKGL__min",
+    "P-JUS-CKGL__max",
+    "P-JUS-CKGL__rate",
+    "P-JUS-CKGL__trend",
+    "P-MON-CKP__mean",
+    "P-MON-CKP__std",
+    "P-MON-CKP__min",
+    "P-MON-CKP__max",
+    "P-MON-CKP__rate",
+    "P-MON-CKP__trend",
+    "P-PDG__mean",
+    "P-PDG__std",
+    "P-PDG__min",
+    "P-PDG__max",
+    "P-PDG__rate",
+    "P-PDG__trend",
+    "P-TPT__mean",
+    "P-TPT__std",
+    "P-TPT__min",
+    "P-TPT__max",
+    "P-TPT__rate",
+    "P-TPT__trend",
+    "QGL__mean",
+    "QGL__std",
+    "QGL__min",
+    "QGL__max",
+    "QGL__rate",
+    "QGL__trend",
+    "T-JUS-CKP__mean",
+    "T-JUS-CKP__std",
+    "T-JUS-CKP__min",
+    "T-JUS-CKP__max",
+    "T-JUS-CKP__rate",
+    "T-JUS-CKP__trend",
+    "T-PDG__mean",
+    "T-PDG__std",
+    "T-PDG__min",
+    "T-PDG__max",
+    "T-PDG__rate",
+    "T-PDG__trend",
+    "T-TPT__mean",
+    "T-TPT__std",
+    "T-TPT__min",
+    "T-TPT__max",
+    "T-TPT__rate",
+    "T-TPT__trend"
+  ],
+  "hyperparameter_search": false,
+  "identity": {
+    "code_sha256": {
+      "ml\\evaluate.py": "8cacbf318fecde069599a6948fbcd7bb6a10508d9b84f4886ee1af717dd2dbf8",
+      "ml\\train_baseline.py": "9df45641c671798bca6f4ce185d0dad300fcceda65c6ecf69a8ad888a3b3404f"
+    },
+    "data": {
+      "artifacts": {
+        "features": {
+          "path": "data/processed/phase3/features.parquet",
+          "sha256": "2b4c59c668bba24a58d81ee06a9c8c194458b85627a4338558267ccef66ef703"
+        },
+        "metadata": {
+          "path": "data/processed/phase3/metadata.parquet",
+          "sha256": "0a1e1064e7e8c3b334faa8cdd00913fff9968f1f7640353a685adf580bafde59"
+        },
+        "preprocessor": {
+          "path": "data/processed/phase3/preprocessor.json",
+          "sha256": "9c42996b13b84c010e6c9ebb8d25a8e0b83330f899f8a3ad70c9401ba2e74dcd"
+        },
+        "quality": {
+          "path": "data/processed/phase3/quality.parquet",
+          "sha256": "d6348f3ab9746971ecf351d11f707bd3011800712019f90a12fd21c897550344"
+        },
+        "targets": {
+          "path": "data/processed/phase3/targets.parquet",
+          "sha256": "d8bddc56179104e73e9422288821230bb43d210c16cad09340d433d382e5632a"
+        }
+      },
+      "dataset": {
+        "attribution": "Petrobras and the 3W contributors",
+        "code_license": "Apache-2.0",
+        "license": "CC-BY-4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "repository": "https://github.com/petrobras/3W",
+        "revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "version": "2.0.0"
+      },
+      "preprocessing_source_provenance": {
+        "base_git_revision": "703f060c34a1192e0307d121230ef5ac5acacfa7",
+        "code_sha256": {
+          "ml/data_pipeline/__init__.py": "0d1f6569256e2a4dc9db5b18addbb984ef089126e33446419a1a57cc89586741",
+          "ml/data_pipeline/io.py": "4203ec01f3e9a0715915197be52526998c7eb45fc09653a102547b7722113102",
+          "ml/data_pipeline/models.py": "cf81c59a6381e30863e8f0d3fcbe7c976f24a5c62ec082717b5487b45376931b",
+          "ml/data_pipeline/pipeline.py": "1f3870769281ec69a14394426063525bed1e6cbbb75910e9d3bea0c72248705f",
+          "ml/data_pipeline/splitting.py": "c534a9c84c9789727a386dd6d6dea7474accdb9dd824118bae7a98d5c72b4e45",
+          "ml/features/__init__.py": "0787540d498e23133cc9f8b835366cec7d1e6733265fc8b7070b9fbe13416967",
+          "ml/features/causal.py": "9f098949ac29c2e98019793d6c5a4c74703ada03d0dd3fa48bb554c0249a944b",
+          "ml/features/constants.py": "80f906e8760636fbc1bc9713d1ba726aeb0773469c0e8753be8d518d10cf647d",
+          "scripts/prepare_data.py": "c65fc128927f07ec0616a121c53916497c4d5e3792bbffc77eea0ccdd72b13f0"
+        },
+        "dependencies": {
+          "numpy": "2.2.6",
+          "pandas": "2.2.3",
+          "pyarrow": "26.0.1",
+          "pydantic": "2.14.3"
+        },
+        "input_files": [
+          {
+            "instance_id": "3w:18d354757119f8b2e8587c976d0e530e45339bdd4449b4353627bf731a31abe2",
+            "sha256": "4c663346ca209648420b2898936d4acd34e52380dfb6407a41f4eb004fd3d13d"
+          },
+          {
+            "instance_id": "3w:22aee0b1d7babe9bf4a25d8d1f4523532cd7e5ea6a404149f087b601ad28a614",
+            "sha256": "5b79533ae2392e4f9b275ef019d652aaa643ea186060c87286e80ad09891979b"
+          },
+          {
+            "instance_id": "3w:2f2adddcccf3c82167c67ae404f3f9b72e3b689a8c298c922064e5ae9b8fcd12",
+            "sha256": "4cdbe289610013cbce34334febabd7267190ccd1e664eb0700933e009740dcaa"
+          },
+          {
+            "instance_id": "3w:38e0b898c657f5ca799e495cd2ef9941f0892ff0f3e256620c6a9f78f7137215",
+            "sha256": "3a64ad5b1e7484340c32bfe00392556df4bd26152459b1f9ae95df7c5c69a7b2"
+          },
+          {
+            "instance_id": "3w:3b7750afe480cb1d04361795d4a5cded832ae3a05d5ef30f533d440c81bfb4cf",
+            "sha256": "3c371ca8b5645e99e58625ee412736ca95ef469948605519dc6a115719e60be1"
+          },
+          {
+            "instance_id": "3w:3d4edd8fc259e5275387ac769322333279cf0b6852808124207136ecadb96276",
+            "sha256": "0ce2320e895a9c26c160d388539566bbc1ebe4a247775ed5dcb3dedc3d361d4f"
+          },
+          {
+            "instance_id": "3w:4b21b1eed42f00dd92d83d6c37a54bbcfb8cb9f1b61a1983581eb1221d0383c9",
+            "sha256": "1a4e4e30a52a4fab932ddd3804ce4cfd3019001cd4f276cc21c318ee90c93642"
+          },
+          {
+            "instance_id": "3w:52a37a0952e64983ba9a2a9d585d56aed7bf2c55b609cfa930fd9baf66953731",
+            "sha256": "fc5862ae8a6ee73b7cb4844ede90d481785c8941c846e93694887fc53c7db0b1"
+          },
+          {
+            "instance_id": "3w:624bb25b04f3ac466c9fb599cdcea9dcaa341160e16e9443b070cbd7726b469f",
+            "sha256": "21813bc53a50728d6d550fbc625936ab830193e3b01187d310c498f5a2af3dae"
+          },
+          {
+            "instance_id": "3w:64972b03c1941eaf0f7c2442387da91a66c48f312a9a5c529972a8d462c04073",
+            "sha256": "ebfb814d1fe7098a551ccddf4cf6321e5593b0dfdb669abbe091499c467d1851"
+          },
+          {
+            "instance_id": "3w:7582c1361d1dc8813d6320e37c764e5d2389dfec8a4dab231770b970eb13c266",
+            "sha256": "bf1e50c5bbbe4f191f8fa7d5a381634263fd1f87685dd125b39a9d8b20de7681"
+          },
+          {
+            "instance_id": "3w:7870d4a23aebe2356f1c45d4a5f165946fb1a4414d86467c212fff5b3b6d038b",
+            "sha256": "d5efcf34a24e7363285cb6d2ea1d570c9b5a9127e8a2b0c2cc5aa626fe258cf2"
+          },
+          {
+            "instance_id": "3w:8c4342c6ec4956bb26d1d3f327a7e0d26b842af5e4236ec64e8845e058fa2376",
+            "sha256": "85beb567d3323a10501711f7e115ebdb5a6b82fdf5cbde818aed64858cc0c867"
+          },
+          {
+            "instance_id": "3w:908f0a7ffcc00dab1dab9a4776e1bf57e4f95f273c1c86877389836721083ca9",
+            "sha256": "9c8c17da78eca2739694b3deb94e17c02bdaeb0719848fb49ed995546563957c"
+          },
+          {
+            "instance_id": "3w:948809463bb4f4b5fd741b02208f228947f13838221d9e0d8e274a1cbd5e4a5d",
+            "sha256": "5eac279ff21c0850bccb4b0947997081d1bbddfce126063faba3af696375045e"
+          },
+          {
+            "instance_id": "3w:95fa86429d859a7992255954ccecf23116a5f4bbdd9e0eb5411a1a40acdacddd",
+            "sha256": "a3089800d7c5bc71617f890da38e5279ebd7ecac90b78958c555607bec6f8a6c"
+          },
+          {
+            "instance_id": "3w:a21e3c111cb22c6a2ff5ddf98522f45319fe4b054dd810599b74f9898195996e",
+            "sha256": "344e7541e61d2f1267a9d086fd6f78d81ba8322eae1e92df74b2a91580d1330c"
+          },
+          {
+            "instance_id": "3w:a5c7673f77c2ecd9de5dd928a25615221f9d1d964e9f221a0a1c9d7554c668b7",
+            "sha256": "6c7d930ebdc424a62dba5e2ff64901d32ac90eac6ce68f813347de131ac79db0"
+          },
+          {
+            "instance_id": "3w:a5d9fe5c7fa8885363974ce24acbe5c47d146a86e8001c782190e119bc99a544",
+            "sha256": "acd72cd0967dfdb619c17c349fe7738ad5b01abaa6e073fb5349852eb8273554"
+          },
+          {
+            "instance_id": "3w:d68c116498825185f2e7b1c5b972bf9dcd8bb0734c2e1d03ff0120ab8d15c810",
+            "sha256": "1ba4c1385ff94b09d5bf9e424bebc77d05b61e99469b4f22a305e6722dc86672"
+          },
+          {
+            "instance_id": "3w:f0f7253fa367583f3b34cd49a0b42ab2e4628e9563c542a13c1b3ab17f2de51a",
+            "sha256": "dc1366b1d1b7b9f9c403ad173a48b9a4685b8bed50a4f3e7cb3bd115ca654dc6"
+          },
+          {
+            "instance_id": "3w:f6dfc1ba48716c3b327db2b73695f0de8c5a339f32a5cf48a44f85fed2c962a3",
+            "sha256": "4fcb5e85d481d38d962f43307026bfbc036862cf6a71fc249daeb087409bac4a"
+          },
+          {
+            "instance_id": "3w:fe47a871168d9d105bbc3be8b89efd60cfa8f1fb0cb88a1f1f17cb1db310e364",
+            "sha256": "13e62d619d19aed2ff70173ad1a5ff3b31cb9da2cfd86304c68d7cfbecdb1ee7"
+          }
+        ],
+        "input_sha256": {
+          "exposure_ledger": "413484bf319b7ac135421b7cc48404e85598ff117b994c8257deefaf06608609",
+          "manifest": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+          "registry": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472"
+        },
+        "python_version": "3.13.3",
+        "requirements_sha256": {
+          "requirements-data.txt": "589df5f1931482d00476737ebc85976755984711990832036bfd5790e8d774e0",
+          "requirements-pipeline.txt": "5901f51891b97e618c124e61a1e693859da38ff556d30c4c18e4ab10506f0b37"
+        }
+      },
+      "preprocessing_summary_sha256": "ff4791b5df6bf4c478e8c6bcfc4030d20b0ae1a167f2722edcdb6bebdee12856",
+      "preprocessor_fingerprint": "5fd7c3a924b1ca7594e458dc88d8a4e575d647bcd9d65766d977ca674ebf4301",
+      "split_file_sha256": "1a02fd7e24a1ce4933a167da049ba7b4dbc4fa90ff96b5643f17cd819e305952",
+      "split_fingerprint": "643ecb9867ceaf6daff093f11a2e1b0a2b3066cbe2ce614b4ad1ecf81ff82062"
+    },
+    "environment": {
+      "base_git_revision": "91eccd95b8dac9a6723c8f1155461a01aa073702",
+      "dependencies": {
+        "Pygments": "2.21.0",
+        "annotated-types": "0.8.0",
+        "asttokens": "3.0.2",
+        "attrs": "26.1.0",
+        "cloudpickle": "3.1.2",
+        "colorama": "0.4.6",
+        "comm": "0.2.3",
+        "contourpy": "1.4.0",
+        "cycler": "0.12.1",
+        "debugpy": "1.8.22",
+        "executing": "2.3.0",
+        "fastjsonschema": "2.22.3",
+        "fonttools": "4.68.0",
+        "iniconfig": "2.3.1",
+        "ipykernel": "7.4.0",
+        "ipython": "9.18.1",
+        "ipython_pygments_lexers": "1.1.1",
+        "jedi": "0.20.1",
+        "joblib": "1.6.0",
+        "jsonschema": "4.26.0",
+        "jsonschema-specifications": "2025.9.1",
+        "jupyter_client": "8.10.0",
+        "jupyter_core": "5.9.1",
+        "kiwisolver": "1.5.1",
+        "matplotlib": "3.11.2",
+        "matplotlib-inline": "0.2.2",
+        "narwhals": "2.28.0",
+        "nbclient": "0.11.0",
+        "nbformat": "5.11.1",
+        "nest-asyncio2": "1.7.4",
+        "numpy": "2.2.6",
+        "packaging": "26.3",
+        "pandas": "2.2.3",
+        "parso": "0.8.7",
+        "pillow": "13.0.0",
+        "pip": "25.0.1",
+        "platformdirs": "4.14.5",
+        "pluggy": "1.7.0",
+        "prompt_toolkit": "3.0.53",
+        "psutil": "7.2.2",
+        "pure_eval": "0.2.4",
+        "pyarrow": "26.0.1",
+        "pydantic": "2.14.3",
+        "pydantic_core": "2.50.4",
+        "pyparsing": "3.3.3",
+        "pytest": "9.1.1",
+        "python-dateutil": "4.0.0",
+        "pytz": "2026.6",
+        "pyzmq": "27.3.0",
+        "referencing": "0.37.0",
+        "rpds-py": "2026.9.1",
+        "scikit-learn": "1.9.1",
+        "scipy": "1.17.1",
+        "stack-data": "0.6.3",
+        "threadpoolctl": "3.8.0",
+        "tornado": "6.6.1",
+        "traitlets": "5.16.1",
+        "typing-inspection": "0.4.5",
+        "typing_extensions": "4.16.0",
+        "tzdata": "2026.6",
+        "wcwidth": "0.9.4"
+      },
+      "platform": "Windows-11-10.0.26300-SP0",
+      "python": "3.13.3",
+      "seed": 42,
+      "thread_limit_during_fit": 1
+    },
+    "isolation_parameters": {
+      "bootstrap": false,
+      "contamination": 0.05,
+      "max_features": 1.0,
+      "max_samples": 256,
+      "n_estimators": 200,
+      "n_jobs": 1,
+      "random_state": 42
+    },
+    "logistic_parameters": {
+      "C": 1.0,
+      "class_weight": {
+        "0": 1,
+        "1": 2
+      },
+      "l1_ratio": 0.0,
+      "max_iter": 2000,
+      "random_state": 42,
+      "solver": "liblinear",
+      "tol": 0.0001
+    },
+    "naive": [
+      "always_normal",
+      "train_majority_ties_normal"
+    ],
+    "protocol_sha256": "89c8997ff90ab5e978a39810fc3be35b0358058d2414baeaf0607509717e42a5",
+    "requirements_sha256": "70656c167fbb607a79db88bb7bae7f8d11d8d30260720155baa7263d9d94487c"
+  },
+  "installed_dependency_pins_verified": true,
+  "model_reload_predictions_exact": true,
+  "models": {
+    "always_normal": {
+      "comparison": "ge",
+      "constant": 0,
+      "fit_window_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "fit_windows": 0,
+      "parameters": {},
+      "score_semantics": "constant decision score",
+      "threshold": 0.5
+    },
+    "isolation_forest": {
+      "comparison": "gt",
+      "constant": null,
+      "fit_status": {
+        "effective_max_samples": 256,
+        "n_features": 120,
+        "reference": "known-normal estimator fit; shared preprocessing fitted on all train endpoints",
+        "trees": 200
+      },
+      "fit_window_ids_sha256": "c62a9247fb988445cbf03d5cc59413a52faf5e8809cf194ea1eb15c6c297a724",
+      "fit_windows": 3541,
+      "parameters": {
+        "bootstrap": false,
+        "contamination": 0.05,
+        "max_features": 1.0,
+        "max_samples": 256,
+        "n_estimators": 200,
+        "n_jobs": 1,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "score_semantics": "negative score_samples; larger=more anomalous, not probability",
+      "threshold": 0.5203496015254129
+    },
+    "logistic_regression": {
+      "comparison": "ge",
+      "constant": null,
+      "fit_status": {
+        "classes": [
+          0,
+          1
+        ],
+        "converged": true,
+        "n_features": 120,
+        "n_iter": [
+          10
+        ]
+      },
+      "fit_window_ids_sha256": "3a0b714d06476e6c1cc2dacd6af4da3f8d922c92942591c165a07840d122eb86",
+      "fit_windows": 7649,
+      "parameters": {
+        "C": 1.0,
+        "class_weight": {
+          "0": 1,
+          "1": 2
+        },
+        "dual": false,
+        "fit_intercept": true,
+        "intercept_scaling": 1,
+        "l1_ratio": 0.0,
+        "max_iter": 2000,
+        "n_jobs": null,
+        "penalty": "deprecated",
+        "random_state": 42,
+        "solver": "liblinear",
+        "tol": 0.0001,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "score_semantics": "uncalibrated positive-class probability",
+      "threshold": 0.5
+    },
+    "train_majority": {
+      "comparison": "ge",
+      "constant": 1,
+      "fit_window_ids_sha256": "3a0b714d06476e6c1cc2dacd6af4da3f8d922c92942591c165a07840d122eb86",
+      "fit_windows": 7649,
+      "parameters": {},
+      "score_semantics": "constant decision score",
+      "threshold": 0.5
+    }
+  },
+  "run_id": "d8386c526a40f56133b5",
+  "schema_version": "1.0.0",
+  "source_and_preprocessing_hashes_unchanged": true,
+  "test_predictions_generated": 0,
+  "test_rows_used": 0,
+  "train_event_families": [
+    0,
+    3,
+    4,
+    5,
+    7
+  ],
+  "training_windows": 7649,
+  "validation_event_families": [
+    0,
+    2,
+    8
+  ],
+  "validation_threshold_tuning": false,
+  "validation_windows": 16518
+}

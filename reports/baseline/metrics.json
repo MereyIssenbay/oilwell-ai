@@ -1,0 +1,1803 @@
+{
+  "development_diagnostic": true,
+  "metric_definitions": {
+    "average_precision": "noninterpolated average_precision_score",
+    "confusion_matrix": "rows=true, columns=predicted; order normal, abnormal",
+    "pr_auc_trapezoidal": "trapezoidal area of precision-recall curve, reported separately",
+    "undefined": "null with denominator/status explanation; never invented zero support"
+  },
+  "model_parameters": {
+    "always_normal": {
+      "comparison": "ge",
+      "constant": 0,
+      "fit_window_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "fit_windows": 0,
+      "parameters": {},
+      "score_semantics": "constant decision score",
+      "threshold": 0.5
+    },
+    "isolation_forest": {
+      "comparison": "gt",
+      "constant": null,
+      "fit_status": {
+        "effective_max_samples": 256,
+        "n_features": 120,
+        "reference": "known-normal estimator fit; shared preprocessing fitted on all train endpoints",
+        "trees": 200
+      },
+      "fit_window_ids_sha256": "c62a9247fb988445cbf03d5cc59413a52faf5e8809cf194ea1eb15c6c297a724",
+      "fit_windows": 3541,
+      "parameters": {
+        "bootstrap": false,
+        "contamination": 0.05,
+        "max_features": 1.0,
+        "max_samples": 256,
+        "n_estimators": 200,
+        "n_jobs": 1,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "score_semantics": "negative score_samples; larger=more anomalous, not probability",
+      "threshold": 0.5203496015254129
+    },
+    "logistic_regression": {
+      "comparison": "ge",
+      "constant": null,
+      "fit_status": {
+        "classes": [
+          0,
+          1
+        ],
+        "converged": true,
+        "n_features": 120,
+        "n_iter": [
+          10
+        ]
+      },
+      "fit_window_ids_sha256": "3a0b714d06476e6c1cc2dacd6af4da3f8d922c92942591c165a07840d122eb86",
+      "fit_windows": 7649,
+      "parameters": {
+        "C": 1.0,
+        "class_weight": {
+          "0": 1,
+          "1": 2
+        },
+        "dual": false,
+        "fit_intercept": true,
+        "intercept_scaling": 1,
+        "l1_ratio": 0.0,
+        "max_iter": 2000,
+        "n_jobs": null,
+        "penalty": "deprecated",
+        "random_state": 42,
+        "solver": "liblinear",
+        "tol": 0.0001,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "score_semantics": "uncalibrated positive-class probability",
+      "threshold": 0.5
+    },
+    "train_majority": {
+      "comparison": "ge",
+      "constant": 1,
+      "fit_window_ids_sha256": "3a0b714d06476e6c1cc2dacd6af4da3f8d922c92942591c165a07840d122eb86",
+      "fit_windows": 7649,
+      "parameters": {},
+      "score_semantics": "constant decision score",
+      "threshold": 0.5
+    }
+  },
+  "models": {
+    "always_normal": {
+      "by_family": [
+        {
+          "detected_windows": 0,
+          "event_family": 1,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": false,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 2,
+          "missed_windows": 152,
+          "recall": 0.0,
+          "seen_in_training": false,
+          "source_instances": 1,
+          "status": "evaluated_binary_detection",
+          "well_ids": 1,
+          "windows": 152
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 3,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 4,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 5,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 6,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": false,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 7,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 8,
+          "missed_windows": 8642,
+          "recall": 0.0,
+          "seen_in_training": false,
+          "source_instances": 1,
+          "status": "evaluated_binary_detection",
+          "well_ids": 1,
+          "windows": 8642
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 9,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": false,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        }
+      ],
+      "by_origin": {
+        "drawn": {
+          "abnormal_windows": 0,
+          "average_precision": null,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "f1": null,
+          "false_positive_window_fraction": null,
+          "fn": 0,
+          "fp": 0,
+          "normal_windows": 0,
+          "positive_prevalence": null,
+          "pr_auc_trapezoidal": null,
+          "precision": null,
+          "reason": "origin excluded from frozen real-only validation split",
+          "recall": null,
+          "source_instances": 0,
+          "status": "not_evaluated",
+          "tn": 0,
+          "tp": 0,
+          "undefined": {
+            "f1": "no positive targets or predictions",
+            "precision": "no positive predictions",
+            "ranking_metrics": "both target classes required",
+            "recall": "no abnormal target windows"
+          },
+          "well_ids": 0,
+          "windows": 0
+        },
+        "real": {
+          "abnormal_windows": 8794,
+          "average_precision": 0.5323889090688946,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              7724,
+              0
+            ],
+            [
+              8794,
+              0
+            ]
+          ],
+          "f1": 0.0,
+          "false_positive_window_fraction": 0.0,
+          "fn": 8794,
+          "fp": 0,
+          "normal_windows": 7724,
+          "positive_prevalence": 0.5323889090688946,
+          "pr_auc_trapezoidal": 0.7661944545344472,
+          "precision": null,
+          "reason": null,
+          "recall": 0.0,
+          "source_instances": 3,
+          "status": "evaluated",
+          "tn": 7724,
+          "tp": 0,
+          "undefined": {
+            "f1": null,
+            "precision": "no positive predictions",
+            "ranking_metrics": null,
+            "recall": null
+          },
+          "well_ids": 3,
+          "windows": 16518
+        },
+        "simulated": {
+          "abnormal_windows": 0,
+          "average_precision": null,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "f1": null,
+          "false_positive_window_fraction": null,
+          "fn": 0,
+          "fp": 0,
+          "normal_windows": 0,
+          "positive_prevalence": null,
+          "pr_auc_trapezoidal": null,
+          "precision": null,
+          "reason": "origin excluded from frozen real-only validation split",
+          "recall": null,
+          "source_instances": 0,
+          "status": "not_evaluated",
+          "tn": 0,
+          "tp": 0,
+          "undefined": {
+            "f1": "no positive targets or predictions",
+            "precision": "no positive predictions",
+            "ranking_metrics": "both target classes required",
+            "recall": "no abnormal target windows"
+          },
+          "well_ids": 0,
+          "windows": 0
+        }
+      },
+      "by_phase": [
+        {
+          "phase": "normal",
+          "positive_decisions": 0,
+          "positive_fraction": 0.0,
+          "windows": 7724
+        },
+        {
+          "phase": "transient",
+          "positive_decisions": 0,
+          "positive_fraction": 0.0,
+          "windows": 8388
+        },
+        {
+          "phase": "event",
+          "positive_decisions": 0,
+          "positive_fraction": 0.0,
+          "windows": 406
+        }
+      ],
+      "by_well": [
+        {
+          "abnormal_windows": 0,
+          "average_precision": null,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              1789,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "f1": null,
+          "false_positive_window_fraction": 0.0,
+          "fn": 0,
+          "fp": 0,
+          "normal_windows": 1789,
+          "positive_prevalence": 0.0,
+          "pr_auc_trapezoidal": null,
+          "precision": null,
+          "recall": null,
+          "status": "evaluated",
+          "tn": 1789,
+          "tp": 0,
+          "undefined": {
+            "f1": "no positive targets or predictions",
+            "precision": "no positive predictions",
+            "ranking_metrics": "both target classes required",
+            "recall": "no abnormal target windows"
+          },
+          "well_id": "WELL-00006",
+          "windows": 1789
+        },
+        {
+          "abnormal_windows": 152,
+          "average_precision": 0.4141689373297003,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              215,
+              0
+            ],
+            [
+              152,
+              0
+            ]
+          ],
+          "f1": 0.0,
+          "false_positive_window_fraction": 0.0,
+          "fn": 152,
+          "fp": 0,
+          "normal_windows": 215,
+          "positive_prevalence": 0.4141689373297003,
+          "pr_auc_trapezoidal": 0.7070844686648501,
+          "precision": null,
+          "recall": 0.0,
+          "status": "evaluated",
+          "tn": 215,
+          "tp": 0,
+          "undefined": {
+            "f1": null,
+            "precision": "no positive predictions",
+            "ranking_metrics": null,
+            "recall": null
+          },
+          "well_id": "WELL-00011",
+          "windows": 367
+        },
+        {
+          "abnormal_windows": 8642,
+          "average_precision": 0.6017267790001393,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              5720,
+              0
+            ],
+            [
+              8642,
+              0
+            ]
+          ],
+          "f1": 0.0,
+          "false_positive_window_fraction": 0.0,
+          "fn": 8642,
+          "fp": 0,
+          "normal_windows": 5720,
+          "positive_prevalence": 0.6017267790001393,
+          "pr_auc_trapezoidal": 0.8008633895000696,
+          "precision": null,
+          "recall": 0.0,
+          "status": "evaluated",
+          "tn": 5720,
+          "tp": 0,
+          "undefined": {
+            "f1": null,
+            "precision": "no positive predictions",
+            "ranking_metrics": null,
+            "recall": null
+          },
+          "well_id": "WELL-00029",
+          "windows": 14362
+        }
+      ],
+      "coverage": {
+        "all_validation_endpoints": 17583,
+        "eligible_windows": 16518,
+        "unavailable_input_windows": 0,
+        "unknown_target_windows": 1065
+      },
+      "false_alerts": {
+        "abnormal_seconds": 87935.0,
+        "application_replay_executed": false,
+        "censored_positive_starts": 0,
+        "confirmed_abnormal_onsets": 0,
+        "confirmed_false_onsets": 0,
+        "exposure": "source-label seconds under causal stride-length sample-and-hold decisions; gaps bounded",
+        "false_alerts_per_monitored_replay_hour": 0.0,
+        "false_alerts_per_normal_hour": 0.0,
+        "monitored_replay_hours": 48.83833333333333,
+        "monitored_seconds": 175818.0,
+        "normal_alarm_occupancy_fraction": 0.0,
+        "normal_alarm_seconds": 0.0,
+        "normal_hours": 21.461111111111112,
+        "normal_seconds": 77260.0,
+        "policy": "available prediction runs; normal 0-to-1 onsets; boundary starts censored; labels never reset runs",
+        "unknown_label_onsets": 0,
+        "unknown_seconds": 10623.0
+      },
+      "validation": {
+        "abnormal_windows": 8794,
+        "average_precision": 0.5323889090688946,
+        "confusion_labels": [
+          "normal",
+          "abnormal"
+        ],
+        "confusion_matrix": [
+          [
+            7724,
+            0
+          ],
+          [
+            8794,
+            0
+          ]
+        ],
+        "f1": 0.0,
+        "false_positive_window_fraction": 0.0,
+        "fn": 8794,
+        "fp": 0,
+        "normal_windows": 7724,
+        "positive_prevalence": 0.5323889090688946,
+        "pr_auc_trapezoidal": 0.7661944545344472,
+        "precision": null,
+        "recall": 0.0,
+        "status": "evaluated",
+        "tn": 7724,
+        "tp": 0,
+        "undefined": {
+          "f1": null,
+          "precision": "no positive predictions",
+          "ranking_metrics": null,
+          "recall": null
+        },
+        "windows": 16518
+      }
+    },
+    "isolation_forest": {
+      "by_family": [
+        {
+          "detected_windows": 0,
+          "event_family": 1,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": false,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 152,
+          "event_family": 2,
+          "missed_windows": 0,
+          "recall": 1.0,
+          "seen_in_training": false,
+          "source_instances": 1,
+          "status": "evaluated_binary_detection",
+          "well_ids": 1,
+          "windows": 152
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 3,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 4,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 5,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 6,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": false,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 7,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 8642,
+          "event_family": 8,
+          "missed_windows": 0,
+          "recall": 1.0,
+          "seen_in_training": false,
+          "source_instances": 1,
+          "status": "evaluated_binary_detection",
+          "well_ids": 1,
+          "windows": 8642
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 9,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": false,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        }
+      ],
+      "by_origin": {
+        "drawn": {
+          "abnormal_windows": 0,
+          "average_precision": null,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "f1": null,
+          "false_positive_window_fraction": null,
+          "fn": 0,
+          "fp": 0,
+          "normal_windows": 0,
+          "positive_prevalence": null,
+          "pr_auc_trapezoidal": null,
+          "precision": null,
+          "reason": "origin excluded from frozen real-only validation split",
+          "recall": null,
+          "source_instances": 0,
+          "status": "not_evaluated",
+          "tn": 0,
+          "tp": 0,
+          "undefined": {
+            "f1": "no positive targets or predictions",
+            "precision": "no positive predictions",
+            "ranking_metrics": "both target classes required",
+            "recall": "no abnormal target windows"
+          },
+          "well_ids": 0,
+          "windows": 0
+        },
+        "real": {
+          "abnormal_windows": 8794,
+          "average_precision": 0.7355040853902104,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              103,
+              7621
+            ],
+            [
+              0,
+              8794
+            ]
+          ],
+          "f1": 0.6976873338886905,
+          "false_positive_window_fraction": 0.9866649404453651,
+          "fn": 0,
+          "fp": 7621,
+          "normal_windows": 7724,
+          "positive_prevalence": 0.5323889090688946,
+          "pr_auc_trapezoidal": 0.7354857742716223,
+          "precision": 0.5357295156868718,
+          "reason": null,
+          "recall": 1.0,
+          "source_instances": 3,
+          "status": "evaluated",
+          "tn": 103,
+          "tp": 8794,
+          "undefined": {
+            "f1": null,
+            "precision": null,
+            "ranking_metrics": null,
+            "recall": null
+          },
+          "well_ids": 3,
+          "windows": 16518
+        },
+        "simulated": {
+          "abnormal_windows": 0,
+          "average_precision": null,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "f1": null,
+          "false_positive_window_fraction": null,
+          "fn": 0,
+          "fp": 0,
+          "normal_windows": 0,
+          "positive_prevalence": null,
+          "pr_auc_trapezoidal": null,
+          "precision": null,
+          "reason": "origin excluded from frozen real-only validation split",
+          "recall": null,
+          "source_instances": 0,
+          "status": "not_evaluated",
+          "tn": 0,
+          "tp": 0,
+          "undefined": {
+            "f1": "no positive targets or predictions",
+            "precision": "no positive predictions",
+            "ranking_metrics": "both target classes required",
+            "recall": "no abnormal target windows"
+          },
+          "well_ids": 0,
+          "windows": 0
+        }
+      },
+      "by_phase": [
+        {
+          "phase": "normal",
+          "positive_decisions": 7621,
+          "positive_fraction": 0.9866649404453651,
+          "windows": 7724
+        },
+        {
+          "phase": "transient",
+          "positive_decisions": 8388,
+          "positive_fraction": 1.0,
+          "windows": 8388
+        },
+        {
+          "phase": "event",
+          "positive_decisions": 406,
+          "positive_fraction": 1.0,
+          "windows": 406
+        }
+      ],
+      "by_well": [
+        {
+          "abnormal_windows": 0,
+          "average_precision": null,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              1789
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "f1": 0.0,
+          "false_positive_window_fraction": 1.0,
+          "fn": 0,
+          "fp": 1789,
+          "normal_windows": 1789,
+          "positive_prevalence": 0.0,
+          "pr_auc_trapezoidal": null,
+          "precision": 0.0,
+          "recall": null,
+          "status": "evaluated",
+          "tn": 0,
+          "tp": 0,
+          "undefined": {
+            "f1": null,
+            "precision": null,
+            "ranking_metrics": "both target classes required",
+            "recall": "no abnormal target windows"
+          },
+          "well_id": "WELL-00006",
+          "windows": 1789
+        },
+        {
+          "abnormal_windows": 152,
+          "average_precision": 1.0,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              103,
+              112
+            ],
+            [
+              0,
+              152
+            ]
+          ],
+          "f1": 0.7307692307692307,
+          "false_positive_window_fraction": 0.5209302325581395,
+          "fn": 0,
+          "fp": 112,
+          "normal_windows": 215,
+          "positive_prevalence": 0.4141689373297003,
+          "pr_auc_trapezoidal": 1.0,
+          "precision": 0.5757575757575758,
+          "recall": 1.0,
+          "status": "evaluated",
+          "tn": 103,
+          "tp": 152,
+          "undefined": {
+            "f1": null,
+            "precision": null,
+            "ranking_metrics": null,
+            "recall": null
+          },
+          "well_id": "WELL-00011",
+          "windows": 367
+        },
+        {
+          "abnormal_windows": 8642,
+          "average_precision": 0.7379956654667115,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              5720
+            ],
+            [
+              0,
+              8642
+            ]
+          ],
+          "f1": 0.7513475917231786,
+          "false_positive_window_fraction": 1.0,
+          "fn": 0,
+          "fp": 5720,
+          "normal_windows": 5720,
+          "positive_prevalence": 0.6017267790001393,
+          "pr_auc_trapezoidal": 0.7379773425136615,
+          "precision": 0.6017267790001393,
+          "recall": 1.0,
+          "status": "evaluated",
+          "tn": 0,
+          "tp": 8642,
+          "undefined": {
+            "f1": null,
+            "precision": null,
+            "ranking_metrics": null,
+            "recall": null
+          },
+          "well_id": "WELL-00029",
+          "windows": 14362
+        }
+      ],
+      "coverage": {
+        "all_validation_endpoints": 17583,
+        "eligible_windows": 16518,
+        "unavailable_input_windows": 0,
+        "unknown_target_windows": 1065
+      },
+      "false_alerts": {
+        "abnormal_seconds": 87935.0,
+        "application_replay_executed": false,
+        "censored_positive_starts": 2,
+        "confirmed_abnormal_onsets": 0,
+        "confirmed_false_onsets": 5,
+        "exposure": "source-label seconds under causal stride-length sample-and-hold decisions; gaps bounded",
+        "false_alerts_per_monitored_replay_hour": 0.1023785960481862,
+        "false_alerts_per_normal_hour": 0.23297954957287081,
+        "monitored_replay_hours": 48.83833333333333,
+        "monitored_seconds": 175818.0,
+        "normal_alarm_occupancy_fraction": 0.9866683924411079,
+        "normal_alarm_seconds": 76230.0,
+        "normal_hours": 21.461111111111112,
+        "normal_seconds": 77260.0,
+        "policy": "available prediction runs; normal 0-to-1 onsets; boundary starts censored; labels never reset runs",
+        "unknown_label_onsets": 9,
+        "unknown_seconds": 10623.0
+      },
+      "validation": {
+        "abnormal_windows": 8794,
+        "average_precision": 0.7355040853902104,
+        "confusion_labels": [
+          "normal",
+          "abnormal"
+        ],
+        "confusion_matrix": [
+          [
+            103,
+            7621
+          ],
+          [
+            0,
+            8794
+          ]
+        ],
+        "f1": 0.6976873338886905,
+        "false_positive_window_fraction": 0.9866649404453651,
+        "fn": 0,
+        "fp": 7621,
+        "normal_windows": 7724,
+        "positive_prevalence": 0.5323889090688946,
+        "pr_auc_trapezoidal": 0.7354857742716223,
+        "precision": 0.5357295156868718,
+        "recall": 1.0,
+        "status": "evaluated",
+        "tn": 103,
+        "tp": 8794,
+        "undefined": {
+          "f1": null,
+          "precision": null,
+          "ranking_metrics": null,
+          "recall": null
+        },
+        "windows": 16518
+      }
+    },
+    "logistic_regression": {
+      "by_family": [
+        {
+          "detected_windows": 0,
+          "event_family": 1,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": false,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 135,
+          "event_family": 2,
+          "missed_windows": 17,
+          "recall": 0.8881578947368421,
+          "seen_in_training": false,
+          "source_instances": 1,
+          "status": "evaluated_binary_detection",
+          "well_ids": 1,
+          "windows": 152
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 3,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 4,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 5,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 6,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": false,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 7,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 4605,
+          "event_family": 8,
+          "missed_windows": 4037,
+          "recall": 0.5328627632492479,
+          "seen_in_training": false,
+          "source_instances": 1,
+          "status": "evaluated_binary_detection",
+          "well_ids": 1,
+          "windows": 8642
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 9,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": false,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        }
+      ],
+      "by_origin": {
+        "drawn": {
+          "abnormal_windows": 0,
+          "average_precision": null,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "f1": null,
+          "false_positive_window_fraction": null,
+          "fn": 0,
+          "fp": 0,
+          "normal_windows": 0,
+          "positive_prevalence": null,
+          "pr_auc_trapezoidal": null,
+          "precision": null,
+          "reason": "origin excluded from frozen real-only validation split",
+          "recall": null,
+          "source_instances": 0,
+          "status": "not_evaluated",
+          "tn": 0,
+          "tp": 0,
+          "undefined": {
+            "f1": "no positive targets or predictions",
+            "precision": "no positive predictions",
+            "ranking_metrics": "both target classes required",
+            "recall": "no abnormal target windows"
+          },
+          "well_ids": 0,
+          "windows": 0
+        },
+        "real": {
+          "abnormal_windows": 8794,
+          "average_precision": 0.9359849049767661,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              7509,
+              215
+            ],
+            [
+              4054,
+              4740
+            ]
+          ],
+          "f1": 0.6895046912502727,
+          "false_positive_window_fraction": 0.02783531848783014,
+          "fn": 4054,
+          "fp": 215,
+          "normal_windows": 7724,
+          "positive_prevalence": 0.5323889090688946,
+          "pr_auc_trapezoidal": 0.9359696172503781,
+          "precision": 0.9566094853683148,
+          "reason": null,
+          "recall": 0.5390038662724584,
+          "source_instances": 3,
+          "status": "evaluated",
+          "tn": 7509,
+          "tp": 4740,
+          "undefined": {
+            "f1": null,
+            "precision": null,
+            "ranking_metrics": null,
+            "recall": null
+          },
+          "well_ids": 3,
+          "windows": 16518
+        },
+        "simulated": {
+          "abnormal_windows": 0,
+          "average_precision": null,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "f1": null,
+          "false_positive_window_fraction": null,
+          "fn": 0,
+          "fp": 0,
+          "normal_windows": 0,
+          "positive_prevalence": null,
+          "pr_auc_trapezoidal": null,
+          "precision": null,
+          "reason": "origin excluded from frozen real-only validation split",
+          "recall": null,
+          "source_instances": 0,
+          "status": "not_evaluated",
+          "tn": 0,
+          "tp": 0,
+          "undefined": {
+            "f1": "no positive targets or predictions",
+            "precision": "no positive predictions",
+            "ranking_metrics": "both target classes required",
+            "recall": "no abnormal target windows"
+          },
+          "well_ids": 0,
+          "windows": 0
+        }
+      },
+      "by_phase": [
+        {
+          "phase": "normal",
+          "positive_decisions": 215,
+          "positive_fraction": 0.02783531848783014,
+          "windows": 7724
+        },
+        {
+          "phase": "transient",
+          "positive_decisions": 4371,
+          "positive_fraction": 0.521101573676681,
+          "windows": 8388
+        },
+        {
+          "phase": "event",
+          "positive_decisions": 369,
+          "positive_fraction": 0.9088669950738916,
+          "windows": 406
+        }
+      ],
+      "by_well": [
+        {
+          "abnormal_windows": 0,
+          "average_precision": null,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              1789,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "f1": null,
+          "false_positive_window_fraction": 0.0,
+          "fn": 0,
+          "fp": 0,
+          "normal_windows": 1789,
+          "positive_prevalence": 0.0,
+          "pr_auc_trapezoidal": null,
+          "precision": null,
+          "recall": null,
+          "status": "evaluated",
+          "tn": 1789,
+          "tp": 0,
+          "undefined": {
+            "f1": "no positive targets or predictions",
+            "precision": "no positive predictions",
+            "ranking_metrics": "both target classes required",
+            "recall": "no abnormal target windows"
+          },
+          "well_id": "WELL-00006",
+          "windows": 1789
+        },
+        {
+          "abnormal_windows": 152,
+          "average_precision": 0.9037679390483664,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              215
+            ],
+            [
+              17,
+              135
+            ]
+          ],
+          "f1": 0.5378486055776892,
+          "false_positive_window_fraction": 1.0,
+          "fn": 17,
+          "fp": 215,
+          "normal_windows": 215,
+          "positive_prevalence": 0.4141689373297003,
+          "pr_auc_trapezoidal": 0.9036260571067454,
+          "precision": 0.38571428571428573,
+          "recall": 0.8881578947368421,
+          "status": "evaluated",
+          "tn": 0,
+          "tp": 135,
+          "undefined": {
+            "f1": null,
+            "precision": null,
+            "ranking_metrics": null,
+            "recall": null
+          },
+          "well_id": "WELL-00011",
+          "windows": 367
+        },
+        {
+          "abnormal_windows": 8642,
+          "average_precision": 0.9945224260135577,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              5720,
+              0
+            ],
+            [
+              4037,
+              4605
+            ]
+          ],
+          "f1": 0.6952517551143655,
+          "false_positive_window_fraction": 0.0,
+          "fn": 4037,
+          "fp": 0,
+          "normal_windows": 5720,
+          "positive_prevalence": 0.6017267790001393,
+          "pr_auc_trapezoidal": 0.9945222331110282,
+          "precision": 1.0,
+          "recall": 0.5328627632492479,
+          "status": "evaluated",
+          "tn": 5720,
+          "tp": 4605,
+          "undefined": {
+            "f1": null,
+            "precision": null,
+            "ranking_metrics": null,
+            "recall": null
+          },
+          "well_id": "WELL-00029",
+          "windows": 14362
+        }
+      ],
+      "coverage": {
+        "all_validation_endpoints": 17583,
+        "eligible_windows": 16518,
+        "unavailable_input_windows": 0,
+        "unknown_target_windows": 1065
+      },
+      "false_alerts": {
+        "abnormal_seconds": 87935.0,
+        "application_replay_executed": false,
+        "censored_positive_starts": 1,
+        "confirmed_abnormal_onsets": 27,
+        "confirmed_false_onsets": 0,
+        "exposure": "source-label seconds under causal stride-length sample-and-hold decisions; gaps bounded",
+        "false_alerts_per_monitored_replay_hour": 0.0,
+        "false_alerts_per_normal_hour": 0.0,
+        "monitored_replay_hours": 48.83833333333333,
+        "monitored_seconds": 175818.0,
+        "normal_alarm_occupancy_fraction": 0.027944602640434895,
+        "normal_alarm_seconds": 2159.0,
+        "normal_hours": 21.461111111111112,
+        "normal_seconds": 77260.0,
+        "policy": "available prediction runs; normal 0-to-1 onsets; boundary starts censored; labels never reset runs",
+        "unknown_label_onsets": 0,
+        "unknown_seconds": 10623.0
+      },
+      "validation": {
+        "abnormal_windows": 8794,
+        "average_precision": 0.9359849049767661,
+        "confusion_labels": [
+          "normal",
+          "abnormal"
+        ],
+        "confusion_matrix": [
+          [
+            7509,
+            215
+          ],
+          [
+            4054,
+            4740
+          ]
+        ],
+        "f1": 0.6895046912502727,
+        "false_positive_window_fraction": 0.02783531848783014,
+        "fn": 4054,
+        "fp": 215,
+        "normal_windows": 7724,
+        "positive_prevalence": 0.5323889090688946,
+        "pr_auc_trapezoidal": 0.9359696172503781,
+        "precision": 0.9566094853683148,
+        "recall": 0.5390038662724584,
+        "status": "evaluated",
+        "tn": 7509,
+        "tp": 4740,
+        "undefined": {
+          "f1": null,
+          "precision": null,
+          "ranking_metrics": null,
+          "recall": null
+        },
+        "windows": 16518
+      }
+    },
+    "train_majority": {
+      "by_family": [
+        {
+          "detected_windows": 0,
+          "event_family": 1,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": false,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 152,
+          "event_family": 2,
+          "missed_windows": 0,
+          "recall": 1.0,
+          "seen_in_training": false,
+          "source_instances": 1,
+          "status": "evaluated_binary_detection",
+          "well_ids": 1,
+          "windows": 152
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 3,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 4,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 5,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 6,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": false,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 7,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": true,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        },
+        {
+          "detected_windows": 8642,
+          "event_family": 8,
+          "missed_windows": 0,
+          "recall": 1.0,
+          "seen_in_training": false,
+          "source_instances": 1,
+          "status": "evaluated_binary_detection",
+          "well_ids": 1,
+          "windows": 8642
+        },
+        {
+          "detected_windows": 0,
+          "event_family": 9,
+          "missed_windows": 0,
+          "recall": null,
+          "seen_in_training": false,
+          "source_instances": 0,
+          "status": "no_validation_support",
+          "well_ids": 0,
+          "windows": 0
+        }
+      ],
+      "by_origin": {
+        "drawn": {
+          "abnormal_windows": 0,
+          "average_precision": null,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "f1": null,
+          "false_positive_window_fraction": null,
+          "fn": 0,
+          "fp": 0,
+          "normal_windows": 0,
+          "positive_prevalence": null,
+          "pr_auc_trapezoidal": null,
+          "precision": null,
+          "reason": "origin excluded from frozen real-only validation split",
+          "recall": null,
+          "source_instances": 0,
+          "status": "not_evaluated",
+          "tn": 0,
+          "tp": 0,
+          "undefined": {
+            "f1": "no positive targets or predictions",
+            "precision": "no positive predictions",
+            "ranking_metrics": "both target classes required",
+            "recall": "no abnormal target windows"
+          },
+          "well_ids": 0,
+          "windows": 0
+        },
+        "real": {
+          "abnormal_windows": 8794,
+          "average_precision": 0.5323889090688946,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              7724
+            ],
+            [
+              0,
+              8794
+            ]
+          ],
+          "f1": 0.6948482932996207,
+          "false_positive_window_fraction": 1.0,
+          "fn": 0,
+          "fp": 7724,
+          "normal_windows": 7724,
+          "positive_prevalence": 0.5323889090688946,
+          "pr_auc_trapezoidal": 0.7661944545344472,
+          "precision": 0.5323889090688946,
+          "reason": null,
+          "recall": 1.0,
+          "source_instances": 3,
+          "status": "evaluated",
+          "tn": 0,
+          "tp": 8794,
+          "undefined": {
+            "f1": null,
+            "precision": null,
+            "ranking_metrics": null,
+            "recall": null
+          },
+          "well_ids": 3,
+          "windows": 16518
+        },
+        "simulated": {
+          "abnormal_windows": 0,
+          "average_precision": null,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "f1": null,
+          "false_positive_window_fraction": null,
+          "fn": 0,
+          "fp": 0,
+          "normal_windows": 0,
+          "positive_prevalence": null,
+          "pr_auc_trapezoidal": null,
+          "precision": null,
+          "reason": "origin excluded from frozen real-only validation split",
+          "recall": null,
+          "source_instances": 0,
+          "status": "not_evaluated",
+          "tn": 0,
+          "tp": 0,
+          "undefined": {
+            "f1": "no positive targets or predictions",
+            "precision": "no positive predictions",
+            "ranking_metrics": "both target classes required",
+            "recall": "no abnormal target windows"
+          },
+          "well_ids": 0,
+          "windows": 0
+        }
+      },
+      "by_phase": [
+        {
+          "phase": "normal",
+          "positive_decisions": 7724,
+          "positive_fraction": 1.0,
+          "windows": 7724
+        },
+        {
+          "phase": "transient",
+          "positive_decisions": 8388,
+          "positive_fraction": 1.0,
+          "windows": 8388
+        },
+        {
+          "phase": "event",
+          "positive_decisions": 406,
+          "positive_fraction": 1.0,
+          "windows": 406
+        }
+      ],
+      "by_well": [
+        {
+          "abnormal_windows": 0,
+          "average_precision": null,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              1789
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "f1": 0.0,
+          "false_positive_window_fraction": 1.0,
+          "fn": 0,
+          "fp": 1789,
+          "normal_windows": 1789,
+          "positive_prevalence": 0.0,
+          "pr_auc_trapezoidal": null,
+          "precision": 0.0,
+          "recall": null,
+          "status": "evaluated",
+          "tn": 0,
+          "tp": 0,
+          "undefined": {
+            "f1": null,
+            "precision": null,
+            "ranking_metrics": "both target classes required",
+            "recall": "no abnormal target windows"
+          },
+          "well_id": "WELL-00006",
+          "windows": 1789
+        },
+        {
+          "abnormal_windows": 152,
+          "average_precision": 0.4141689373297003,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              215
+            ],
+            [
+              0,
+              152
+            ]
+          ],
+          "f1": 0.5857418111753372,
+          "false_positive_window_fraction": 1.0,
+          "fn": 0,
+          "fp": 215,
+          "normal_windows": 215,
+          "positive_prevalence": 0.4141689373297003,
+          "pr_auc_trapezoidal": 0.7070844686648501,
+          "precision": 0.4141689373297003,
+          "recall": 1.0,
+          "status": "evaluated",
+          "tn": 0,
+          "tp": 152,
+          "undefined": {
+            "f1": null,
+            "precision": null,
+            "ranking_metrics": null,
+            "recall": null
+          },
+          "well_id": "WELL-00011",
+          "windows": 367
+        },
+        {
+          "abnormal_windows": 8642,
+          "average_precision": 0.6017267790001393,
+          "confusion_labels": [
+            "normal",
+            "abnormal"
+          ],
+          "confusion_matrix": [
+            [
+              0,
+              5720
+            ],
+            [
+              0,
+              8642
+            ]
+          ],
+          "f1": 0.7513475917231786,
+          "false_positive_window_fraction": 1.0,
+          "fn": 0,
+          "fp": 5720,
+          "normal_windows": 5720,
+          "positive_prevalence": 0.6017267790001393,
+          "pr_auc_trapezoidal": 0.8008633895000696,
+          "precision": 0.6017267790001393,
+          "recall": 1.0,
+          "status": "evaluated",
+          "tn": 0,
+          "tp": 8642,
+          "undefined": {
+            "f1": null,
+            "precision": null,
+            "ranking_metrics": null,
+            "recall": null
+          },
+          "well_id": "WELL-00029",
+          "windows": 14362
+        }
+      ],
+      "coverage": {
+        "all_validation_endpoints": 17583,
+        "eligible_windows": 16518,
+        "unavailable_input_windows": 0,
+        "unknown_target_windows": 1065
+      },
+      "false_alerts": {
+        "abnormal_seconds": 87935.0,
+        "application_replay_executed": false,
+        "censored_positive_starts": 3,
+        "confirmed_abnormal_onsets": 0,
+        "confirmed_false_onsets": 0,
+        "exposure": "source-label seconds under causal stride-length sample-and-hold decisions; gaps bounded",
+        "false_alerts_per_monitored_replay_hour": 0.0,
+        "false_alerts_per_normal_hour": 0.0,
+        "monitored_replay_hours": 48.83833333333333,
+        "monitored_seconds": 175818.0,
+        "normal_alarm_occupancy_fraction": 1.0,
+        "normal_alarm_seconds": 77260.0,
+        "normal_hours": 21.461111111111112,
+        "normal_seconds": 77260.0,
+        "policy": "available prediction runs; normal 0-to-1 onsets; boundary starts censored; labels never reset runs",
+        "unknown_label_onsets": 0,
+        "unknown_seconds": 10623.0
+      },
+      "validation": {
+        "abnormal_windows": 8794,
+        "average_precision": 0.5323889090688946,
+        "confusion_labels": [
+          "normal",
+          "abnormal"
+        ],
+        "confusion_matrix": [
+          [
+            0,
+            7724
+          ],
+          [
+            0,
+            8794
+          ]
+        ],
+        "f1": 0.6948482932996207,
+        "false_positive_window_fraction": 1.0,
+        "fn": 0,
+        "fp": 7724,
+        "normal_windows": 7724,
+        "positive_prevalence": 0.5323889090688946,
+        "pr_auc_trapezoidal": 0.7661944545344472,
+        "precision": 0.5323889090688946,
+        "recall": 1.0,
+        "status": "evaluated",
+        "tn": 0,
+        "tp": 8794,
+        "undefined": {
+          "f1": null,
+          "precision": null,
+          "ranking_metrics": null,
+          "recall": null
+        },
+        "windows": 16518
+      }
+    }
+  },
+  "partition": "validation",
+  "preprocessor_fingerprint": "5fd7c3a924b1ca7594e458dc88d8a4e575d647bcd9d65766d977ca674ebf4301",
+  "readiness": {
+    "accepted_detector": false,
+    "reason": "Diagnostic exposed cohort; validation abnormal families absent from training and insufficient independent support; no declared operational false-alarm budget",
+    "software_baseline_experiment_complete": true
+  },
+  "run_id": "d8386c526a40f56133b5",
+  "split_fingerprint": "643ecb9867ceaf6daff093f11a2e1b0a2b3066cbe2ce614b4ad1ecf81ff82062",
+  "task": "binary_normal_vs_documented_undesirable",
+  "training_families": [
+    0,
+    3,
+    4,
+    5,
+    7
+  ]
+}

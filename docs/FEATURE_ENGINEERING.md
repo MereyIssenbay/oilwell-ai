@@ -2,6 +2,8 @@
 
 Phase 3, authorized 2026-11-10. This phase implements reusable preprocessing and verifies its boundaries. No event detector is fitted, no ML hypothesis is established, and no additional telemetry is acquired. Fitting imputation and normalization statistics on the assigned training partition is preprocessing. The [split policy](SPLIT_STRATEGY.md) and [five hypotheses](ML_HYPOTHESES.md) remain the evaluation constraints.
 
+The statements above describe Phase 3's completed scope. Phase 4 subsequently authorizes fixed diagnostic baselines using these frozen artifacts under the [baseline protocol](../reports/baseline/PROTOCOL.md); it does not refit or revise preprocessing using validation/test data.
+
 ## Input contract and immutable sources
 
 The source is Petrobras/3W v2.0.0 at revision `914af287b1cf3e5207dce0da1e9dc08361c9adeb`, under CC BY 4.0 with attribution to Petrobras and the 3W contributors. The [acquisition manifest](../data/manifests/subset.json) fixes each original path, unique source-instance ID, origin, published well ID, byte size and SHA-256. The [metadata registry](../data/manifests/dataset_metadata.json) fixes the exact 27 sensor names and documented label codes. Original Parquets remain under ignored `data/raw/` and are never repaired or overwritten.

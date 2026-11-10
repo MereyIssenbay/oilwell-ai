@@ -2,6 +2,8 @@
 
 Phase 2 EDA recommendation, 2026-11-10, retained as the evaluation policy. Phase 3 now authorizes implementation of reusable grouped splitting and preprocessing; see [FEATURE_ENGINEERING.md](FEATURE_ENGINEERING.md). The existing subset may be partitioned for development diagnostics only. The current 23-file subset is development-exposed. A valid final evaluation requires a separately approved cohort and protected test data; relabeling existing files as test does not erase the information already learned from them.
 
+The user subsequently authorized Phase 4 baseline fitting on the frozen diagnostic split. The [baseline protocol](../reports/baseline/PROTOCOL.md) defines binary detection, fixed model settings and validation-only comparison. The existing test partition is not scored or used for model selection. This limited experiment does not satisfy the protected-cohort requirements below.
+
 ## Decision
 
 Use **disjoint published real well IDs**, strengthened by duplicate/overlap relationships, as the primary partition unit. Retain all observations and instances of a group in one partition before generating any windows. Keep simulated and hand-drawn sources out of the primary real validation and test sets. Use them only in a later explicitly compared training-augmentation arm, with generator-family limitations documented.
@@ -84,4 +86,4 @@ First obtain a feasible real cohort and protect its holdout. Then establish a si
 
 An explicitly scoped binary normal-versus-undesirable prototype could use the current data for **development-only** grouped diagnostics after approval; its mixture of event families must be reported, and it would still have no untouched final test. It is not a substitute for the originally proposed multiclass acceptance claim. No model, metric target, split outcome or successful detection result is asserted by this recommendation.
 
-**Phase 2 ended at EDA and recommendations.** The user subsequently authorized Phase 3 partition/preprocessing implementation. Cohort expansion and model training remain outside that approval; protected-test readiness remains unresolved.
+**Phase 2 ended at EDA and recommendations.** Later approvals authorized Phase 3 preprocessing and Phase 4 diagnostic baseline fitting. Cohort expansion, advanced model search and protected-test readiness remain outside the completed data phases; each requires an explicit subsequent scope.

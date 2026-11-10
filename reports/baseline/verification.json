@@ -1,0 +1,34 @@
+{
+  "artifact_sha256": {
+    "ml/artifacts/baseline/d8386c526a40f56133b5/manifest.json": "a28a5ae682ec2a9158468321bba6cadb79d8e231e89cd84716ee2dbf9275436f",
+    "ml/artifacts/baseline/d8386c526a40f56133b5/models.joblib": "50e5b29f5d401d923000b78ab454d2290f53db5c24491923034942538748713e",
+    "ml/artifacts/baseline/d8386c526a40f56133b5/preprocessor.json": "9c42996b13b84c010e6c9ebb8d25a8e0b83330f899f8a3ad70c9401ba2e74dcd",
+    "ml/artifacts/baseline/d8386c526a40f56133b5/split.json": "1a02fd7e24a1ce4933a167da049ba7b4dbc4fa90ff96b5643f17cd819e305952",
+    "ml/runs/baseline/d8386c526a40f56133b5/validation_predictions.parquet": "daacad72c44d7cb8c09d13cc554ab62224d29289bcc8de02b9c7ed8f6253e883",
+    "reports/baseline/README.md": "3ef7d32c1640f7ff9eded96f0af056c91e4ae0156972df0bd2ac0f74699ab5eb",
+    "reports/baseline/confusion_matrices.png": "064884ddffef622b672e99edf256db8efb806b7665593688ede1d2d53df6fbc1",
+    "reports/baseline/experiment_manifest.json": "a28a5ae682ec2a9158468321bba6cadb79d8e231e89cd84716ee2dbf9275436f",
+    "reports/baseline/failure_cases.csv": "9542c544726153e053d845f06a1acf035ef5781a36e0f6a61ad6f8df16a99a8f",
+    "reports/baseline/metrics.json": "1a9bdf70baf7b4ba593b7aaffdfe2f173933cc2cab3b0a902dcffd7f78a17b0e",
+    "reports/baseline/minority_events.csv": "9b14d01bc899292b8c54270329a9ab6a4b373f4657e2e1f2ac29c2cdda76a16b",
+    "reports/baseline/model_comparison.csv": "c4143a2a56cab56508996ac826ed9c6a23d8a2cd30612d03a3d0e6fc15a9e4f9",
+    "reports/baseline/pr_curve_points.csv": "9c5a9b48f0a86a6ddb24aa3b773ed8a573818acbcffa8cf527d34540207c3391",
+    "reports/baseline/precision_recall.png": "10c75bac8d9fb393b0e148a6c35e8e55e829f79b52c9cd4aa2c5d1606163cafb"
+  },
+  "byte_identical_artifacts": 14,
+  "consecutive_successful_final_runs": 2,
+  "model_reload_predictions_exact": true,
+  "new_tests": {
+    "duration_seconds": 6.53,
+    "failed": 0,
+    "implementation_cases": 27,
+    "independent_qa_cases": 46,
+    "passed": 73,
+    "skipped": 0
+  },
+  "no_test_predictions_or_metrics": true,
+  "repeat_command": ".venv/Scripts/python.exe -m ml.train_baseline",
+  "run_id": "d8386c526a40f56133b5",
+  "schema_version": "1.0.0",
+  "scope": "fixed diagnostic baseline, no tuning or model promotion"
+}
