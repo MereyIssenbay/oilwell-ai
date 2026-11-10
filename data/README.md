@@ -80,6 +80,12 @@ Observed audit limitations:
 
 The consolidated [dataset audit](../docs/DATASET_AUDIT.md) and [machine-readable summary](../reports/data_summary.json) distinguish metadata claims from measured subset evidence. Their warnings are audit findings, not repaired data.
 
+## Phase 3 preprocessing
+
+The reusable [preprocessing command and feature policy](../docs/FEATURE_ENGINEERING.md) consume the original manifest without changing source bytes. The [development split](manifests/development_split.json) groups whole published real well IDs; the [preprocessing summary](../reports/preprocessing_summary.json) records actual support, training-only normalization and provenance. Normalized features, labels, metadata, quality and preprocessing state are separate ignored files under `data/processed/phase3/`.
+
+These partitions are development diagnostics: all existing instances and their real well IDs were EDA-exposed. They cannot establish a pristine final test or repair insufficient independent event support. No model training occurred. The Phase 1 acquisition/audit statements above retain their historical scope.
+
 ## License and attribution
 
 The upstream [README license section](https://github.com/petrobras/3W/blob/914af287b1cf3e5207dce0da1e9dc08361c9adeb/README.md#licenses) licenses dataset Parquet files under **CC BY 4.0** and repository code under **Apache-2.0**. Exact original `dataset/LICENSE-CC-BY`, `LICENSE.md` and `CITATION.md` are preserved among the downloaded provenance documents. Attribution: **Petrobras and the 3W contributors, 3W Dataset v2.0.0**, pinned revision and source link above. This acquisition makes no transformations to the source files. Selection and audit summaries are project outputs, and no Petrobras endorsement is implied.

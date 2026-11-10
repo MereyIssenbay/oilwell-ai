@@ -7,6 +7,7 @@ Updated: 2026-11-10 (Asia/Oral).
 - **Phase 0: complete.** Architecture, contracts, configuration, scaffolding, static verification and independent review are complete.
 - **Phase 1: complete**, authorized and executed on 2026-11-10. Bounded acquisition, inspection, automated validation, provenance documentation and independent integrity review only.
 - **Phase 2 EDA: complete**, authorized and executed on 2026-11-10. Actual-data exploration, charts, hypotheses, split recommendation and independent leakage review only. This user request supersedes the original roadmap's Phase 2 model-training schedule. Work stops here; additional acquisition, production preprocessing, training and application implementation require a new approval.
+- **Phase 3 preprocessing: complete**, authorized and executed on 2026-11-10. Reusable, deterministic grouped splitting, causal features and train-only preprocessing statistics, with independent leakage review. No model training or additional telemetry acquisition. Current-data partitions remain development diagnostics. Stop here pending the user's next phase approval.
 
 ## Phase 0 delivered design
 
@@ -115,9 +116,50 @@ Combined test command: `.venv/Scripts/python.exe -m pytest tests/data tests/qa -
 
 The five future hypotheses compare values against availability shortcuts, trailing changes against absolute levels, multiple sensors against a single-channel baseline, transient supervision against steady-only supervision, and synthetic augmentation against real-only training. Their effects are untested. All 23 instances and all 12 published real well IDs are recorded as development-exposed, including future files from those same IDs for an unseen-well evaluation.
 
+## Phase 3 deliverables and verified results
+
+The user authorized preprocessing after Phase 2 and explicitly excluded final-model training. The orchestrator assigned `ml/data_pipeline/`, `ml/features/` and `tests/test_data_pipeline.py` to `data_engineer`, and the separate leakage tests/review to `qa_reviewer`. Root retained integration, the CLI, shared docs, dependencies and diagnostic reports/manifests. Both agents returned ownership at handoff. No overlapping writers or nested delegation were used.
+
+Delivered:
+
+- [ml/data_pipeline/](../ml/data_pipeline/): validated source/config/split/state contracts; checksum-verified original-byte Parquet loading; deterministic connected-well splitting; exposure/support guards; separate window features, targets, provenance and quality; train-only feature imputation/normalization; JSON state save/load.
+- [ml/features/](../ml/features/): observed-value trailing mean, population standard deviation, min/max, elapsed-time rate of change and least-squares recent trend. Window length, stride and expected cadence are configurable.
+- [tests/test_data_pipeline.py](../tests/test_data_pipeline.py): 20 implementation tests, plus [47 independent leakage cases](../tests/qa/test_pipeline_leakage.py) and [review report](reviews/PHASE_3.md).
+- [FEATURE_ENGINEERING.md](FEATURE_ENGINEERING.md), [pinned pipeline dependencies](../requirements-pipeline.txt), [reproduction command](../scripts/prepare_data.py), [development split](../data/manifests/development_split.json) and [preprocessing summary](../reports/preprocessing_summary.json).
+- Ignored local `data/processed/phase3/`: preprocessing JSON and separate feature/target/metadata/quality Parquets. No processed telemetry or model binaries were added to Git.
+
+Pipeline policy: preserve the verified one-second cadence without resampling; reset windows at source/time gaps; never interpolate or backward-fill. Use only the exact sensor allowlist, excluding `class`, auxiliary `state`, timestamps and source identifiers. The registry's actual `ESTADO-*` valve sensors remain candidates. Keep unknown targets nullable. Default endpoint-family targets include only documented transient mappings, while retaining raw code/phase; an explicit exclusion mode changes supervision without moving the windows. Fit feature medians and post-imputation mean/std on every assigned train window, including unknown endpoints; freeze train-allmissing column drops and the fitted schema. Constant observed zeros are retained. Quality is separate and does not itself define a future detector's abstention policy.
+
+The default actual-data run loaded the same 23 originals, 582,220 rows. It included 14 real files, 322,725 rows, excluding nine simulated/drawn sources. With 60 rows/window, stride 10 and seed 42, it produced **32,197 windows**, 162 candidate features and **120 retained features**; 42 columns were entirely missing on training windows and dropped. Seven affected sensor families include four globally absent channels plus three absent from this particular training allocation; holdout availability never informed the drop decision.
+
+| Diagnostic partition | Real well groups | Source instances | Windows | Supervised-eligible windows | Unknown-target windows |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Train | 7 | 7 | 10,134 | 7,649 | 2,485 |
+| Validation | 3 | 3 | 17,583 | 16,518 | 1,065 |
+| Test | 2 | 4 | 4,480 | 3,060 | 1,420 |
+
+Group-count rounding yields 7/3/2, not similar row/window proportions. There are 4,970 unknown endpoints and 10,710 transient endpoints. No output window is entirely missing across all selected sensors. Some families occur only outside train; warnings are retained rather than changing seeds to obtain attractive coverage. All partition names remain **development diagnostics**, not an untouched final evaluation.
+
+| Verification / command | Actual outcome | Scope / limitation |
+| --- | --- | --- |
+| `.venv/Scripts/python.exe scripts/prepare_data.py` | Exit 0; output counts above; source checks, saved-state round trip and four Parquet round trips exact | Original bytes unchanged, no event detector fitted |
+| Repeat identical command | Exit 0; all seven published files byte-identical: split, summary, state and four Parquets | Determinism demonstrated with fixed inputs/configuration/environment/code |
+| Protected/invalid CLI guards | `--mode protected` rejected EDA exposure; invalid window, raw-output path and input-manifest overwrite attempts also returned exit 2 without changing completed outputs | Protected future-cohort software path additionally passes independent fresh synthetic-fixture checks; no current well declared fresh |
+| Root independent artifact audit | Well/instance partitions disjoint; all 32,197 normalized rows finite; training means zero and population std zero or one; all window spans 59 elapsed seconds | Correlated windows are not independent observations; finite imputations are not sufficient-evidence claims |
+| Independent numerical reconciliation | Root and reviewer separately reconstructed first/middle/last windows of all 14 included instances: 42 windows and 5,040 retained feature comparisons matched tolerances | Calculations reread originals; independent trend reference uses NumPy least squares, not implementation aggregation |
+| Independent QA test run | **67 passed in 7.09 seconds**, zero failed/skipped: 20 implementation + 47 QA cases | Causality, grouping, missingness, label handling, fit isolation, protected guards, malformed artifacts and public imports |
+| Final regression | **141 passed in 7.04 seconds**, zero failed/skipped: prior 74 + new 67 | Data/EDA/preprocessing checks only; no detector quality, application, end-to-end or deployment evaluation |
+| Source and artifact provenance | All 23 raw SHA-256s remain unchanged; saved implementation/input/dependency/artifact hashes and split/state fingerprints independently reconciled | Near-duplicate subsequences and undocumented relationships remain wider-cohort limitations |
+| Final repository/dependency audit | PASS: 103 Git-visible files, 164 valid local links, nine strict JSON/notebook files, 11 new Python sources compiled and 54 unique installed dependency pins matched | All 31 original files and five generated local artifacts ignored; prior data/EDA sources, reports and pins unchanged; application and detector-training directories remain placeholders |
+| Dependency/whitespace checks | `pip check`: no broken requirements; `git diff --check`: exit 0; separate UTF-8/newline/whitespace audit passed for tracked and new text files | LF-to-CRLF Git notices only; no commit was made |
+
+Full regression command: `.venv/Scripts/python.exe -m pytest tests/data tests/qa tests/test_data_pipeline.py -q -p no:cacheprovider --basetemp <unique-workspace-temp-path> --tb=short`. Fixture ACL restrictions in the sandbox were resolved by narrow execution escalation. Pydantic was installed into `.venv` with prior dependency constraints preserved; its resolved additions are pinned separately. No application service was installed or started.
+
+Resolved review findings: derive real well/origin/event/source identity from the pinned original path rather than trust mutable manifest fields; validate persisted split relationships beyond a checksum; remove a circular public import; verify eligible endpoint support in protected mode. The loader parses the same verified bytes to avoid a second unverified read. No unresolved Phase 3 software blocker remains. CLI publication is atomic per file; summary hashes must identify a completed artifact set after any interrupted run.
+
 ## Blockers and unresolved evidence
 
-No blocker remains for the requested Phase 1 acquisition/audit or Phase 2 EDA. The original roadmap's broader M1 modeling-cohort/split acceptance remains unresolved: most selected undesirable families occur in only one real well group, and no selected real row contains family 9. The inspected subset cannot supply a pristine, class-supported three-way multiclass evaluation. No split manifest, final model scope, preprocessing or training was created. Further approved data work must establish sufficient independent real groups and usable label/sensor coverage before model work.
+No blocker remains for the requested acquisition/audit, EDA or preprocessing phases. The original roadmap's broader M1 modeling-cohort/evaluation acceptance remains unresolved: most selected undesirable families occur in only one real well group, and no selected real row contains family 9. Phase 3 now supplies an executable diagnostic split and preprocessing, but the inspected subset cannot supply a pristine, class-supported three-way multiclass evaluation. No protected final-test cohort, accepted model scope or trained detector exists. Further approved data work must establish sufficient independent real groups and usable label/sensor coverage before a model evaluation claim.
 
 Residual limitations: unknown source timezone and physical-identity equivalence; structural/origin-dependent sensor missingness; initial null target/status labels; absent steady code 7; documentation-versus-file dtype discrepancy; 40 real filename IDs in pinned inventory versus 42 wells in release notes; possible wider-corpus overlaps/near-duplicates and upstream interpolation. Thresholds, calibration, model performance and provider selection remain future decisions.
 
@@ -125,4 +167,4 @@ The independent review prompted two integrated corrections: snapshots and events
 
 ## Next action
 
-**Stop: Phase 2 is complete. Await the user's next phase approval.** The recommended next scope is cohort/split readiness: select a supportable task, obtain adequate independent real groups if authorized, and freeze disjoint published-well groups plus duplicate/overlap relationships before windows. Reserve fresh real groups for final testing before exploratory access; keep synthetic sources out of primary real validation/test. Only after that gate should a separately authorized modeling phase test small scikit-learn baselines and the five hypotheses before considering XGBoost. No training is authorized by this handoff.
+**Stop: Phase 3 is complete. Await the user's next phase approval.** Recommended next work is explicit task/cohort readiness: choose supportable families, obtain adequate fresh real groups if authorized, freeze the protected evaluation manifest and define evidence eligibility. Only a separately approved modeling phase should test the five hypotheses and establish a scikit-learn baseline before considering XGBoost. No model training or further acquisition is authorized by this handoff.

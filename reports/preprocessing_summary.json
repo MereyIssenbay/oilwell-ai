@@ -1,0 +1,370 @@
+{
+  "artifacts": {
+    "features": {
+      "path": "data/processed/phase3/features.parquet",
+      "sha256": "2b4c59c668bba24a58d81ee06a9c8c194458b85627a4338558267ccef66ef703"
+    },
+    "metadata": {
+      "path": "data/processed/phase3/metadata.parquet",
+      "sha256": "0a1e1064e7e8c3b334faa8cdd00913fff9968f1f7640353a685adf580bafde59"
+    },
+    "preprocessor": {
+      "path": "data/processed/phase3/preprocessor.json",
+      "sha256": "9c42996b13b84c010e6c9ebb8d25a8e0b83330f899f8a3ad70c9401ba2e74dcd"
+    },
+    "quality": {
+      "path": "data/processed/phase3/quality.parquet",
+      "sha256": "d6348f3ab9746971ecf351d11f707bd3011800712019f90a12fd21c897550344"
+    },
+    "targets": {
+      "path": "data/processed/phase3/targets.parquet",
+      "sha256": "d8bddc56179104e73e9422288821230bb43d210c16cad09340d433d382e5632a"
+    }
+  },
+  "configuration": {
+    "cadence_seconds": 1.0,
+    "stride_rows": 10,
+    "transient_policy": "family",
+    "version": "1.0.0",
+    "window_rows": 60
+  },
+  "dropped_train_allmissing_features": [
+    "P-JUS-BS__mean",
+    "P-JUS-BS__std",
+    "P-JUS-BS__min",
+    "P-JUS-BS__max",
+    "P-JUS-BS__rate",
+    "P-JUS-BS__trend",
+    "P-JUS-CKP__mean",
+    "P-JUS-CKP__std",
+    "P-JUS-CKP__min",
+    "P-JUS-CKP__max",
+    "P-JUS-CKP__rate",
+    "P-JUS-CKP__trend",
+    "P-MON-CKGL__mean",
+    "P-MON-CKGL__std",
+    "P-MON-CKGL__min",
+    "P-MON-CKGL__max",
+    "P-MON-CKGL__rate",
+    "P-MON-CKGL__trend",
+    "P-MON-SDV-P__mean",
+    "P-MON-SDV-P__std",
+    "P-MON-SDV-P__min",
+    "P-MON-SDV-P__max",
+    "P-MON-SDV-P__rate",
+    "P-MON-SDV-P__trend",
+    "PT-P__mean",
+    "PT-P__std",
+    "PT-P__min",
+    "PT-P__max",
+    "PT-P__rate",
+    "PT-P__trend",
+    "QBS__mean",
+    "QBS__std",
+    "QBS__min",
+    "QBS__max",
+    "QBS__rate",
+    "QBS__trend",
+    "T-MON-CKP__mean",
+    "T-MON-CKP__std",
+    "T-MON-CKP__min",
+    "T-MON-CKP__max",
+    "T-MON-CKP__rate",
+    "T-MON-CKP__trend"
+  ],
+  "excluded_source_instances": 9,
+  "included_rows": 322725,
+  "input_origin_counts": {
+    "drawn": 2,
+    "real": 14,
+    "simulated": 7
+  },
+  "input_rows": 582220,
+  "input_source_instances": 23,
+  "limitations": [
+    "All existing source instances and real well IDs are EDA-exposed; diagnostic test is not a final holdout.",
+    "Current multiclass real-group coverage is inadequate for protected three-way evaluation.",
+    "Near-duplicate subsequences, upstream interpolation and private physical identity remain unverified.",
+    "Finite imputation does not establish adequate measured evidence or a future abstention policy.",
+    "Window and stride defaults are reproducibility settings, not tuned or validated detection choices."
+  ],
+  "model_trained": false,
+  "partitions": {
+    "test": {
+      "all_missing_selected_sensor_windows": 0,
+      "connected_groups": 2,
+      "eligible_family_counts": {
+        "0": 1324,
+        "1": 962,
+        "4": 706,
+        "6": 68
+      },
+      "endpoint_raw_class_counts": {
+        "0": 1324,
+        "1": 301,
+        "101": 661,
+        "106": 53,
+        "4": 706,
+        "6": 15,
+        "unknown": 1420
+      },
+      "real_well_ids": [
+        "WELL-00002",
+        "WELL-00004"
+      ],
+      "source_instances": 4,
+      "supervised_eligible_windows": 3060,
+      "transient_endpoint_windows": 714,
+      "unknown_endpoint_windows": 1420,
+      "windows": 4480
+    },
+    "train": {
+      "all_missing_selected_sensor_windows": 0,
+      "connected_groups": 7,
+      "eligible_family_counts": {
+        "0": 3541,
+        "3": 1797,
+        "4": 703,
+        "5": 111,
+        "7": 1497
+      },
+      "endpoint_raw_class_counts": {
+        "0": 3541,
+        "105": 111,
+        "107": 1497,
+        "3": 1797,
+        "4": 703,
+        "unknown": 2485
+      },
+      "real_well_ids": [
+        "WELL-00001",
+        "WELL-00005",
+        "WELL-00008",
+        "WELL-00010",
+        "WELL-00016",
+        "WELL-00024",
+        "WELL-00036"
+      ],
+      "source_instances": 7,
+      "supervised_eligible_windows": 7649,
+      "transient_endpoint_windows": 1608,
+      "unknown_endpoint_windows": 2485,
+      "windows": 10134
+    },
+    "validation": {
+      "all_missing_selected_sensor_windows": 0,
+      "connected_groups": 3,
+      "eligible_family_counts": {
+        "0": 7724,
+        "2": 152,
+        "8": 8642
+      },
+      "endpoint_raw_class_counts": {
+        "0": 7724,
+        "102": 152,
+        "108": 8236,
+        "8": 406,
+        "unknown": 1065
+      },
+      "real_well_ids": [
+        "WELL-00006",
+        "WELL-00011",
+        "WELL-00029"
+      ],
+      "source_instances": 3,
+      "supervised_eligible_windows": 16518,
+      "transient_endpoint_windows": 8388,
+      "unknown_endpoint_windows": 1065,
+      "windows": 17583
+    }
+  },
+  "preprocessor_fingerprint": "5fd7c3a924b1ca7594e458dc88d8a4e575d647bcd9d65766d977ca674ebf4301",
+  "pristine_evaluation_claim": false,
+  "provenance": {
+    "base_git_revision": "703f060c34a1192e0307d121230ef5ac5acacfa7",
+    "code_sha256": {
+      "ml/data_pipeline/__init__.py": "0d1f6569256e2a4dc9db5b18addbb984ef089126e33446419a1a57cc89586741",
+      "ml/data_pipeline/io.py": "4203ec01f3e9a0715915197be52526998c7eb45fc09653a102547b7722113102",
+      "ml/data_pipeline/models.py": "cf81c59a6381e30863e8f0d3fcbe7c976f24a5c62ec082717b5487b45376931b",
+      "ml/data_pipeline/pipeline.py": "1f3870769281ec69a14394426063525bed1e6cbbb75910e9d3bea0c72248705f",
+      "ml/data_pipeline/splitting.py": "c534a9c84c9789727a386dd6d6dea7474accdb9dd824118bae7a98d5c72b4e45",
+      "ml/features/__init__.py": "0787540d498e23133cc9f8b835366cec7d1e6733265fc8b7070b9fbe13416967",
+      "ml/features/causal.py": "9f098949ac29c2e98019793d6c5a4c74703ada03d0dd3fa48bb554c0249a944b",
+      "ml/features/constants.py": "80f906e8760636fbc1bc9713d1ba726aeb0773469c0e8753be8d518d10cf647d",
+      "scripts/prepare_data.py": "c65fc128927f07ec0616a121c53916497c4d5e3792bbffc77eea0ccdd72b13f0"
+    },
+    "dependencies": {
+      "numpy": "2.2.6",
+      "pandas": "2.2.3",
+      "pyarrow": "26.0.1",
+      "pydantic": "2.14.3"
+    },
+    "input_files": [
+      {
+        "instance_id": "3w:18d354757119f8b2e8587c976d0e530e45339bdd4449b4353627bf731a31abe2",
+        "sha256": "4c663346ca209648420b2898936d4acd34e52380dfb6407a41f4eb004fd3d13d"
+      },
+      {
+        "instance_id": "3w:22aee0b1d7babe9bf4a25d8d1f4523532cd7e5ea6a404149f087b601ad28a614",
+        "sha256": "5b79533ae2392e4f9b275ef019d652aaa643ea186060c87286e80ad09891979b"
+      },
+      {
+        "instance_id": "3w:2f2adddcccf3c82167c67ae404f3f9b72e3b689a8c298c922064e5ae9b8fcd12",
+        "sha256": "4cdbe289610013cbce34334febabd7267190ccd1e664eb0700933e009740dcaa"
+      },
+      {
+        "instance_id": "3w:38e0b898c657f5ca799e495cd2ef9941f0892ff0f3e256620c6a9f78f7137215",
+        "sha256": "3a64ad5b1e7484340c32bfe00392556df4bd26152459b1f9ae95df7c5c69a7b2"
+      },
+      {
+        "instance_id": "3w:3b7750afe480cb1d04361795d4a5cded832ae3a05d5ef30f533d440c81bfb4cf",
+        "sha256": "3c371ca8b5645e99e58625ee412736ca95ef469948605519dc6a115719e60be1"
+      },
+      {
+        "instance_id": "3w:3d4edd8fc259e5275387ac769322333279cf0b6852808124207136ecadb96276",
+        "sha256": "0ce2320e895a9c26c160d388539566bbc1ebe4a247775ed5dcb3dedc3d361d4f"
+      },
+      {
+        "instance_id": "3w:4b21b1eed42f00dd92d83d6c37a54bbcfb8cb9f1b61a1983581eb1221d0383c9",
+        "sha256": "1a4e4e30a52a4fab932ddd3804ce4cfd3019001cd4f276cc21c318ee90c93642"
+      },
+      {
+        "instance_id": "3w:52a37a0952e64983ba9a2a9d585d56aed7bf2c55b609cfa930fd9baf66953731",
+        "sha256": "fc5862ae8a6ee73b7cb4844ede90d481785c8941c846e93694887fc53c7db0b1"
+      },
+      {
+        "instance_id": "3w:624bb25b04f3ac466c9fb599cdcea9dcaa341160e16e9443b070cbd7726b469f",
+        "sha256": "21813bc53a50728d6d550fbc625936ab830193e3b01187d310c498f5a2af3dae"
+      },
+      {
+        "instance_id": "3w:64972b03c1941eaf0f7c2442387da91a66c48f312a9a5c529972a8d462c04073",
+        "sha256": "ebfb814d1fe7098a551ccddf4cf6321e5593b0dfdb669abbe091499c467d1851"
+      },
+      {
+        "instance_id": "3w:7582c1361d1dc8813d6320e37c764e5d2389dfec8a4dab231770b970eb13c266",
+        "sha256": "bf1e50c5bbbe4f191f8fa7d5a381634263fd1f87685dd125b39a9d8b20de7681"
+      },
+      {
+        "instance_id": "3w:7870d4a23aebe2356f1c45d4a5f165946fb1a4414d86467c212fff5b3b6d038b",
+        "sha256": "d5efcf34a24e7363285cb6d2ea1d570c9b5a9127e8a2b0c2cc5aa626fe258cf2"
+      },
+      {
+        "instance_id": "3w:8c4342c6ec4956bb26d1d3f327a7e0d26b842af5e4236ec64e8845e058fa2376",
+        "sha256": "85beb567d3323a10501711f7e115ebdb5a6b82fdf5cbde818aed64858cc0c867"
+      },
+      {
+        "instance_id": "3w:908f0a7ffcc00dab1dab9a4776e1bf57e4f95f273c1c86877389836721083ca9",
+        "sha256": "9c8c17da78eca2739694b3deb94e17c02bdaeb0719848fb49ed995546563957c"
+      },
+      {
+        "instance_id": "3w:948809463bb4f4b5fd741b02208f228947f13838221d9e0d8e274a1cbd5e4a5d",
+        "sha256": "5eac279ff21c0850bccb4b0947997081d1bbddfce126063faba3af696375045e"
+      },
+      {
+        "instance_id": "3w:95fa86429d859a7992255954ccecf23116a5f4bbdd9e0eb5411a1a40acdacddd",
+        "sha256": "a3089800d7c5bc71617f890da38e5279ebd7ecac90b78958c555607bec6f8a6c"
+      },
+      {
+        "instance_id": "3w:a21e3c111cb22c6a2ff5ddf98522f45319fe4b054dd810599b74f9898195996e",
+        "sha256": "344e7541e61d2f1267a9d086fd6f78d81ba8322eae1e92df74b2a91580d1330c"
+      },
+      {
+        "instance_id": "3w:a5c7673f77c2ecd9de5dd928a25615221f9d1d964e9f221a0a1c9d7554c668b7",
+        "sha256": "6c7d930ebdc424a62dba5e2ff64901d32ac90eac6ce68f813347de131ac79db0"
+      },
+      {
+        "instance_id": "3w:a5d9fe5c7fa8885363974ce24acbe5c47d146a86e8001c782190e119bc99a544",
+        "sha256": "acd72cd0967dfdb619c17c349fe7738ad5b01abaa6e073fb5349852eb8273554"
+      },
+      {
+        "instance_id": "3w:d68c116498825185f2e7b1c5b972bf9dcd8bb0734c2e1d03ff0120ab8d15c810",
+        "sha256": "1ba4c1385ff94b09d5bf9e424bebc77d05b61e99469b4f22a305e6722dc86672"
+      },
+      {
+        "instance_id": "3w:f0f7253fa367583f3b34cd49a0b42ab2e4628e9563c542a13c1b3ab17f2de51a",
+        "sha256": "dc1366b1d1b7b9f9c403ad173a48b9a4685b8bed50a4f3e7cb3bd115ca654dc6"
+      },
+      {
+        "instance_id": "3w:f6dfc1ba48716c3b327db2b73695f0de8c5a339f32a5cf48a44f85fed2c962a3",
+        "sha256": "4fcb5e85d481d38d962f43307026bfbc036862cf6a71fc249daeb087409bac4a"
+      },
+      {
+        "instance_id": "3w:fe47a871168d9d105bbc3be8b89efd60cfa8f1fb0cb88a1f1f17cb1db310e364",
+        "sha256": "13e62d619d19aed2ff70173ad1a5ff3b31cb9da2cfd86304c68d7cfbecdb1ee7"
+      }
+    ],
+    "input_sha256": {
+      "exposure_ledger": "413484bf319b7ac135421b7cc48404e85598ff117b994c8257deefaf06608609",
+      "manifest": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+      "registry": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472"
+    },
+    "python_version": "3.13.3",
+    "requirements_sha256": {
+      "requirements-data.txt": "589df5f1931482d00476737ebc85976755984711990832036bfd5790e8d774e0",
+      "requirements-pipeline.txt": "5901f51891b97e618c124e61a1e693859da38ff556d30c4c18e4ab10506f0b37"
+    }
+  },
+  "purpose": "development_diagnostic",
+  "raw_feature_count": 162,
+  "raw_hashes_verified_before_and_after": true,
+  "resampling": "none; cadence gaps start separate segments",
+  "retained_feature_count": 120,
+  "saved_state_and_parquet_roundtrips_exact": true,
+  "schema_version": "1.0.0",
+  "source": {
+    "attribution": "Petrobras and the 3W contributors",
+    "code_license": "Apache-2.0",
+    "license": "CC-BY-4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "repository": "https://github.com/petrobras/3W",
+    "revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+    "version": "2.0.0"
+  },
+  "split_configuration": {
+    "include_synthetic_train": false,
+    "minimum_groups_per_family": 1,
+    "mode": "diagnostic",
+    "ratios": [
+      0.6,
+      0.2,
+      0.2
+    ],
+    "required_families": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "seed": 42
+  },
+  "split_fingerprint": "643ecb9867ceaf6daff093f11a2e1b0a2b3066cbe2ce614b4ad1ecf81ff82062",
+  "training_batch_fingerprint": "99187277ce0dd412f36b04a67062d47f6ee77372546dd2a5a10224c264c9f0f3",
+  "warnings": [
+    "Development diagnostic partitions; no pristine final evaluation claim",
+    "train: family 1 has 0 real groups; insufficient declared support",
+    "train: family 2 has 0 real groups; insufficient declared support",
+    "train: family 6 has 0 real groups; insufficient declared support",
+    "train: family 8 has 0 real groups; insufficient declared support",
+    "train: family 9 has 0 real groups; insufficient declared support",
+    "validation: family 1 has 0 real groups; insufficient declared support",
+    "validation: family 3 has 0 real groups; insufficient declared support",
+    "validation: family 4 has 0 real groups; insufficient declared support",
+    "validation: family 5 has 0 real groups; insufficient declared support",
+    "validation: family 6 has 0 real groups; insufficient declared support",
+    "validation: family 7 has 0 real groups; insufficient declared support",
+    "validation: family 9 has 0 real groups; insufficient declared support",
+    "test: family 2 has 0 real groups; insufficient declared support",
+    "test: family 3 has 0 real groups; insufficient declared support",
+    "test: family 5 has 0 real groups; insufficient declared support",
+    "test: family 7 has 0 real groups; insufficient declared support",
+    "test: family 8 has 0 real groups; insufficient declared support",
+    "test: family 9 has 0 real groups; insufficient declared support"
+  ],
+  "windows": 32197
+}

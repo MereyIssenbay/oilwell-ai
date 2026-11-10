@@ -1,6 +1,6 @@
 # Split strategy and modeling readiness
 
-Phase 2 EDA recommendation, 2026-11-10. **No partition, preprocessing pipeline or model has been created.** The current 23-file subset is development-exposed. A valid final evaluation requires a separately approved cohort and protected test data; relabeling existing files as test does not erase the information already learned from them.
+Phase 2 EDA recommendation, 2026-11-10, retained as the evaluation policy. Phase 3 now authorizes implementation of reusable grouped splitting and preprocessing; see [FEATURE_ENGINEERING.md](FEATURE_ENGINEERING.md). The existing subset may be partitioned for development diagnostics only. The current 23-file subset is development-exposed. A valid final evaluation requires a separately approved cohort and protected test data; relabeling existing files as test does not erase the information already learned from them.
 
 ## Decision
 
@@ -48,7 +48,7 @@ The subset was selected partly by compressed file size. It is not a prevalence s
 7. **Use development data for selection only.** Within training, use grouped cross-validation when support permits. Use the real validation groups for decisions such as window length, model selection, calibration and alert thresholds, with additional cross-fitting or separated calibration folds if needed. Do not fit imputation/scaling/feature selection on the combined train+validation+test data.
 8. **Evaluate once with explicit denominators.** Report per-family/phase/source metrics, unique wells, source instances, event episodes, observed normal hours and misses. For the held-out-well claim, estimate uncertainty by well clusters, preserving dependence among episodes within each well; a hierarchical well/episode procedure may be appropriate when group counts permit it. Do not treat separate episodes from one well or overlapping windows as independent. With too few wells, disclose that uncertainty is not reliably estimable. Undefined or unsupported metrics remain undefined.
 
-Standard scikit-learn grouped splitters can enforce group separation, but a splitter name alone does not guarantee every class appears in every partition. `GroupShuffleSplit` proportions refer to groups, and repeated random splits can reuse test groups across repetitions. The proposed final holdout is a single frozen allocation, not a repeated split search. See [grouped cross-validation guidance](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data) and [GroupShuffleSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupShuffleSplit.html). No splitter was executed in this phase.
+Standard scikit-learn grouped splitters can enforce group separation, but a splitter name alone does not guarantee every class appears in every partition. `GroupShuffleSplit` proportions refer to groups, and repeated random splits can reuse test groups across repetitions. The proposed final holdout is a single frozen allocation, not a repeated split search. See [grouped cross-validation guidance](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data) and [GroupShuffleSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupShuffleSplit.html). No splitter was executed in Phase 2. Phase 3 implements its own deterministic group allocation without requiring an estimator library; the development partition must not be described as the protected holdout above.
 
 ## Time, labels and window boundaries
 
@@ -84,4 +84,4 @@ First obtain a feasible real cohort and protect its holdout. Then establish a si
 
 An explicitly scoped binary normal-versus-undesirable prototype could use the current data for **development-only** grouped diagnostics after approval; its mixture of event families must be reported, and it would still have no untouched final test. It is not a substitute for the originally proposed multiclass acceptance claim. No model, metric target, split outcome or successful detection result is asserted by this recommendation.
 
-**Phase 2 ends at EDA and recommendations.** Cohort expansion, partition implementation, preprocessing and training require further user authorization.
+**Phase 2 ended at EDA and recommendations.** The user subsequently authorized Phase 3 partition/preprocessing implementation. Cohort expansion and model training remain outside that approval; protected-test readiness remains unresolved.

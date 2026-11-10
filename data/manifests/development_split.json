@@ -1,0 +1,572 @@
+{
+  "algorithm": "sha256-ranked-connected-groups-v1",
+  "assignments": [
+    {
+      "group_id": "fe94dc1fdd05da01a5459a95d5806f4288dae5c09cb5318faa6fab838b95428b",
+      "partition": "excluded",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:18d354757119f8b2e8587c976d0e530e45339bdd4449b4353627bf731a31abe2",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "simulated",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "4c663346ca209648420b2898936d4acd34e52380dfb6407a41f4eb004fd3d13d",
+        "source_path": "dataset/3/SIMULATED_00045.parquet",
+        "well_id": null
+      }
+    },
+    {
+      "group_id": "42356ac8ef3de23f1a020caa96aa2c041842ee7a513eb0dcc52edbbbfeedb4ae",
+      "partition": "excluded",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:22aee0b1d7babe9bf4a25d8d1f4523532cd7e5ea6a404149f087b601ad28a614",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "drawn",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "5b79533ae2392e4f9b275ef019d652aaa643ea186060c87286e80ad09891979b",
+        "source_path": "dataset/7/DRAWN_00009.parquet",
+        "well_id": null
+      }
+    },
+    {
+      "group_id": "bc4b24eeca5e65f7e42fc4d64c722bb6063ce294f38afae1e7ee642656c9ef1c",
+      "partition": "train",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:2f2adddcccf3c82167c67ae404f3f9b72e3b689a8c298c922064e5ae9b8fcd12",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "4cdbe289610013cbce34334febabd7267190ccd1e664eb0700933e009740dcaa",
+        "source_path": "dataset/0/WELL-00008_20170816230146.parquet",
+        "well_id": "WELL-00008"
+      }
+    },
+    {
+      "group_id": "40b95afffa8b9a668c134c5b9041f7b23aaf2bfa62fd7a9b2353794f9e1c8871",
+      "partition": "excluded",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:38e0b898c657f5ca799e495cd2ef9941f0892ff0f3e256620c6a9f78f7137215",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "simulated",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "3a64ad5b1e7484340c32bfe00392556df4bd26152459b1f9ae95df7c5c69a7b2",
+        "source_path": "dataset/9/SIMULATED_00119.parquet",
+        "well_id": null
+      }
+    },
+    {
+      "group_id": "94195d601398ae2f8e2e45281909fba8208640ebf8a392e9665078c0a6939347",
+      "partition": "validation",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:3b7750afe480cb1d04361795d4a5cded832ae3a05d5ef30f533d440c81bfb4cf",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "3c371ca8b5645e99e58625ee412736ca95ef469948605519dc6a115719e60be1",
+        "source_path": "dataset/2/WELL-00011_20140530083203.parquet",
+        "well_id": "WELL-00011"
+      }
+    },
+    {
+      "group_id": "d90f00d146892cf1234624ecfa7ae8adf0054931853467c90000e3cc0f513268",
+      "partition": "test",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:3d4edd8fc259e5275387ac769322333279cf0b6852808124207136ecadb96276",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "0ce2320e895a9c26c160d388539566bbc1ebe4a247775ed5dcb3dedc3d361d4f",
+        "source_path": "dataset/6/WELL-00004_20171031181500.parquet",
+        "well_id": "WELL-00004"
+      }
+    },
+    {
+      "group_id": "a222766a0b0e87f450e051265cbeb27542fa6bffc64a2b057a6360f5bdbfc310",
+      "partition": "excluded",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:4b21b1eed42f00dd92d83d6c37a54bbcfb8cb9f1b61a1983581eb1221d0383c9",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "simulated",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "1a4e4e30a52a4fab932ddd3804ce4cfd3019001cd4f276cc21c318ee90c93642",
+        "source_path": "dataset/5/SIMULATED_00337.parquet",
+        "well_id": null
+      }
+    },
+    {
+      "group_id": "81999f553029139c2f2be287f62ac2b09b1cc8f2fffe1d5c6f995c918906e86a",
+      "partition": "test",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:52a37a0952e64983ba9a2a9d585d56aed7bf2c55b609cfa930fd9baf66953731",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "fc5862ae8a6ee73b7cb4844ede90d481785c8941c846e93694887fc53c7db0b1",
+        "source_path": "dataset/1/WELL-00002_20140126180030.parquet",
+        "well_id": "WELL-00002"
+      }
+    },
+    {
+      "group_id": "e32b23a18cf48aaf178c3e85d8480d70584b07bb3a884bc87dc146a79696f2f7",
+      "partition": "validation",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:624bb25b04f3ac466c9fb599cdcea9dcaa341160e16e9443b070cbd7726b469f",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "21813bc53a50728d6d550fbc625936ab830193e3b01187d310c498f5a2af3dae",
+        "source_path": "dataset/0/WELL-00006_20170223200000.parquet",
+        "well_id": "WELL-00006"
+      }
+    },
+    {
+      "group_id": "07733e63aa5c934a667b3f8150cbf5fa9a6c92ac507d430b22e8cdd503f4354b",
+      "partition": "validation",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:64972b03c1941eaf0f7c2442387da91a66c48f312a9a5c529972a8d462c04073",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "ebfb814d1fe7098a551ccddf4cf6321e5593b0dfdb669abbe091499c467d1851",
+        "source_path": "dataset/8/WELL-00029_20201020231724.parquet",
+        "well_id": "WELL-00029"
+      }
+    },
+    {
+      "group_id": "620afb034fc37c4dad1650b632ca45a2cce9c17f37bb09b968fe1413cf075bee",
+      "partition": "train",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:7582c1361d1dc8813d6320e37c764e5d2389dfec8a4dab231770b970eb13c266",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "bf1e50c5bbbe4f191f8fa7d5a381634263fd1f87685dd125b39a9d8b20de7681",
+        "source_path": "dataset/9/WELL-00036_20190930013035.parquet",
+        "well_id": "WELL-00036"
+      }
+    },
+    {
+      "group_id": "4b9f437a82fda8cb5f27caa8d113f3d15d9a5fdce5d86d935913c335e382570e",
+      "partition": "train",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:7870d4a23aebe2356f1c45d4a5f165946fb1a4414d86467c212fff5b3b6d038b",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "d5efcf34a24e7363285cb6d2ea1d570c9b5a9127e8a2b0c2cc5aa626fe258cf2",
+        "source_path": "dataset/4/WELL-00010_20180428130249.parquet",
+        "well_id": "WELL-00010"
+      }
+    },
+    {
+      "group_id": "81999f553029139c2f2be287f62ac2b09b1cc8f2fffe1d5c6f995c918906e86a",
+      "partition": "test",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:8c4342c6ec4956bb26d1d3f327a7e0d26b842af5e4236ec64e8845e058fa2376",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "85beb567d3323a10501711f7e115ebdb5a6b82fdf5cbde818aed64858cc0c867",
+        "source_path": "dataset/0/WELL-00002_20131214190030.parquet",
+        "well_id": "WELL-00002"
+      }
+    },
+    {
+      "group_id": "b5a50257ef4df30c291edb2c7bd8d5720f707221bc37021c0cd3ba2f84fce801",
+      "partition": "excluded",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:908f0a7ffcc00dab1dab9a4776e1bf57e4f95f273c1c86877389836721083ca9",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "simulated",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "9c8c17da78eca2739694b3deb94e17c02bdaeb0719848fb49ed995546563957c",
+        "source_path": "dataset/2/SIMULATED_00016.parquet",
+        "well_id": null
+      }
+    },
+    {
+      "group_id": "ca4b57a4c893261930af32438a8bb9771de6d36c1f0d7f5c7078186fea2dc482",
+      "partition": "train",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:948809463bb4f4b5fd741b02208f228947f13838221d9e0d8e274a1cbd5e4a5d",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "5eac279ff21c0850bccb4b0947997081d1bbddfce126063faba3af696375045e",
+        "source_path": "dataset/7/WELL-00024_20160920153331.parquet",
+        "well_id": "WELL-00024"
+      }
+    },
+    {
+      "group_id": "aab9083f52f78c642e356d8a331854338c607db3d421ba836ef22a37825676c7",
+      "partition": "excluded",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:95fa86429d859a7992255954ccecf23116a5f4bbdd9e0eb5411a1a40acdacddd",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "simulated",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "a3089800d7c5bc71617f890da38e5279ebd7ecac90b78958c555607bec6f8a6c",
+        "source_path": "dataset/8/SIMULATED_00006.parquet",
+        "well_id": null
+      }
+    },
+    {
+      "group_id": "d09e4e511776a021d048072c83ef86445afb1eac7a037048181a69c5d016666a",
+      "partition": "excluded",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:a21e3c111cb22c6a2ff5ddf98522f45319fe4b054dd810599b74f9898195996e",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "simulated",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "344e7541e61d2f1267a9d086fd6f78d81ba8322eae1e92df74b2a91580d1330c",
+        "source_path": "dataset/6/SIMULATED_00119.parquet",
+        "well_id": null
+      }
+    },
+    {
+      "group_id": "5e7018071e7e5c038a7053008588eac1dec77f0e591d2a2778c2674f9107001a",
+      "partition": "excluded",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:a5c7673f77c2ecd9de5dd928a25615221f9d1d964e9f221a0a1c9d7554c668b7",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "drawn",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "6c7d930ebdc424a62dba5e2ff64901d32ac90eac6ce68f813347de131ac79db0",
+        "source_path": "dataset/1/DRAWN_00008.parquet",
+        "well_id": null
+      }
+    },
+    {
+      "group_id": "c0870cb2498776825b5f7cd1677d333a41914613281393c01a45e819d4a90326",
+      "partition": "train",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:a5d9fe5c7fa8885363974ce24acbe5c47d146a86e8001c782190e119bc99a544",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "acd72cd0967dfdb619c17c349fe7738ad5b01abaa6e073fb5349852eb8273554",
+        "source_path": "dataset/0/WELL-00005_20170910020004.parquet",
+        "well_id": "WELL-00005"
+      }
+    },
+    {
+      "group_id": "16bc6465ab7889c4cd75aac62885dc5eadc1d229eaf2528e61f71698b175b222",
+      "partition": "train",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:d68c116498825185f2e7b1c5b972bf9dcd8bb0734c2e1d03ff0120ab8d15c810",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "1ba4c1385ff94b09d5bf9e424bebc77d05b61e99469b4f22a305e6722dc86672",
+        "source_path": "dataset/3/WELL-00001_20170320120025.parquet",
+        "well_id": "WELL-00001"
+      }
+    },
+    {
+      "group_id": "7faae06797400b950a94b88fd37f8acc079c44830ce6e9a9183641cb6e37d8ff",
+      "partition": "train",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:f0f7253fa367583f3b34cd49a0b42ab2e4628e9563c542a13c1b3ab17f2de51a",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "dc1366b1d1b7b9f9c403ad173a48b9a4685b8bed50a4f3e7cb3bd115ca654dc6",
+        "source_path": "dataset/5/WELL-00016_20180426131710.parquet",
+        "well_id": "WELL-00016"
+      }
+    },
+    {
+      "group_id": "81999f553029139c2f2be287f62ac2b09b1cc8f2fffe1d5c6f995c918906e86a",
+      "partition": "test",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:f6dfc1ba48716c3b327db2b73695f0de8c5a339f32a5cf48a44f85fed2c962a3",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "real",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "4fcb5e85d481d38d962f43307026bfbc036862cf6a71fc249daeb087409bac4a",
+        "source_path": "dataset/4/WELL-00002_20140121070214.parquet",
+        "well_id": "WELL-00002"
+      }
+    },
+    {
+      "group_id": "c4dd503c11ad5c0daed12fd5abada2f227daf3a4f28250569bb8a81c6d53d2a8",
+      "partition": "excluded",
+      "source": {
+        "dataset_revision": "914af287b1cf3e5207dce0da1e9dc08361c9adeb",
+        "dataset_version": "2.0.0",
+        "instance_id": "3w:fe47a871168d9d105bbc3be8b89efd60cfa8f1fb0cb88a1f1f17cb1db310e364",
+        "manifest_sha256": "d5c4a0509fa242cc191578c77c3fe099163437da0a2a875ff2bcb851b55b1009",
+        "origin": "simulated",
+        "registry_sha256": "61cab2e67c3b482ae0c03461b65da835654e504177ba41b661b1bfabd1d41472",
+        "related_group": null,
+        "sha256": "13e62d619d19aed2ff70173ad1a5ff3b31cb9da2cfd86304c68d7cfbecdb1ee7",
+        "source_path": "dataset/1/SIMULATED_00041.parquet",
+        "well_id": null
+      }
+    }
+  ],
+  "config": {
+    "include_synthetic_train": false,
+    "minimum_groups_per_family": 1,
+    "mode": "diagnostic",
+    "ratios": [
+      0.6,
+      0.2,
+      0.2
+    ],
+    "required_families": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "seed": 42
+  },
+  "exposure_sha256": "413484bf319b7ac135421b7cc48404e85598ff117b994c8257deefaf06608609",
+  "fingerprint": "643ecb9867ceaf6daff093f11a2e1b0a2b3066cbe2ce614b4ad1ecf81ff82062",
+  "support": [
+    {
+      "family": 0,
+      "partition": "train",
+      "real_groups": 5
+    },
+    {
+      "family": 1,
+      "partition": "train",
+      "real_groups": 0
+    },
+    {
+      "family": 2,
+      "partition": "train",
+      "real_groups": 0
+    },
+    {
+      "family": 3,
+      "partition": "train",
+      "real_groups": 1
+    },
+    {
+      "family": 4,
+      "partition": "train",
+      "real_groups": 1
+    },
+    {
+      "family": 5,
+      "partition": "train",
+      "real_groups": 1
+    },
+    {
+      "family": 6,
+      "partition": "train",
+      "real_groups": 0
+    },
+    {
+      "family": 7,
+      "partition": "train",
+      "real_groups": 1
+    },
+    {
+      "family": 8,
+      "partition": "train",
+      "real_groups": 0
+    },
+    {
+      "family": 9,
+      "partition": "train",
+      "real_groups": 0
+    },
+    {
+      "family": 0,
+      "partition": "validation",
+      "real_groups": 3
+    },
+    {
+      "family": 1,
+      "partition": "validation",
+      "real_groups": 0
+    },
+    {
+      "family": 2,
+      "partition": "validation",
+      "real_groups": 1
+    },
+    {
+      "family": 3,
+      "partition": "validation",
+      "real_groups": 0
+    },
+    {
+      "family": 4,
+      "partition": "validation",
+      "real_groups": 0
+    },
+    {
+      "family": 5,
+      "partition": "validation",
+      "real_groups": 0
+    },
+    {
+      "family": 6,
+      "partition": "validation",
+      "real_groups": 0
+    },
+    {
+      "family": 7,
+      "partition": "validation",
+      "real_groups": 0
+    },
+    {
+      "family": 8,
+      "partition": "validation",
+      "real_groups": 1
+    },
+    {
+      "family": 9,
+      "partition": "validation",
+      "real_groups": 0
+    },
+    {
+      "family": 0,
+      "partition": "test",
+      "real_groups": 2
+    },
+    {
+      "family": 1,
+      "partition": "test",
+      "real_groups": 1
+    },
+    {
+      "family": 2,
+      "partition": "test",
+      "real_groups": 0
+    },
+    {
+      "family": 3,
+      "partition": "test",
+      "real_groups": 0
+    },
+    {
+      "family": 4,
+      "partition": "test",
+      "real_groups": 1
+    },
+    {
+      "family": 5,
+      "partition": "test",
+      "real_groups": 0
+    },
+    {
+      "family": 6,
+      "partition": "test",
+      "real_groups": 1
+    },
+    {
+      "family": 7,
+      "partition": "test",
+      "real_groups": 0
+    },
+    {
+      "family": 8,
+      "partition": "test",
+      "real_groups": 0
+    },
+    {
+      "family": 9,
+      "partition": "test",
+      "real_groups": 0
+    }
+  ],
+  "version": "1.0.0",
+  "warnings": [
+    "Development diagnostic partitions; no pristine final evaluation claim",
+    "train: family 1 has 0 real groups; insufficient declared support",
+    "train: family 2 has 0 real groups; insufficient declared support",
+    "train: family 6 has 0 real groups; insufficient declared support",
+    "train: family 8 has 0 real groups; insufficient declared support",
+    "train: family 9 has 0 real groups; insufficient declared support",
+    "validation: family 1 has 0 real groups; insufficient declared support",
+    "validation: family 3 has 0 real groups; insufficient declared support",
+    "validation: family 4 has 0 real groups; insufficient declared support",
+    "validation: family 5 has 0 real groups; insufficient declared support",
+    "validation: family 6 has 0 real groups; insufficient declared support",
+    "validation: family 7 has 0 real groups; insufficient declared support",
+    "validation: family 9 has 0 real groups; insufficient declared support",
+    "test: family 2 has 0 real groups; insufficient declared support",
+    "test: family 3 has 0 real groups; insufficient declared support",
+    "test: family 5 has 0 real groups; insufficient declared support",
+    "test: family 7 has 0 real groups; insufficient declared support",
+    "test: family 8 has 0 real groups; insufficient declared support",
+    "test: family 9 has 0 real groups; insufficient declared support"
+  ]
+}

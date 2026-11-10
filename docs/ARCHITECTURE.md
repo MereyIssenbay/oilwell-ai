@@ -1,6 +1,6 @@
 # OilWell AI architecture
 
-Architecture established in Phase 0 on 2026-11-09. Phase 1 on 2026-11-10 implemented bounded raw acquisition and audit; see [DATASET_AUDIT.md](DATASET_AUDIT.md). Phase 2 added descriptive [EDA artifacts](../reports/eda/README.md), testable hypotheses and a split recommendation. No application, database, preprocessing pipeline, partition or trained model is present. All other components below remain planned. Decisions are recorded in [DECISIONS.md](DECISIONS.md); upstream facts are in [DATASET_METADATA.md](DATASET_METADATA.md).
+Architecture established in Phase 0 on 2026-11-09. Phase 1 on 2026-11-10 implemented bounded raw acquisition and audit; see [DATASET_AUDIT.md](DATASET_AUDIT.md). Phase 2 added descriptive [EDA artifacts](../reports/eda/README.md), hypotheses and a split recommendation. Phase 3 implements [causal preprocessing/features](FEATURE_ENGINEERING.md) and grouped development partitions with train-only fitted statistics. No application, database or trained event detector is present. All other components below remain planned. Decisions are recorded in [DECISIONS.md](DECISIONS.md); upstream facts are in [DATASET_METADATA.md](DATASET_METADATA.md).
 
 ## Product boundary and MVP
 

@@ -1,8 +1,10 @@
 # Milestones, dependencies and acceptance
 
-Phase 0 is complete. The user approved a bounded Phase 1 acquisition/audit on 2026-11-10, now completed; preprocessing and training were explicitly excluded. All subsequent implementation remains gated. The orchestrator records scope approvals in [PROGRESS.md](PROGRESS.md).
+Phase 0, bounded Phase 1 acquisition/audit and Phase 2 EDA are complete. The user subsequently approved Phase 3 reproducible preprocessing on 2026-11-10. Model training, further acquisition and application implementation remain gated. The orchestrator records scope approvals in [PROGRESS.md](PROGRESS.md).
 
 The subsequent user request defines **Phase 2 as exploratory data analysis**, not training: an executed notebook, actual-data charts, five testable hypotheses, leakage review and a split recommendation. This supersedes the original Phase 2 schedule below; M2/M3 and all application work remain unapproved future milestones. EDA is inserted before the model-readiness gate, and all explored files/well IDs become development-exposed.
+
+The user's **Phase 3 is reusable preprocessing**, superseding the original Phase 3 dashboard/integration schedule. It implements diagnostic grouped partitions, causal features and train-only statistics on existing data. It does not resolve the need for a fresh, sufficiently supported real evaluation cohort. Future component milestones below retain their identifiers without an authorized phase number.
 
 The original M1 below includes later modeling-cohort/split readiness. The requested Phase 1 audit does not satisfy those additional gates: the size-biased subset has sparse real groups, missing target phases and unknown labels. No split or final model scope was created. A further approved data expansion/cohort decision must resolve these prerequisites before M2; Phase 1 completion is not authorization to proceed automatically.
 
@@ -13,14 +15,15 @@ flowchart TD
     M0["M0 / Phase 0: design, contracts, agents"] --> G1{"User approves Phase 1"}
     G1 --> M1["M1 / Phase 1: data foundation and scope audit"]
     M1 --> E2["Phase 2: EDA, hypotheses and split strategy"]
-    E2 --> COHORT["Further approval: feasible cohort and protected test groups"]
+    E2 --> P3["Phase 3: reproducible preprocessing and diagnostic splits"]
+    P3 --> COHORT["Further approval: feasible cohort and protected test groups"]
     COHORT --> M2["M2 / Future: baseline and evaluated artifact"]
     COHORT --> M3["M3 / Future: persistence and replay API"]
-    M3 --> M4["M4 / Phase 3: dashboard and replay UX"]
-    M2 --> M5["M5 / Phase 3: inference integration and alert policy"]
+    M3 --> M4["M4 / Future: dashboard and replay UX"]
+    M2 --> M5["M5 / Future: inference integration and alert policy"]
     M3 --> M5
-    M5 --> M6["M6 / Phase 4: grounded copilot"]
-    M4 --> M7["M7 / Phase 5: packaged demo and release review"]
+    M5 --> M6["M6 / Future: grounded copilot"]
+    M4 --> M7["M7 / Future: packaged demo and release review"]
     M5 --> M7
     M6 --> M7
 ```
@@ -33,6 +36,7 @@ Every phase also requires an explicit scope approval before execution; only the 
 | --- | --- | --- | --- |
 | **M0: architecture and governance** | Orchestrator, with metadata/config subagents and independent review | User's Phase 0 request | Requested documents/root files and six valid roles exist; config enables agents with limit 3; actual upstream metadata is pinned; schema/provenance/time/replay semantics agreed; TOML and JSON Schema checks recorded; repository contains no telemetry, trained artifacts or feature implementation; progress identifies the approval gate |
 | **M1: data foundation** | `data_engineer`; orchestrator integrates root tooling | M0 accepted and explicit Phase 1 approval | Acquire only a documented selected subset at the pinned commit; retain source SHA-256/license/attribution; audit actual columns/index/dtypes/time/labels/missingness/duplicates; produce reproducible source, sensor, scope and split manifests; choose normal + two event families only if independent train/validation/test support exists; all related well/instance segments stay in one partition; unknown labels and state codes have explicit handling; no training yet |
+| **P3: reproducible preprocessing** | `data_engineer`; orchestrator integrates CLI/docs; independent QA | Phase 2 EDA and explicit Phase 3 approval | Consistent immutable Parquet loading; deterministic published-well/duplicate grouping before windows; diagnostic exposure clearly distinguished from protected evaluation; configurable causal features and stride; no interpolation across gaps; unknown/transient target policy; train-only imputation and scaling with persisted versioned state; adversarial leakage tests and actual-data reproducibility checks; no event-detector training |
 | **M2: evaluated ML bundle** | `ml_engineer` | M1 accepted and Phase 2 approval | Reproducible causal baseline and one XGBoost comparison on frozen splits; label/state/identity features excluded; preprocessing fit only on train; validation chooses windowing/calibration/thresholds; model card includes class/origin/phase metrics, denominators, misses, false alerts, detection delay, limitations and reproducibility commands; criteria and alert policy fixed before final test; trusted bundle reproduces offline predictions; underperforming models are honestly rejected or marked unfit for demo claims |
 | **M3: database and replay API** | `backend_engineer` | M1 accepted, Phase 2 approval and frozen v1 contract | Migrations build an empty database; registry accepts manifest-backed sources only; one-active-session cap, command transitions, optimistic concurrency and idempotency are verified; causal chunking, pause/resume/speed and cancellation work; restart resumes without duplicate prediction/event persistence; SSE snapshot watermark/reconnect/expiry behavior verified with synthetic fixtures; missing model/data returns explicit not-ready state |
 | **M4: dashboard** | `frontend_engineer` | M3 accepted and Phase 3 approval | React/TypeScript consumes generated contract types; Plotly shows bounded source-time telemetry and missing gaps; replay controls reflect eventual worker state; origin/replay/model/calibration/abstention badges are visible; alert/prediction detail exposes evidence; reconnect deduplication and loading/error/empty/accessibility states are checked; UI does not imply live data or physical well identity |

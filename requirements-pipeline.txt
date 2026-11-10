@@ -1,0 +1,8 @@
+# Phase 3 preprocessing; preserve the Phase 1 data environment.
+# Executed on Windows/Python 3.13.3. No estimator library is required.
+-r requirements-data.txt
+annotated-types==0.8.0
+pydantic==2.14.3
+pydantic-core==2.50.4
+typing_extensions==4.16.0
+typing-inspection==0.4.5
