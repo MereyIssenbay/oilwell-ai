@@ -127,7 +127,7 @@ def test_startup_docs_openapi_and_diagnostic_identity(service):
     assert client.get("/health").json()["status"] == "ok"
     assert client.get("/docs").status_code == 200
     schema = client.get("/openapi.json").json()
-    assert set(schema["paths"]) == {"/health", "/wells", "/wells/{id}/telemetry", "/predict", "/alerts", "/models/info"}
+    assert {"/health", "/wells", "/wells/{id}/telemetry", "/predict", "/alerts", "/models/info"} <= set(schema["paths"])
     assert schema["info"]["version"] == "diagnostic-1.0.0"
     assert schema["paths"]["/predict"]["post"]["responses"]["422"]["content"]["application/json"]["schema"]["$ref"].endswith("/ErrorResponse")
     info = client.get("/models/info").json()

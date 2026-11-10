@@ -106,7 +106,7 @@ def test_startup_docs_openapi_and_version(client, services):
     assert client.get("/health").json()["status"] == "ok"
     assert client.get("/docs").status_code == 200
     schema = client.get("/openapi.json").json()
-    assert set(schema["paths"]) == {"/health", "/wells", "/wells/{id}/telemetry", "/predict", "/alerts", "/models/info"}
+    assert set(schema["paths"]) >= {"/health", "/wells", "/wells/{id}/telemetry", "/predict", "/alerts", "/models/info"}
     assert schema["info"]["version"] == "diagnostic-1.0.0"
     info = client.get("/models/info").json()
     assert info["model_version"] == "fixture-model" and not info["accepted_for_monitoring"]

@@ -105,7 +105,8 @@ class RequestBoundary:
                 await _error(request_id, "INTERNAL_ERROR", "Request could not be completed", 500)(scope, receive, identified_send)
 
 
-def create_app(settings: Settings | None = None, *, runtime=None, registry=None, repository=None) -> FastAPI:
+def create_app(settings: Settings | None = None, *, runtime=None, registry=None, repository=None,
+               replay_repository=None, replay_worker_enabled: bool = True) -> FastAPI:
     settings = settings or Settings.from_environment()
     if registry is None:
         from backend.app.registry import Registry
@@ -127,7 +128,26 @@ def create_app(settings: Settings | None = None, *, runtime=None, registry=None,
                 _log("dependency_ready", dependency=name)
             except Exception:
                 _log("dependency_unavailable", dependency=name)
-        yield
+        app.state.replay_ready = False
+        worker = None
+        if all(app.state.ready.values()) and (replay_repository is not None or isinstance(repository, PostgresRepository)):
+            from backend.app.replay import ReplayService, ReplayWorker
+            from backend.app.replay_repository import PostgresReplayRepository
+            store = replay_repository if replay_repository is not None else PostgresReplayRepository(settings)
+            try:
+                await run_in_threadpool(store.initialize)
+                app.state.replay_service = ReplayService(registry, runtime, store)
+                app.state.replay_ready = True
+                if replay_worker_enabled:
+                    worker = ReplayWorker(app.state.replay_service)
+                    worker.start()
+            except Exception:
+                _log("dependency_unavailable", dependency="replay")
+        try:
+            yield
+        finally:
+            if worker is not None:
+                await run_in_threadpool(worker.stop)
 
     app = FastAPI(title="OilWell AI diagnostic inference", version="diagnostic-1.0.0",
                   description="Historical binary diagnostic inference. The selected model is rejected for monitoring; "
@@ -164,7 +184,8 @@ def create_app(settings: Settings | None = None, *, runtime=None, registry=None,
     def health(response: Response):
         readiness = getattr(app.state, "ready", {"registry": False, "model": False, "database": False}).copy()
         readiness["database"] = readiness["database"] and repository.health()
-        ok = all(readiness.values())
+        replay_expected = replay_repository is not None or isinstance(repository, PostgresRepository)
+        ok = all(readiness.values()) and (not replay_expected or getattr(app.state, "replay_ready", False))
         response.status_code = 200 if ok else 503
         return Health(status="ok" if ok else "degraded",
                       **{name: "ready" if ready else "unavailable" for name, ready in readiness.items()})
@@ -225,6 +246,8 @@ def create_app(settings: Settings | None = None, *, runtime=None, registry=None,
         require("model")
         return runtime.info()
 
+    from backend.app.replay import replay_router
+    app.include_router(replay_router(app))
     return app
 
 

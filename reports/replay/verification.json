@@ -1,0 +1,59 @@
+{
+  "phase": 7,
+  "status": "complete",
+  "full_regression": {
+    "passed": 511,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 1,
+    "seconds": 65.46,
+    "warning": "Existing Starlette/httpx deprecation"
+  },
+  "prior_tests": 429,
+  "new_tests": 82,
+  "model_changed": false,
+  "test_reinference": false,
+  "accepted_for_monitoring": false,
+  "python": "3.13.3",
+  "postgresql": "18.3",
+  "live_api": "http://127.0.0.1:8001",
+  "demo_report": "reports/replay/demo.json",
+  "restart_smoke": "reports/replay/restart_smoke.json",
+  "scope_limitations": [
+    "diagnostic model rejected for monitoring",
+    "best-effort UTC pacing",
+    "no automatic overall history pruning",
+    "loopback single-user scope"
+  ],
+  "initial_restricted_run": "Failed with Windows WinError 5 in pytest temporary fixtures; approved narrow escalation rerun passed",
+  "static_audit": {
+    "git_visible_files": 190,
+    "text_files": 179,
+    "local_markdown_links": 326,
+    "python_ast": 53,
+    "strict_json_notebooks": 30,
+    "toml": 7,
+    "immutable_files_unchanged": 130,
+    "schema_and_openapi_match": true,
+    "private_state_ignored": true,
+    "errors": []
+  },
+  "implementation_sha256": {
+    "backend/app/replay.py": "c9be916b47f5dd49a9aa29e146bb15ed495524c7e2e6177f6eda3ec6e0c01038",
+    "backend/app/replay_repository.py": "a97d8f0d322559e3d1b50fcf45ca4f198d75bdd3caa0a9913c2eeb9bf8825ab4",
+    "backend/app/replay_schemas.py": "d3c2d7131c2540383b44942993f58eaa8afb594b81cdd21ba7697d3c8798e280",
+    "backend/migrations/002_historical_replay.sql": "e589b1b4094eeca441c11c36de8997f9a2e438d5f496981baadc993336ef73a9",
+    "backend/__init__.py": "034fbc250933af7208f567d5fecf9b2c45dfa17fc0f4ef0c8434b3d139700213",
+    "backend/app/__init__.py": "434c6356fd3ddee695f93473d5d7a038c134ab4bf8f9b7355f1a9204b3a56c6a",
+    "backend/app/errors.py": "c9b3496732c1a552215438b6b360274ece98bcd8356db689406c813da008cb19",
+    "backend/app/inference.py": "78eb21e1ec1dd8d894a7e8adf63f7090f0209df370563c06c186b6858bf0329f",
+    "backend/app/main.py": "e02ef41d2148ccd8bb92e8871a2b043168e6ae1e933603514bc63bc630e5d0f7",
+    "backend/app/pagination.py": "773077445a5150fb7962b6f5ebeed0a21e475bdb43605f19c33607bf87784913",
+    "backend/app/registry.py": "ecb768932b1a5f88bfa2236220316e64ddd02997d0fa724c2a138be01cd0937a",
+    "backend/app/repository.py": "7fbc1b3581393d219a527447b10f817aa2f7264c427a15930788be7c1d3d20a0",
+    "backend/app/schemas.py": "10ef07df7819218cb5a0950b9ecb75dde4d9d659623edd49fc80aa03577c3430",
+    "backend/app/settings.py": "d0e0efab18d5eefd716d4499d4ee6cc7fc5b1dc4314cf6e3e8b3fd0f7d01e555",
+    "backend/migrations/001_diagnostic_predictions.sql": "994486fbb81235ffd8712a5cb40e89a1824298019dd052b01dc0bf1b6f86d10d"
+  },
+  "generated_at": "2026-11-10T10:19:51.080826+00:00"
+}

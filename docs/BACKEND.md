@@ -1,5 +1,7 @@
 # Phase 6 local diagnostic backend
 
+Phase 7 adds [historical replay controls, durable SSE and episode policy](REPLAY.md) on the same service. Its acceptance instance runs at `http://127.0.0.1:8001`; the older six-route API remains compatible. The complete suite now has 511 passing cases. Phase 6 results below remain historical evidence.
+
 The FastAPI service wraps the frozen selected model and PostgreSQL persistence. It exposes binary historical diagnostics only. The model failed its Phase 5 normal-time false-alarm check and is **not accepted for monitoring**; this status appears in health, model, prediction and alert responses. No model training occurs in handlers.
 
 ## Start locally

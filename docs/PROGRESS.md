@@ -14,6 +14,8 @@ Updated: 2026-11-10 (Asia/Oral).
 
 - **Phase 6 backend and ML inference: complete** (2026-11-10). Six local typed endpoints, startup-loaded frozen model, shared preprocessing, PostgreSQL persistence, idempotency, structured errors/logging, OpenAPI and independent contract/integration checks. All 429 tests passed. Model monitoring acceptance remains false; no model changes or test re-inference. Stop after Phase 6 pending user approval.
 
+- **Phase 7 historical replay: complete** (2026-11-10). API controls, causal frozen inference, durable PostgreSQL events/episodes, SSE reconnection, restart/concurrency checks and actual normal-to-transient demo are complete. **511 tests passed**, without failures or skips. Frozen model/threshold and one-attempt test evidence remain immutable; detector acceptance remains rejected. Stop after Phase 7.
+
 ## Phase 0 delivered design
 
 - Architecture/MVP scope, component boundaries, replay lifecycle, evidence-only copilot and local deployment plan.
@@ -311,9 +313,51 @@ Integrated review fixes enforce full-window/evidence/source-time consistency and
 
 **Outcome:** all Phase 6 acceptance criteria are met for the local diagnostic service. This does not reverse the model's failed monitoring acceptance. Continuous replay/pause/resume/SSE, ongoing alert episodes, frontend, copilot, public deployment and fresh-model/data work remain outside this phase. No retraining or test reevaluation was performed; stop after Phase 6.
 
+## Phase 7 deliverables and verified results
+
+The user explicitly authorized historical replay. Root delegated backend implementation to `backend_engineer`, frozen offline/replay consistency tests to `ml_engineer`, and independent replay/contract correctness review to `qa_reviewer`. Root retained ML-backend integration, contracts/exports, demo and final regression. Ownership remained disjoint, including explicitly transferred narrow compatibility assertions; all agents returned ownership at handoff. No frontend/copilot/model research was started.
+
+Delivered:
+
+- [Replay service/worker/API](../backend/app/replay.py), [PostgreSQL replay repository](../backend/app/replay_repository.py), [typed replay schemas](../backend/app/replay_schemas.py), [migration 002](../backend/migrations/002_historical_replay.sql), and application lifespan integration.
+- [Replay guide](REPLAY.md), additive contract/OpenAPI exports, [prediction envelope schema](contracts/replay_prediction.schema.json), [snapshot schema](contracts/replay_snapshot.schema.json), [event schema](contracts/replay_event.schema.json) and ADR-044..048.
+- [Reproducible HTTP demo](../scripts/replay_demo.py), [chart generator](../scripts/plot_replay_demo.py), [actual demo report/chart](../reports/replay/README.md), [JSON evidence](../reports/replay/demo.json), [restart/stop smoke](../reports/replay/restart_smoke.json) and [verification record](../reports/replay/verification.json).
+- Backend, ML and independent QA tests, [ML review](reviews/PHASE_7_ML.md), and [QA review](reviews/PHASE_7.md).
+
+The additive `/replays` API supports choosing a registered source/range, start/pause/resume/stop, speed 0.1..20, snapshots, bounded history/predictions/alerts and SSE. The `diagnostic-replay-1.0.0` envelope marks simulated historical playback while preserving real source origin and the unchanged diagnostic inner prediction. The original diagnostic and canonical event-family schemas remain byte-identical. No event-family output or operational reliability is implied.
+
+One transaction commits an original sensor row, any prediction, episode update, cursor and ordered events. PostgreSQL locks and idempotent commands prevent concurrent advancement/duplicate episode openings; rollback preserves the last committed cursor. Resume and worker restart reuse persisted progress. A dedicated application-lifespan worker thread adapts the earlier separate-process plan for this local MVP. REST controls plus unidirectional SSE avoid unnecessary WebSocket commands. Clients reconnect with durable IDs and deduplicate at-least-once delivery; terminal streams drain then close.
+
+Causal replay starts with empty history and requires 60 replayed observations on the original `59+10*k` endpoint grid. The unchanged adapter sees only trailing sensor rows through the current timestamp. Registered sources remain train/validation only. No `class`, auxiliary `state`, future data or test source enters inference. The separate demo reads original labels only after completion, checks source bytes and joins retrospective results locally.
+
+The fixed episode rule opens once on a usable positive, updates ongoing positives, resolves on usable normal and preserves an open episode on abstention. This is diagnostic no-dwell deduplication at the exact selected threshold, not improved model quality. Episode state is captured at each prediction; later outcomes do not rewrite evidence. Replay alerts are scoped under `/replays/{id}/alerts`; Phase 6 `/alerts` retains its original synchronous meaning.
+
+| Verification | Actual result | Scope / limitation |
+| --- | --- | --- |
+| Backend owner | 31 passed in 7.17 s: six new replay cases plus 25 prior API cases | Includes actual PostgreSQL rollback, concurrent processing and repository restart |
+| Independent ML | 11 passed in 7.75 s | All 21 demo scores/decisions at three configured speeds; all 260 rows ordered; future perturbation, sensor-only inputs, unaligned-start warmup and abstention; deterministic fixture scheduling, not throughput benchmark |
+| Independent QA | 63 combined cases passed in 11.77 s, followed by expanded 52-case contract file in 1.10 s | 65 new QA/contract cases total plus one previous compatibility case; actual PostgreSQL 18.3 thread restart, partial event rollback, competing workers, SSE/reconnect/error sanitization, strict flags and immutable evidence |
+| Root full regression | **511 passed in 65.46 s**, zero failed/skipped | Previous 429 + 82 new cases; all three dedicated test databases and frozen QA checks enabled; one pre-existing Starlette/httpx deprecation warning |
+| Actual HTTP/PostgreSQL demo | Completed 260 rows, 21 predictions, 306 events | Pause stayed fixed; speed changes/resume completed; create retry exact; SSE reconnected to exact persisted suffix |
+| Offline agreement | All 21 live scores within absolute 1e-14 of frozen saved validation; every decision identical | No fitting, threshold changes, test re-inference or new benchmark claim |
+| Actual process restart and stop | Prior snapshot and all 21 prediction IDs unchanged after restarting owned API; separate replay stopped at source position 5603 and stayed fixed | Health/docs 200; ahead SSE cursor structured 400 |
+| Source/model integrity | All 130 pre-phase frozen data/model/evaluation/canonical files unchanged; QA separately checks 31 originals and one-attempt test journal | No original Parquet or model/preprocessor/inference binary/code edits |
+| Contract integration | Current runtime OpenAPI equals exported OpenAPI and actual HTTP OpenAPI; three replay JSON Schemas equal Pydantic exports | Separate additive version; prior schemas preserved |
+| Final static audit | 190 Git-visible files, 179 text files, 326 local links, 53 Python AST checks, 30 strict JSON/notebook files and seven TOML files passed; `git diff --check` exit 0 | Credentials/runtime/model binaries ignored; no dependency changes; Git emitted only a line-ending notice |
+
+Actual validation demonstration: WELL-00011 rows 5600..5859, original timestamps 2014-05-30 10:05:23..10:09:42 (timezone unverified). Normal class 0 changes to transient 102 at position 5759 / 10:08:02. First alert opens at 5659 / 10:06:22 while normal; it resolves at 5809 / 10:08:52 despite the event, then reopens at 5849 / 10:09:32. There are two openings, fifteen updates and one resolution, not eighteen new alerts. Ten normal prediction endpoints are all false positives; four of eleven transient endpoints are false negatives. This intentionally shows the rejected model's failures.
+
+The root full-suite command is the same documented setup as BACKEND.md: load the three ignored dedicated test DSNs, enable `OILWELL_RUN_FROZEN_QA=1`, then `pytest tests -q -p no:cacheprovider --tb=short --basetemp <unique-workspace-directory>`. The initial restricted-token attempt encountered Windows `WinError 5` in temporary pytest fixtures and cleanup; a narrow approved execution escalation reran it successfully. This was an execution-environment issue, not a claim that the initial run passed. No dependency changes or commit were made.
+
+Root launched the Phase 7 API on **http://127.0.0.1:8001**, restarted that owned process with final code, and retained the completed demo in the workspace PostgreSQL on loopback 55436. The previous Phase 6 process on 8000 was not stopped. Local credentials, logs and PostgreSQL files remain ignored. No public exposure was added.
+
+Remaining local limitations: persisted UTC deadlines provide best-effort pacing; clock changes and per-row PostgreSQL/inference overhead affect achieved speed. The observed run took 67.342806 seconds including controls despite requested 20x. Source ordering/features are unaffected. Each session caps at one million rows and stream/pages use bounded batches, but completed-session count/disk history have no automatic pruning or expiry. No 410 expired-history behavior is implemented. The selected detector remains rejected; no protected cohort, accepted model, frontend, copilot or deployment is implied.
+
+**Outcome:** Phase 7 acceptance is met for historical diagnostic replay. Stop here; later work requires explicit user authorization.
+
 ## Blockers and unresolved evidence
 
-No selected-model or diagnostic-API integrity blocker remains for the completed Phases 1-6; CatBoost inference timing has the explicitly recorded thread-control deviation. The original roadmap's broader M1 modeling-cohort/evaluation acceptance remains unresolved: most selected undesirable families occur in only one real well group, and no selected real row contains family 9. The executable split, preprocessing and selected binary artifact support development diagnostics; the selected artifact failed its test false-alarm behavior and remains unaccepted. In addition, the inspected subset cannot supply a pristine, class-supported three-way multiclass evaluation. No protected final-test cohort or accepted monitoring detector exists. Further approved data work must establish sufficient independent real groups and usable label/sensor coverage before generalization claims.
+No selected-model or diagnostic-API integrity blocker remains for the completed Phases 1-7; CatBoost inference timing has the explicitly recorded thread-control deviation. The original roadmap's broader M1 modeling-cohort/evaluation acceptance remains unresolved: most selected undesirable families occur in only one real well group, and no selected real row contains family 9. The executable split, preprocessing and selected binary artifact support development diagnostics; the selected artifact failed its test false-alarm behavior and remains unaccepted. In addition, the inspected subset cannot supply a pristine, class-supported three-way multiclass evaluation. No protected final-test cohort or accepted monitoring detector exists. Further approved data work must establish sufficient independent real groups and usable label/sensor coverage before generalization claims.
 
 Residual limitations: unknown source timezone and physical-identity equivalence; structural/origin-dependent sensor missingness; initial null target/status labels; absent steady code 7; documentation-versus-file dtype discrepancy; 40 real filename IDs in pinned inventory versus 42 wells in release notes; possible wider-corpus overlaps/near-duplicates and upstream interpolation. Phase 4 measured fixed diagnostic operating points; Phase 5 performed bounded validation selection and one diagnostic test, which failed normal-exposure control. Operational threshold selection, calibration, protected-cohort performance and provider selection remain future decisions.
 
@@ -321,4 +365,4 @@ The independent review prompted two integrated corrections: snapshots and events
 
 ## Next action
 
-**Stop after Phase 6 and wait for user approval.** The local diagnostic service and PostgreSQL are available for inspection. Any next phase must explicitly choose its scope: replay/frontend integration with honest diagnostic labels, or renewed data/model research with fresh groups. Preserve the rejected model's failure disclosure, immutable artifact and one-attempt test journal; no new model/threshold choice may be made from the existing test result. No additional phase or public deployment is authorized.
+**Stop after Phase 7 and wait for user approval.** The local replay API and persisted historical demonstration are available for inspection. Preserve the rejected model's failure disclosure, immutable artifacts and one-attempt test journal. No frontend, copilot, fresh model/data work or public deployment is authorized by this completed phase.

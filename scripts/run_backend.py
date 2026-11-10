@@ -1,4 +1,4 @@
-"""Run the Phase 6 diagnostic API on loopback; never trains or evaluates test data."""
+"""Run the diagnostic API and historical replay on loopback; never trains or evaluates test data."""
 from __future__ import annotations
 
 import argparse

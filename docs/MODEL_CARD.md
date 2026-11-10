@@ -64,3 +64,7 @@ Selected LR latency: feature-to-score wrapper p50/p95 3.588300/4.230460 ms; raw 
 ## Phase 6 serving scope
 
 The user subsequently authorized a local backend around this exact frozen artifact. [Diagnostic API integration](BACKEND.md) serves only registered train/validation sensor windows and preserves the model, threshold, preprocessing, provenance and Phase 5 test journal. No test inference or retraining occurred. `diagnostic-1.0.0` explicitly reports binary scores and rejected-monitoring status; it does not implement the original event-family prediction contract or promote this model's reliability. API/software acceptance does not change the failed model-quality conclusion above.
+
+## Phase 7 replay integration
+
+The unchanged model and threshold now run inside the historical replay engine. All 21 predictions of the documented validation interval match saved offline validation within absolute 1e-14 with exact decisions, independently checked at configured speeds 0.1/1/20. The live PostgreSQL/HTTP demo exposes ten false-positive normal endpoints and four false-negative transient endpoints; episode deduplication does not cure detector failure. Labels are joined only retrospectively after replay completion. No new test inference, tuning, fitting or calibration occurred. See [replay evidence](../reports/replay/README.md); monitoring acceptance remains rejected.

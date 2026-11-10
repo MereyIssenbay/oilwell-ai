@@ -1,0 +1,10 @@
+{
+  "prior_replay_exact_after_process_restart": true,
+  "prior_prediction_ids_unchanged": 21,
+  "stop_terminal_no_advance": true,
+  "stopped_at_position": 5603,
+  "stopped_replay_id": "61970873-f263-45fc-9602-e32d68f5b1e5",
+  "ahead_sse_cursor_rejected": 400,
+  "health": 200,
+  "docs": 200
+}
