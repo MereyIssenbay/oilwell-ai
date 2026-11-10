@@ -52,4 +52,5 @@ export const api = {
   telemetry: (well: string, source: string, offset: number, signal?: AbortSignal) => request<Schema['TelemetryPage']>(`/wells/${encodeURIComponent(well)}/telemetry${query({ source_instance_id: source, offset, limit: 600 })}`, { signal }),
   create: (body: Schema['CreateReplay']) => mutation<Replay>('/replays', body),
   command: (id: string, body: Schema['ReplayCommand']) => mutation<Replay>(`/replays/${encodeURIComponent(id)}/commands`, body),
+  explain: (id: string, sequence: number, body: Schema['ExplanationRequest'], signal?: AbortSignal) => request<Schema['Explanation']>(`/replays/${encodeURIComponent(id)}/predictions/${sequence}/explanation`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal }),
 };

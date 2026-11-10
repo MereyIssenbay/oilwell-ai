@@ -1,0 +1,72 @@
+{
+  "phase": 9,
+  "status": "complete",
+  "python": "3.13.3",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "git_base_revision": "fe5700688cb85b05ad9b06534e3ea8f0e232b6cf",
+  "uncommitted_changes": true,
+  "python_suite": {
+    "passed": 672,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 58.12,
+    "warnings": [
+      "existing Starlette httpx deprecation"
+    ]
+  },
+  "frontend_suite": {
+    "passed": 25,
+    "files": 6,
+    "elapsed_seconds": 5.05
+  },
+  "frontend_build": {
+    "typescript": "passed",
+    "vite": "passed",
+    "elapsed_milliseconds": 551
+  },
+  "browser_checks": {
+    "main": 11,
+    "cached_actual_provider": 1,
+    "failed": 0,
+    "new_paid_browser_calls": 0
+  },
+  "provider_attempts": 2,
+  "provider_successes": 1,
+  "provider_unavailable": 1,
+  "successful_input_tokens": 1331,
+  "successful_output_tokens": 78,
+  "successful_estimated_usd": 0.0001721,
+  "first_attempt_billing": "unknown",
+  "account_balance_checked": false,
+  "paid_budget_exhausted": true,
+  "protected_files_unchanged": 133,
+  "test_journal_attempts": 1,
+  "openapi_runtime_http_export_exact": true,
+  "generated_types_exact": true,
+  "server_credential_ignored": true,
+  "credential_patterns_in_git_visible_text_browser_assets_api_logs": 0,
+  "new_model_inference_for_explanations": false,
+  "implementation_sha256": {
+    "backend/app/copilot.py": "930c9c57fb7de15ed7b99d5b6d767fd36088101da651a0df26c7d597cd24b142",
+    "backend/app/main.py": "9a531f4b23a620170a5bc398794fbbf0adc8f8ad9a72af04414946202c45e270",
+    "backend/app/repository.py": "6cd4d1e6e347777bdf5a1690d52daf2749d1a4b3a64e82abf5f0e2a63a049acb",
+    "docs/contracts/copilot_evidence.schema.json": "1e8b61fbb3c456cb1fbdacec7336507e9db463e6d36b38397a24e9ed8e4b1be9",
+    "docs/contracts/explanation.schema.json": "357455effdab65f77ff562a85e434f6ff00ad8e53ce0af9cc2c8c18ca93910dc",
+    "docs/openapi.json": "634045b1b97c75be9df8d8c4eea293a1af97393dc73a739f5f4b2ae2e55c84e3",
+    "frontend/src/CopilotPanel.tsx": "8f5675ddf90d86bbfb8bde4009f8dec0eb5e0c3c80f5a60f4dab809e9b309bc6",
+    "frontend/src/api/client.ts": "276e428532c816ee0312905b4afd1f3cc5e517730deae0c54ecaa667b407088d",
+    "frontend/src/api/generated.ts": "7a93d52de1755b09b0c6aeba4a8ec5c396a1f23128aea53e8d0e73d807f1715e",
+    "llm/__init__.py": "b8ba3357dec57758ec271eaf513beb213162e515fec1bd9dcb409aa3b707cb74",
+    "llm/evaluation_cases.json": "764c945d28bc6a86a5f075801f46fbfad3ed1445a0d687d0375b7ed2e31095a6",
+    "llm/knowledge.py": "c6ec7da494edde27222aa90623d87cc844de8213a823b35852e4259588339932",
+    "llm/knowledge/sources.json": "1bd06c9404345c226182b00b97b81381419e85601667d90f7a7ab992ca0e13e9",
+    "llm/providers/__init__.py": "91e869a18aaaebd2560d454766e1b74d43c494487eb463975c99e410662e820c",
+    "llm/providers/openai.py": "d7c47e1be8858e429047cef6b44cb34dbb08fb4259226fcc6b6ad16241e8ad3d",
+    "llm/schemas.py": "747bf09a740bca2937378b8f117d8463766e06fa8b286df621dc12fb836ec5d1",
+    "llm/service.py": "4e79829e46ce83c70f82b4ef7c215a1532b42401be497facefa213090d597d80",
+    "llm/store.py": "0ba655ffe9df29022cb9bff9d71e4b3dc6e24078ba9e84ea780fcaeddbfc34ea",
+    "scripts/copilot_demo.py": "ede8e2f61b5d9c1a530f9cc0fad55eb80540334fa6ccafd4be41acfbb020b4aa",
+    "scripts/export_api.py": "028433d1cda25510f0325615cbad56ad613831f5687507100ad7f80058eac335",
+    "scripts/run_backend.py": "2d80a6102ed73b694ea88a06a763aa23bc7551c0457a86fe07e4e40e1e910964"
+  }
+}

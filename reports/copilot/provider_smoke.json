@@ -1,0 +1,492 @@
+{
+  "replay_id": "5a725349-e2c3-42e9-9dd3-4204ddd3ee7c",
+  "sequence": 91,
+  "prediction_id": "17ae74db-f98f-42c3-b84c-1efe786eeb40",
+  "endpoint": 3619,
+  "http_status": 200,
+  "elapsed_seconds": 2.8105633999803104,
+  "prediction_fields_match": true,
+  "citation_content_hashes_match": true,
+  "repeat_cached": true,
+  "unsupported_control_question": "unsupported_question",
+  "explanation": {
+    "schema_version": "copilot-explanation-1.0.0",
+    "status": "provider",
+    "reason": "provider_selected",
+    "historical_replay": true,
+    "diagnostic_only": true,
+    "accepted_for_monitoring": false,
+    "observations": [
+      {
+        "claim_id": "obs-e12",
+        "text": "P-ANULAR: observed mean 14649159.666666666; endpoint reading 14656690; OLS trend 255.33926090580718 per second; unit Pa; 60/60 observed, missing fraction 0.",
+        "evidence_ids": [
+          "e12",
+          "w1"
+        ],
+        "citation_ids": []
+      },
+      {
+        "claim_id": "obs-e19",
+        "text": "P-PDG: observed mean 38044150; endpoint reading 38044520; OLS trend 19.380939149763822 per second; unit Pa; 60/60 observed, missing fraction 0.",
+        "evidence_ids": [
+          "e19",
+          "w1"
+        ],
+        "citation_ids": []
+      },
+      {
+        "claim_id": "obs-e21",
+        "text": "P-TPT: observed mean 22629512.5; endpoint reading 22628960; OLS trend 20.239788830230619 per second; unit Pa; 60/60 observed, missing fraction 0.",
+        "evidence_ids": [
+          "e21",
+          "w1"
+        ],
+        "citation_ids": []
+      },
+      {
+        "claim_id": "obs-e26",
+        "text": "T-PDG: observed mean 125.83461166666669; endpoint reading 125.83450000000001; OLS trend -4.0650180604530389e-06 per second; unit oC; 60/60 observed, missing fraction 0.",
+        "evidence_ids": [
+          "e26",
+          "w1"
+        ],
+        "citation_ids": []
+      },
+      {
+        "claim_id": "obs-e27",
+        "text": "T-TPT: observed mean 111.80858000000002; endpoint reading 111.8257; OLS trend 0.00049084745762714894 per second; unit oC; 60/60 observed, missing fraction 0.",
+        "evidence_ids": [
+          "e27",
+          "w1"
+        ],
+        "citation_ids": []
+      },
+      {
+        "claim_id": "obs-e1",
+        "text": "ABER-CKGL: observed mean unavailable; endpoint reading unavailable; OLS trend unavailable per second; unit %; 0/60 observed, missing fraction 1.",
+        "evidence_ids": [
+          "e1",
+          "w1"
+        ],
+        "citation_ids": []
+      }
+    ],
+    "prediction": [
+      {
+        "claim_id": "pred-decision",
+        "text": "The stored model predicted undesirable_event. Selected-class confidence 0.99999396430143406; abnormal score 0.99999396430143406; frozen threshold 1.1881945293311268e-14 (alert when score >= threshold). Prediction alert status: alert.",
+        "evidence_ids": [
+          "p1"
+        ],
+        "citation_ids": []
+      },
+      {
+        "claim_id": "pred-model",
+        "text": "Model version: oilwell-binary-phase5-c4e1835a82620306778a.",
+        "evidence_ids": [
+          "m1"
+        ],
+        "citation_ids": []
+      },
+      {
+        "claim_id": "pred-episode",
+        "text": "Episode state captured at prediction time: open.",
+        "evidence_ids": [
+          "r1"
+        ],
+        "citation_ids": []
+      }
+    ],
+    "possible_interpretations": [
+      {
+        "claim_id": "context-nist-association",
+        "text": "A possible statistical association is not a verified physical explanation. These observed summaries and the binary score cannot establish causality or a well diagnosis.",
+        "evidence_ids": [
+          "w1"
+        ],
+        "citation_ids": [
+          "nist-association"
+        ]
+      },
+      {
+        "claim_id": "context-3w-missingness",
+        "text": "Missing observations limit the window summary. The public 3W description documents missing and frozen variables; it cannot establish why a particular reading is unavailable.",
+        "evidence_ids": [
+          "w1"
+        ],
+        "citation_ids": [
+          "3w-missingness"
+        ]
+      }
+    ],
+    "limitations": [
+      {
+        "claim_id": "limit-score",
+        "text": "Confidence is an uncalibrated model score, not certainty or verified event identity.",
+        "evidence_ids": [
+          "p1"
+        ],
+        "citation_ids": []
+      },
+      {
+        "claim_id": "limit-model",
+        "text": "This binary diagnostic model is rejected for monitoring. It cannot establish an event family, physical cause, or operating procedure.",
+        "evidence_ids": [
+          "m1"
+        ],
+        "citation_ids": []
+      },
+      {
+        "claim_id": "limit-time",
+        "text": "Historical playback only. Original source timezone is unknown; source coordinates are not verified UTC times.",
+        "evidence_ids": [
+          "w1",
+          "h1"
+        ],
+        "citation_ids": []
+      },
+      {
+        "claim_id": "limit-summary",
+        "text": "Sensor means, latest readings and trends describe the supplied causal window; they are not feature attribution or proof of what caused the model decision.",
+        "evidence_ids": [
+          "w1",
+          "m1"
+        ],
+        "citation_ids": []
+      }
+    ],
+    "abstention": null,
+    "citations": [
+      {
+        "source_id": "nist-association",
+        "title": "NIST/SEMATECH: association and causality",
+        "url": "https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm",
+        "section": "3.1.3.6 Experiments and Experimental Design",
+        "attribution": "NIST/SEMATECH e-Handbook of Statistical Methods, section 3.1.3.6; accessed 2026-11-10. No NIST endorsement implied.",
+        "license": "NIST public-information reuse policy; no copyright marking on cited prose",
+        "license_url": "https://www.nist.gov/copyrights-disclaimers",
+        "accessed_at": "2026-11-10",
+        "content": "Observed association between variables alone does not establish a causal relationship. A shared or unobserved factor can produce association. In this dashboard, sensor summaries and a binary prediction support description of the recorded window, not a physical diagnosis.",
+        "content_sha256": "a44ff3a4d707e41cd91591452ee42635136b85a1a5a9aafa77ec9d1236700d0d",
+        "content_kind": "curated_paraphrase"
+      },
+      {
+        "source_id": "3w-missingness",
+        "title": "3W Dataset 2.0.0: real-data imperfections",
+        "url": "https://www.nature.com/articles/s41597-026-07225-z",
+        "section": "Background & Summary, paragraphs on real instances",
+        "attribution": "Vaz Vargas, R. E., de Melo Junior, A. J., de Campos Lima, C. B. et al., Scientific Data 13, 949 (2026), DOI 10.1038/s41597-026-07225-z.",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "accessed_at": "2026-11-10",
+        "content": "The 3W publication describes real industrial records that retain missing variables, frozen variables and outliers. Missing observations in a particular window therefore require explicit handling; this general dataset description does not establish the cause of any individual missing reading.",
+        "content_sha256": "67a3d7dbf2a2907f546704420e26c4c218549253ee916db3a57124a4e625c76d",
+        "content_kind": "curated_paraphrase"
+      }
+    ],
+    "evidence": {
+      "packet_version": "copilot-evidence-1.0.0",
+      "model_version": "oilwell-binary-phase5-c4e1835a82620306778a",
+      "event_type": "undesirable_event",
+      "confidence": 0.9999939643014341,
+      "abnormal_score": 0.9999939643014341,
+      "threshold": 1.1881945293311268e-14,
+      "calibration": "uncalibrated",
+      "alert_status": "alert",
+      "episode_state": "open",
+      "source_origin": "real",
+      "source_time_basis": "source_naive_assumed_utc",
+      "window_start": "2014-05-30T09:31:23",
+      "window_end": "2014-05-30T09:32:22",
+      "sample_count": 60,
+      "expected_sample_count": 60,
+      "sensors": [
+        {
+          "evidence_id": "e1",
+          "sensor": "ABER-CKGL",
+          "unit": "%",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e2",
+          "sensor": "ABER-CKP",
+          "unit": "%",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e3",
+          "sensor": "ESTADO-DHSV",
+          "unit": "0, 0.5, or 1",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e4",
+          "sensor": "ESTADO-M1",
+          "unit": "0, 0.5, or 1",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e5",
+          "sensor": "ESTADO-M2",
+          "unit": "0, 0.5, or 1",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e6",
+          "sensor": "ESTADO-PXO",
+          "unit": "0, 0.5, or 1",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e7",
+          "sensor": "ESTADO-SDV-GL",
+          "unit": "0, 0.5, or 1",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e8",
+          "sensor": "ESTADO-SDV-P",
+          "unit": "0, 0.5, or 1",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e9",
+          "sensor": "ESTADO-W1",
+          "unit": "0, 0.5, or 1",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e10",
+          "sensor": "ESTADO-W2",
+          "unit": "0, 0.5, or 1",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e11",
+          "sensor": "ESTADO-XO",
+          "unit": "0, 0.5, or 1",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e12",
+          "sensor": "P-ANULAR",
+          "unit": "Pa",
+          "mean": 14649159.666666666,
+          "latest": 14656690.0,
+          "trend_per_second": 255.33926090580718,
+          "missing_fraction": 0.0,
+          "observed_count": 60
+        },
+        {
+          "evidence_id": "e13",
+          "sensor": "P-JUS-BS",
+          "unit": "Pa",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e14",
+          "sensor": "P-JUS-CKGL",
+          "unit": "Pa",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e15",
+          "sensor": "P-JUS-CKP",
+          "unit": "Pa",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e16",
+          "sensor": "P-MON-CKGL",
+          "unit": "Pa",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e17",
+          "sensor": "P-MON-CKP",
+          "unit": "Pa",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e18",
+          "sensor": "P-MON-SDV-P",
+          "unit": "Pa",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e19",
+          "sensor": "P-PDG",
+          "unit": "Pa",
+          "mean": 38044150.0,
+          "latest": 38044520.0,
+          "trend_per_second": 19.380939149763822,
+          "missing_fraction": 0.0,
+          "observed_count": 60
+        },
+        {
+          "evidence_id": "e20",
+          "sensor": "PT-P",
+          "unit": "Pa",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e21",
+          "sensor": "P-TPT",
+          "unit": "Pa",
+          "mean": 22629512.5,
+          "latest": 22628960.0,
+          "trend_per_second": 20.23978883023062,
+          "missing_fraction": 0.0,
+          "observed_count": 60
+        },
+        {
+          "evidence_id": "e22",
+          "sensor": "QBS",
+          "unit": "m3/s",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e23",
+          "sensor": "QGL",
+          "unit": "m3/s",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e24",
+          "sensor": "T-JUS-CKP",
+          "unit": "oC",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e25",
+          "sensor": "T-MON-CKP",
+          "unit": "oC",
+          "mean": null,
+          "latest": null,
+          "trend_per_second": null,
+          "missing_fraction": 1.0,
+          "observed_count": 0
+        },
+        {
+          "evidence_id": "e26",
+          "sensor": "T-PDG",
+          "unit": "oC",
+          "mean": 125.83461166666669,
+          "latest": 125.8345,
+          "trend_per_second": -4.065018060453039e-06,
+          "missing_fraction": 0.0,
+          "observed_count": 60
+        },
+        {
+          "evidence_id": "e27",
+          "sensor": "T-TPT",
+          "unit": "oC",
+          "mean": 111.80858000000002,
+          "latest": 111.8257,
+          "trend_per_second": 0.0004908474576271489,
+          "missing_fraction": 0.0,
+          "observed_count": 60
+        }
+      ],
+      "integrity": "verified",
+      "abstention_reason": null
+    },
+    "evidence_hash": "2552d544af9b7723e85d41c6961b96fdc656ace861ee4e752a0c496388e49f89",
+    "prompt_version": "claim-selection-1.0.0",
+    "kb_version": "curated-1.0.0:a82b1d4b841a9008cfe8d2264e6355b167654069c8ed1fc1c2a065f331c2f711",
+    "provider": "openai",
+    "provider_model": "gpt-6-luna",
+    "created_at": "2026-11-10T11:28:48.198170Z",
+    "cached": false,
+    "usage": {
+      "input_tokens": 1331,
+      "output_tokens": 78
+    }
+  },
+  "new_inference_executed": false
+}

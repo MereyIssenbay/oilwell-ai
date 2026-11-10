@@ -2,6 +2,26 @@
 
 Status: canonical event-family design v1.0.0 is retained below and remains unimplemented. Phase 6 adds the separately versioned **diagnostic-1.0.0** synchronous API described first. Phase 7 adds the separately enveloped historical replay surface described below; neither API implements event-family classification. [prediction.schema.json](contracts/prediction.schema.json) and its synthetic fixture remain byte-for-byte unchanged. The additive [diagnostic prediction schema](contracts/diagnostic_prediction.schema.json) and [OpenAPI export](openapi.json) govern the implemented routes.
 
+## Phase 9 implemented copilot additions
+
+The additive [explanation schema](contracts/explanation.schema.json), [evidence schema](contracts/copilot_evidence.schema.json) and [OpenAPI](openapi.json) govern this implementation. Original prediction/replay schemas remain unchanged. This supersedes the planned explanation envelope below; no earlier explanation client existed to migrate.
+
+| Route | Request | Response |
+| --- | --- | --- |
+| `POST /replays/{id}/predictions/{sequence}/explanation` | UUID replay ID, positive durable prediction-event sequence, JSON `{question:"", use_provider:false}` | `copilot-explanation-1.0.0`; immutable prediction and its captured episode state |
+| `POST /predictions/{id}/explanation` | UUID saved synchronous prediction ID, same JSON | Same explanation; episode state `unknown` because synchronous predictions do not track episodes |
+| `GET /copilot/sources/{source_id}` | Curated source ID | Licensed attributed local paraphrase, original URL/section, license URL and content checksum |
+
+Questions are bounded to 500 characters. `use_provider` is a strict Boolean, default false; client-supplied predictions, readings, overrides, labels and credentials are forbidden. Supported question intents cover alert explanation, readings, missing observations, confidence and trends. Unsupported diagnoses, procedures and instructions receive `status=abstained`. No control tools exist.
+
+Responses separate `observations`, `prediction`, `possible_interpretations` and `limitations`, each with evidence/citation IDs. Status is `fallback`, `provider` or `abstained`; `reason` states provider failure/disablement/budget exhaustion or unsupported evidence/question. Responses include allowlisted evidence and hash, prompt/knowledge version, provider/model, creation time, cache status and nullable token usage. Historical playback, diagnostic-only and rejected-monitoring indicators are mandatory.
+
+Packet-local IDs `e1..e27` resolve to named sensor entries; `p1` identifies decision/score/threshold, `m1` model/scope, `w1` causal window/coverage/time basis, `r1` episode-at-prediction and `h1` historical playback/origin. Latest means the final row, including null. Trend is OLS against elapsed seconds using finite observations in that same window, not physical causality or feature attribution.
+
+Before explanation, the server verifies the exact raw-window checksum, model/source/preprocessing binding, timestamps, all 27 saved means, units and missing fractions. No inference or ground-truth read occurs. Conflicting saved evidence returns 409 `EVIDENCE_CONFLICT` without a provider call. Missing resources return 404, invalid input 422, unavailable dependencies 503 and two-slot saturation 429. Provider failure returns a successful deterministic response with an explicit reason.
+
+Provider input contains selected approved facts, safe question intent and reviewed retrieved context, never the full prediction/provenance, raw question, targets or future episode state. The provider selects approved claim/citation IDs; Python renders values. Cache keys bind evidence, question, provider mode/model, knowledge and prompt version. Paid reservations persist across restart. Default provider is disabled; at most two lifetime attempts, no retries or automatic UI calls. See [COPILOT.md](COPILOT.md).
+
 ## Phase 8 dashboard additions
 
 The React/TypeScript consumer generates API types from [OpenAPI](openapi.json), uses a local same-origin `/api` proxy, and preserves the existing diagnostic/replay schemas. Additive read-only endpoints are:

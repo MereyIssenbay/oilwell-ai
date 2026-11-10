@@ -1,0 +1,552 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "Claim": {
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {
+          "title": "Claim Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "citation_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Citation Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "claim_id",
+        "text",
+        "evidence_ids"
+      ],
+      "title": "Claim",
+      "type": "object"
+    },
+    "EvidencePacket": {
+      "additionalProperties": false,
+      "properties": {
+        "packet_version": {
+          "const": "copilot-evidence-1.0.0",
+          "default": "copilot-evidence-1.0.0",
+          "title": "Packet Version",
+          "type": "string"
+        },
+        "model_version": {
+          "pattern": "^[a-zA-Z0-9_.-]{1,100}$",
+          "title": "Model Version",
+          "type": "string"
+        },
+        "event_type": {
+          "enum": [
+            "normal",
+            "undesirable_event",
+            "unknown"
+          ],
+          "title": "Event Type",
+          "type": "string"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Confidence"
+        },
+        "abnormal_score": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Abnormal Score"
+        },
+        "threshold": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Threshold",
+          "type": "number"
+        },
+        "calibration": {
+          "const": "uncalibrated",
+          "default": "uncalibrated",
+          "title": "Calibration",
+          "type": "string"
+        },
+        "alert_status": {
+          "enum": [
+            "normal",
+            "alert",
+            "insufficient_data"
+          ],
+          "title": "Alert Status",
+          "type": "string"
+        },
+        "episode_state": {
+          "default": "none",
+          "enum": [
+            "none",
+            "open",
+            "resolved",
+            "unknown"
+          ],
+          "title": "Episode State",
+          "type": "string"
+        },
+        "source_origin": {
+          "default": "real",
+          "enum": [
+            "real",
+            "simulated",
+            "drawn"
+          ],
+          "title": "Source Origin",
+          "type": "string"
+        },
+        "source_time_basis": {
+          "const": "source_naive_assumed_utc",
+          "default": "source_naive_assumed_utc",
+          "title": "Source Time Basis",
+          "type": "string"
+        },
+        "window_start": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?$",
+          "title": "Window Start",
+          "type": "string"
+        },
+        "window_end": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?$",
+          "title": "Window End",
+          "type": "string"
+        },
+        "sample_count": {
+          "maximum": 60,
+          "minimum": 1,
+          "title": "Sample Count",
+          "type": "integer"
+        },
+        "expected_sample_count": {
+          "const": 60,
+          "default": 60,
+          "title": "Expected Sample Count",
+          "type": "integer"
+        },
+        "sensors": {
+          "items": {
+            "$ref": "#/$defs/SensorEvidence"
+          },
+          "maxItems": 27,
+          "title": "Sensors",
+          "type": "array"
+        },
+        "integrity": {
+          "default": "verified",
+          "enum": [
+            "verified",
+            "conflicting"
+          ],
+          "title": "Integrity",
+          "type": "string"
+        },
+        "abstention_reason": {
+          "anyOf": [
+            {
+              "enum": [
+                "insufficient_history",
+                "missing_required_sensors"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Abstention Reason"
+        }
+      },
+      "required": [
+        "model_version",
+        "event_type",
+        "confidence",
+        "abnormal_score",
+        "threshold",
+        "alert_status",
+        "window_start",
+        "window_end",
+        "sample_count",
+        "sensors"
+      ],
+      "title": "EvidencePacket",
+      "type": "object"
+    },
+    "SensorEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "pattern": "^e[0-9]{1,3}$",
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "sensor": {
+          "maxLength": 30,
+          "title": "Sensor",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "maxLength": 80,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Unit"
+        },
+        "mean": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Mean"
+        },
+        "latest": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Latest"
+        },
+        "trend_per_second": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Trend Per Second"
+        },
+        "missing_fraction": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Missing Fraction",
+          "type": "number"
+        },
+        "observed_count": {
+          "maximum": 60,
+          "minimum": 0,
+          "title": "Observed Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "sensor",
+        "unit",
+        "mean",
+        "latest",
+        "trend_per_second",
+        "missing_fraction",
+        "observed_count"
+      ],
+      "title": "SensorEvidence",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "section": {
+          "title": "Section",
+          "type": "string"
+        },
+        "attribution": {
+          "title": "Attribution",
+          "type": "string"
+        },
+        "license": {
+          "title": "License",
+          "type": "string"
+        },
+        "license_url": {
+          "title": "License Url",
+          "type": "string"
+        },
+        "accessed_at": {
+          "title": "Accessed At",
+          "type": "string"
+        },
+        "content": {
+          "title": "Content",
+          "type": "string"
+        },
+        "content_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Content Sha256",
+          "type": "string"
+        },
+        "content_kind": {
+          "const": "curated_paraphrase",
+          "default": "curated_paraphrase",
+          "title": "Content Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "title",
+        "url",
+        "section",
+        "attribution",
+        "license",
+        "license_url",
+        "accessed_at",
+        "content",
+        "content_sha256"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "TokenUsage": {
+      "additionalProperties": false,
+      "properties": {
+        "input_tokens": {
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "input_tokens",
+        "output_tokens"
+      ],
+      "title": "TokenUsage",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "copilot-explanation-1.0.0",
+      "default": "copilot-explanation-1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "fallback",
+        "provider",
+        "abstained"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "reason": {
+      "enum": [
+        "deterministic_requested",
+        "provider_disabled",
+        "provider_unavailable",
+        "provider_invalid",
+        "budget_exhausted",
+        "unsupported_question",
+        "missing_evidence",
+        "conflicting_evidence",
+        "provider_refusal",
+        "provider_selected"
+      ],
+      "title": "Reason",
+      "type": "string"
+    },
+    "historical_replay": {
+      "const": true,
+      "default": true,
+      "title": "Historical Replay",
+      "type": "boolean"
+    },
+    "diagnostic_only": {
+      "const": true,
+      "default": true,
+      "title": "Diagnostic Only",
+      "type": "boolean"
+    },
+    "accepted_for_monitoring": {
+      "const": false,
+      "default": false,
+      "title": "Accepted For Monitoring",
+      "type": "boolean"
+    },
+    "observations": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Observations",
+      "type": "array"
+    },
+    "prediction": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Prediction",
+      "type": "array"
+    },
+    "possible_interpretations": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Possible Interpretations",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "$ref": "#/$defs/Claim"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "abstention": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Abstention"
+    },
+    "citations": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "title": "Citations",
+      "type": "array"
+    },
+    "evidence": {
+      "$ref": "#/$defs/EvidencePacket"
+    },
+    "evidence_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Evidence Hash",
+      "type": "string"
+    },
+    "prompt_version": {
+      "const": "claim-selection-1.0.0",
+      "default": "claim-selection-1.0.0",
+      "title": "Prompt Version",
+      "type": "string"
+    },
+    "kb_version": {
+      "title": "Kb Version",
+      "type": "string"
+    },
+    "provider": {
+      "default": "none",
+      "enum": [
+        "none",
+        "openai"
+      ],
+      "title": "Provider",
+      "type": "string"
+    },
+    "provider_model": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Provider Model"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "cached": {
+      "default": false,
+      "title": "Cached",
+      "type": "boolean"
+    },
+    "usage": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TokenUsage"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "status",
+    "reason",
+    "observations",
+    "prediction",
+    "possible_interpretations",
+    "limitations",
+    "abstention",
+    "citations",
+    "evidence",
+    "evidence_hash",
+    "kb_version",
+    "created_at"
+  ],
+  "title": "Explanation",
+  "type": "object"
+}

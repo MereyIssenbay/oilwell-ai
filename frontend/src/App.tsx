@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type ReactNode } from 'react';
 import type { Data } from 'plotly.js';
 import { api, ApiError, type Schema, type Replay, type Prediction, type Telemetry, type EpisodeEvent, type ReplayEvent } from './api/client';
 import { ErrorPanel, Empty, LatestPrediction, Loading, Panel, Plot, Stat, Status } from './components';
+import { CopilotPanel } from './CopilotPanel';
 import { useMutation } from './mutations';
 import { EVENT_LIMIT, score, sourceTime, terminal, useReplay, useResource } from './state';
 
@@ -74,6 +75,7 @@ export default function App() {
             <Panel title="Replay controller" kicker="One active session at a time" action={snapshot && <Status value={snapshot.state} />}>{sessionSelect}<ErrorPanel error={sessions.error} retry={sessions.retry} /><ErrorPanel error={replay.error} retry={replay.refresh} />{snapshot ? <ReplayControls key={snapshot.replay_id} snapshot={snapshot} onChanged={refreshed} onRefresh={replay.refresh} /> : <Empty>{replayId ? 'Loading selected replay…' : 'Create a replay or select an existing session.'}</Empty>}</Panel>
             <div className="stream-bar"><span className={`stream-dot ${replay.connection === 'connected' ? 'connected' : ''}`} /><strong>{replay.connection.replaceAll('_', ' ')}</strong><span>SSE · ordered durable events</span><span className="push-right">Showing up to {EVENT_LIMIT.toLocaleString()} recent events · source timezone unverified</span></div>
             <div className="main-grid">{chart}<Panel title="Latest prediction" kicker="Uncalibrated diagnostic score"><LatestPrediction value={latestPrediction} /></Panel></div>
+            <CopilotPanel key={replayId ?? 'no-replay'} replayId={replayId} events={history} />
             <Panel title="Predicted vs actual" kicker="Retrospective evaluation only"><Comparison snapshot={snapshot} /></Panel>
           </>}
           {page === 'alerts' && <Alerts sessionSelect={sessionSelect} snapshot={snapshot} events={history} error={replay.error} retry={replay.refresh} />}

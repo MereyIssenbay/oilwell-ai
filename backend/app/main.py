@@ -106,7 +106,7 @@ class RequestBoundary:
 
 
 def create_app(settings: Settings | None = None, *, runtime=None, registry=None, repository=None,
-               replay_repository=None, replay_worker_enabled: bool = True) -> FastAPI:
+               replay_repository=None, replay_worker_enabled: bool = True, copilot_service=None) -> FastAPI:
     settings = settings or Settings.from_environment()
     if registry is None:
         from backend.app.registry import Registry
@@ -156,6 +156,8 @@ def create_app(settings: Settings | None = None, *, runtime=None, registry=None,
     app.state.registry = registry
     app.state.repository = repository
     app.state.settings = settings
+    app.state.copilot_service = copilot_service
+    app.state.copilot_init_lock = threading.Lock()
     app.add_middleware(RequestBoundary, max_bytes=settings.max_request_bytes)
 
     @app.exception_handler(ServiceError)
@@ -250,6 +252,8 @@ def create_app(settings: Settings | None = None, *, runtime=None, registry=None,
     app.include_router(replay_router(app))
     from backend.app.dashboard import dashboard_router
     app.include_router(dashboard_router(app))
+    from backend.app.copilot import copilot_router
+    app.include_router(copilot_router(app))
     return app
 
 

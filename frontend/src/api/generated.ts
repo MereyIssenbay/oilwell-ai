@@ -260,6 +260,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/replays/{id}/predictions/{sequence}/explanation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Replay Explanation */
+        post: operations["replay_explanation_replays__id__predictions__sequence__explanation_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/predictions/{id}/explanation": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Prediction Explanation */
+        post: operations["prediction_explanation_predictions__id__explanation_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/copilot/sources/{source_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Source Content */
+        get: operations["source_content_copilot_sources__source_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -333,6 +384,17 @@ export interface components {
             items: components["schemas"]["Alert"][];
             /** Next Cursor */
             next_cursor: string | null;
+        };
+        /** Claim */
+        Claim: {
+            /** Claim Id */
+            claim_id: string;
+            /** Text */
+            text: string;
+            /** Evidence Ids */
+            evidence_ids: string[];
+            /** Citation Ids */
+            citation_ids?: string[];
         };
         /** CreateReplay */
         CreateReplay: {
@@ -408,7 +470,7 @@ export interface components {
              */
             accepted_for_monitoring: false;
             /** Sensor Evidence */
-            sensor_evidence: components["schemas"]["SensorEvidence"][];
+            sensor_evidence: components["schemas"]["backend__app__schemas__SensorEvidence"][];
             /**
              * Alert Status
              * @enum {string}
@@ -497,6 +559,79 @@ export interface components {
         ErrorResponse: {
             error: components["schemas"]["ErrorDetail"];
         };
+        /** EvidencePacket */
+        EvidencePacket: {
+            /**
+             * Packet Version
+             * @default copilot-evidence-1.0.0
+             * @constant
+             */
+            packet_version: "copilot-evidence-1.0.0";
+            /** Model Version */
+            model_version: string;
+            /**
+             * Event Type
+             * @enum {string}
+             */
+            event_type: "normal" | "undesirable_event" | "unknown";
+            /** Confidence */
+            confidence: number | null;
+            /** Abnormal Score */
+            abnormal_score: number | null;
+            /** Threshold */
+            threshold: number;
+            /**
+             * Calibration
+             * @default uncalibrated
+             * @constant
+             */
+            calibration: "uncalibrated";
+            /**
+             * Alert Status
+             * @enum {string}
+             */
+            alert_status: "normal" | "alert" | "insufficient_data";
+            /**
+             * Episode State
+             * @default none
+             * @enum {string}
+             */
+            episode_state: "none" | "open" | "resolved" | "unknown";
+            /**
+             * Source Origin
+             * @default real
+             * @enum {string}
+             */
+            source_origin: "real" | "simulated" | "drawn";
+            /**
+             * Source Time Basis
+             * @default source_naive_assumed_utc
+             * @constant
+             */
+            source_time_basis: "source_naive_assumed_utc";
+            /** Window Start */
+            window_start: string;
+            /** Window End */
+            window_end: string;
+            /** Sample Count */
+            sample_count: number;
+            /**
+             * Expected Sample Count
+             * @default 60
+             * @constant
+             */
+            expected_sample_count: 60;
+            /** Sensors */
+            sensors: components["schemas"]["llm__schemas__SensorEvidence"][];
+            /**
+             * Integrity
+             * @default verified
+             * @enum {string}
+             */
+            integrity: "verified" | "conflicting";
+            /** Abstention Reason */
+            abstention_reason?: ("insufficient_history" | "missing_required_sensors") | null;
+        };
         /** Execution */
         Execution: {
             /**
@@ -510,6 +645,98 @@ export interface components {
              * Format: date-time
              */
             generated_at: string;
+        };
+        /** Explanation */
+        Explanation: {
+            /**
+             * Schema Version
+             * @default copilot-explanation-1.0.0
+             * @constant
+             */
+            schema_version: "copilot-explanation-1.0.0";
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "fallback" | "provider" | "abstained";
+            /**
+             * Reason
+             * @enum {string}
+             */
+            reason: "deterministic_requested" | "provider_disabled" | "provider_unavailable" | "provider_invalid" | "budget_exhausted" | "unsupported_question" | "missing_evidence" | "conflicting_evidence" | "provider_refusal" | "provider_selected";
+            /**
+             * Historical Replay
+             * @default true
+             * @constant
+             */
+            historical_replay: true;
+            /**
+             * Diagnostic Only
+             * @default true
+             * @constant
+             */
+            diagnostic_only: true;
+            /**
+             * Accepted For Monitoring
+             * @default false
+             * @constant
+             */
+            accepted_for_monitoring: false;
+            /** Observations */
+            observations: components["schemas"]["Claim"][];
+            /** Prediction */
+            prediction: components["schemas"]["Claim"][];
+            /** Possible Interpretations */
+            possible_interpretations: components["schemas"]["Claim"][];
+            /** Limitations */
+            limitations: components["schemas"]["Claim"][];
+            /** Abstention */
+            abstention: string | null;
+            /** Citations */
+            citations: components["schemas"]["Source"][];
+            evidence: components["schemas"]["EvidencePacket"];
+            /** Evidence Hash */
+            evidence_hash: string;
+            /**
+             * Prompt Version
+             * @default claim-selection-1.0.0
+             * @constant
+             */
+            prompt_version: "claim-selection-1.0.0";
+            /** Kb Version */
+            kb_version: string;
+            /**
+             * Provider
+             * @default none
+             * @enum {string}
+             */
+            provider: "none" | "openai";
+            /** Provider Model */
+            provider_model?: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Cached
+             * @default false
+             */
+            cached: boolean;
+            usage?: components["schemas"]["TokenUsage"] | null;
+        };
+        /** ExplanationRequest */
+        ExplanationRequest: {
+            /**
+             * Question
+             * @default
+             */
+            question: string;
+            /**
+             * Use Provider
+             * @default false
+             */
+            use_provider: boolean;
         };
         /** Health */
         Health: {
@@ -1255,41 +1482,6 @@ export interface components {
             /** Unit Or Domain */
             unit_or_domain: string;
         };
-        /** SensorEvidence */
-        SensorEvidence: {
-            /** Evidence Id */
-            evidence_id: string;
-            /** Sensor Name */
-            sensor_name: string;
-            /**
-             * Statistic
-             * @default mean
-             * @constant
-             */
-            statistic: "mean";
-            /** Value */
-            value: number | null;
-            /** Unit */
-            unit: string;
-            /**
-             * Window Start
-             * Format: date-time
-             */
-            window_start: string;
-            /**
-             * Window End
-             * Format: date-time
-             */
-            window_end: string;
-            /** Missing Fraction */
-            missing_fraction: number;
-            /**
-             * Method
-             * @default observed_summary
-             * @constant
-             */
-            method: "observed_summary";
-        };
         /** SensorSample */
         SensorSample: {
             /** Timestamp */
@@ -1298,6 +1490,35 @@ export interface components {
             sensors: {
                 [key: string]: number | null;
             };
+        };
+        /** Source */
+        Source: {
+            /** Source Id */
+            source_id: string;
+            /** Title */
+            title: string;
+            /** Url */
+            url: string;
+            /** Section */
+            section: string;
+            /** Attribution */
+            attribution: string;
+            /** License */
+            license: string;
+            /** License Url */
+            license_url: string;
+            /** Accessed At */
+            accessed_at: string;
+            /** Content */
+            content: string;
+            /** Content Sha256 */
+            content_sha256: string;
+            /**
+             * Content Kind
+             * @default curated_paraphrase
+             * @constant
+             */
+            content_kind: "curated_paraphrase";
         };
         /** SourceInfo */
         SourceInfo: {
@@ -1347,6 +1568,13 @@ export interface components {
             sensors: {
                 [key: string]: number | null;
             };
+        };
+        /** TokenUsage */
+        TokenUsage: {
+            /** Input Tokens */
+            input_tokens: number;
+            /** Output Tokens */
+            output_tokens: number;
         };
         /** WellInfo */
         WellInfo: {
@@ -1400,6 +1628,60 @@ export interface components {
              * @constant
              */
             expected_sample_count: 60;
+        };
+        /** SensorEvidence */
+        backend__app__schemas__SensorEvidence: {
+            /** Evidence Id */
+            evidence_id: string;
+            /** Sensor Name */
+            sensor_name: string;
+            /**
+             * Statistic
+             * @default mean
+             * @constant
+             */
+            statistic: "mean";
+            /** Value */
+            value: number | null;
+            /** Unit */
+            unit: string;
+            /**
+             * Window Start
+             * Format: date-time
+             */
+            window_start: string;
+            /**
+             * Window End
+             * Format: date-time
+             */
+            window_end: string;
+            /** Missing Fraction */
+            missing_fraction: number;
+            /**
+             * Method
+             * @default observed_summary
+             * @constant
+             */
+            method: "observed_summary";
+        };
+        /** SensorEvidence */
+        llm__schemas__SensorEvidence: {
+            /** Evidence Id */
+            evidence_id: string;
+            /** Sensor */
+            sensor: string;
+            /** Unit */
+            unit: string | null;
+            /** Mean */
+            mean: number | null;
+            /** Latest */
+            latest: number | null;
+            /** Trend Per Second */
+            trend_per_second: number | null;
+            /** Missing Fraction */
+            missing_fraction: number;
+            /** Observed Count */
+            observed_count: number;
         };
     };
     responses: never;
@@ -2596,6 +2878,243 @@ export interface operations {
             };
             /** @description Unprocessable Content */
             422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    replay_explanation_replays__id__predictions__sequence__explanation_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+                sequence: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ExplanationRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Explanation"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    prediction_explanation_predictions__id__explanation_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ExplanationRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Explanation"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Service Unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    source_content_copilot_sources__source_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                source_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Source"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Content */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+            /** @description Too Many Requests */
+            429: {
                 headers: {
                     [name: string]: unknown;
                 };

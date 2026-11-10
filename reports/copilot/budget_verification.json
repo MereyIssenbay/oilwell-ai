@@ -1,0 +1,15 @@
+{
+  "reserved_attempts": 2,
+  "hard_limit": 2,
+  "further_request_reason": "budget_exhausted",
+  "additional_reservations": 0,
+  "successful_request_tokens": {
+    "input_tokens": 1331,
+    "output_tokens": 78
+  },
+  "successful_request_estimated_usd": 0.00017209999999999998,
+  "first_attempt_tokens_and_billing": "unknown: unavailable before usage received",
+  "account_balance_checked": false,
+  "pricing_basis": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+  "pricing_observed_date": "2026-11-10"
+}

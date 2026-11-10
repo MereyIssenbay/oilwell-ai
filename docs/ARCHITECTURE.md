@@ -94,6 +94,14 @@ Later Docker Compose will run frontend, API, replay worker and PostgreSQL; raw d
 
 Track replay lag, worker heartbeat, inference duration, queue/event backlog, invalid windows, explanation fallback rate and API errors. These are future measurements, not existing dashboards. Demo acceptance must include a worker restart, an SSE reconnect, disabled-provider fallback and a clean database recreation using migrations.
 
+## Phase 9 implemented explanation flow
+
+FastAPI retrieves an immutable PostgreSQL prediction or replay event, verifies source/model binding and exact trailing-window checksum, and constructs an allowlisted packet. It never executes inference for an explanation. Actual sensor summaries, endpoint readings, causal OLS trends, binary prediction/score/model version and episode-at-prediction are included; labels and future observations are excluded.
+
+The local `llm/` service retrieves reviewed licensed context with deterministic lexical ranking. Approved templates separate observation, prediction and general possible interpretation. An optional server-only provider selects claim/citation IDs under strict JSON; Python validates them and renders factual values. Unsupported questions, missing/conflicting evidence and provider failure produce explicit abstention/fallback. No controls or external tools are exposed.
+
+A bounded one-hour SQLite cache under ignored `.local/copilot/` stores explanations and a persistent conservative paid-call counter. PostgreSQL remains authoritative for predictions/alerts/replay. The provider is disabled by default; paid requests require explicit UI opt-in, bounded tokens/time, no retries and at most two lifetime attempts. This remains a loopback historical demo with rejected-model disclosure. See [COPILOT.md](COPILOT.md).
+
 ## Repository layout
 
 Phase 0 established documentation/configuration and ownership placeholders. Phase 1 adds root data scripts, manifests, raw sources, reports and acquisition/validation tests. Folders below define implementation boundaries; they do not indicate completed application services.

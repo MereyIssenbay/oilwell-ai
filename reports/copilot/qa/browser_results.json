@@ -1,0 +1,60 @@
+{
+  "base_url": "http://127.0.0.1:5173",
+  "replay_id": "5a725349-e2c3-42e9-9dd3-4204ddd3ee7c",
+  "paid_provider_calls": 0,
+  "checks": [
+    {
+      "name": "Panel binds a saved prediction and defaults to no paid request",
+      "status": "passed"
+    },
+    {
+      "name": "Explicit Explain alert returns actual saved score and distinct categories",
+      "status": "passed"
+    },
+    {
+      "name": "Every displayed sensor summary binds actual causal telemetry and persisted means",
+      "status": "passed"
+    },
+    {
+      "name": "Evidence references expand exact records without navigating away",
+      "status": "passed"
+    },
+    {
+      "name": "Citation passages resolve to locally stored licensed content with exact hashes",
+      "status": "passed"
+    },
+    {
+      "name": "Repeated default request uses cached explanation without a provider",
+      "status": "passed"
+    },
+    {
+      "name": "Unsupported diagnosis and injected command yield explicit abstention",
+      "status": "passed"
+    },
+    {
+      "name": "Approved missing-data question preserves nulls and unsupported counts",
+      "status": "passed"
+    },
+    {
+      "name": "Failed endpoint displays error and deliberate retry recovers",
+      "status": "passed"
+    },
+    {
+      "name": "Mobile layout remains readable and does not overflow",
+      "status": "passed"
+    },
+    {
+      "name": "No browser errors, provider requests, automatic charges or markup injection",
+      "status": "passed"
+    }
+  ],
+  "failures": [],
+  "screenshots": [
+    "reports/copilot/qa/copilot-desktop.png",
+    "reports/copilot/qa/copilot-mobile.png"
+  ],
+  "prediction_sequence": 91,
+  "source_position": 3619,
+  "explanation_requests": 6,
+  "browser_errors": []
+}

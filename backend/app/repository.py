@@ -59,6 +59,18 @@ class PostgresRepository:
         except Exception:
             return False
 
+    def get_prediction(self, prediction_id) -> DiagnosticPrediction:
+        import psycopg
+        try:
+            with self._connect() as connection:
+                row = connection.execute("SELECT payload FROM oilwell_predictions WHERE prediction_id=%s",
+                                         (str(prediction_id),)).fetchone()
+            if row is None:
+                raise ServiceError("PREDICTION_NOT_FOUND", "Saved prediction not found", 404)
+            return DiagnosticPrediction.model_validate(row[0])
+        except psycopg.Error as exc:
+            raise ServiceError("DATABASE_UNAVAILABLE", "Database is unavailable", 503) from exc
+
     def get_or_create(self, key: str, request_hash: str,
                       build: PredictionFactory) -> tuple[DiagnosticPrediction, bool]:
         import psycopg
@@ -127,6 +139,13 @@ class MemoryRepository:
 
     def health(self) -> bool:
         return True
+
+    def get_prediction(self, prediction_id) -> DiagnosticPrediction:
+        with self._lock:
+            for _, value in self.predictions.values():
+                if value["prediction_id"] == str(prediction_id):
+                    return DiagnosticPrediction.model_validate(deepcopy(value))
+        raise ServiceError("PREDICTION_NOT_FOUND", "Saved prediction not found", 404)
 
     def get_or_create(self, key: str, request_hash: str,
                       build: PredictionFactory) -> tuple[DiagnosticPrediction, bool]:

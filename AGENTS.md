@@ -2,7 +2,7 @@
 
 ## Phase gate and source of truth
 
-- Current authorization: **Phase 8 frontend dashboard**, explicitly approved by the user: React/TypeScript/Plotly five-page dashboard, real typed API integration, historical replay controls/charts/history, retrospective comparison, responsive industrial theme, frontend/UI tests and local demonstration. Minimal additive backend catalog/evaluation endpoints are authorized for these flows. Preserve frozen model/threshold/test evidence; no retraining, acquisition, test re-inference, LLM copilot or public deployment. Stop after Phase 8.
+- Current authorization: **Phase 9 evidence-grounded copilot**, explicitly approved by the user: bounded server-side provider, deterministic fallback, cited licensed local knowledge, saved-alert evidence integration, frontend panel and grounding/security evaluation. Preserve frozen model/threshold/test evidence; no retraining, acquisition, test re-inference, physical controls or public deployment. Paid API usage must be economical and explicitly bounded. Stop after Phase 9.
 - Do not download, clone, sample, or ingest the 3W telemetry, train models, install application services, or implement product features during Phase 0. Reading upstream documentation and metadata is allowed.
 - Read `docs/PROGRESS.md`, `docs/DECISIONS.md`, and the relevant contract before work. Record unresolved assumptions instead of silently converting them into facts.
 - Upstream dataset metadata and a pinned acquisition manifest govern ingestion. Never assume the historical CSV/eight-sensor layout. Preserve original names, labels, units, time semantics, origins, and source checksums.

@@ -1,5 +1,5 @@
 import { afterEach, expect, it, vi } from 'vitest';
-import { ApiError, mutation, request } from './client';
+import { api, ApiError, mutation, request } from './client';
 afterEach(() => vi.unstubAllGlobals());
 it('retains identical mutation payload and idempotency key across retries', async () => {
   const fetch = vi.fn().mockResolvedValue(new Response(JSON.stringify({ state: 'created' }), { status: 200 }));
@@ -24,4 +24,12 @@ it('shows a connection error without exposing underlying transport details', asy
 it('rejects unreadable responses rather than inventing data', async () => {
   vi.stubGlobal('fetch', vi.fn(async () => new Response('<html>not JSON</html>', { status: 200 })));
   await expect(request('/wells')).rejects.toMatchObject({ code: 'INVALID_RESPONSE' });
+});
+it('sends only a question and explicit provider choice for a persisted prediction', async () => {
+  const fetch = vi.fn<typeof globalThis.fetch>(async () => new Response('{}', { status: 200 }));
+  vi.stubGlobal('fetch', fetch);
+  await api.explain('fixture/replay', 19, { question: 'Explain this alert', use_provider: false });
+  expect(fetch.mock.calls[0][0]).toBe('/api/replays/fixture%2Freplay/predictions/19/explanation');
+  expect(fetch.mock.calls[0][1]?.method).toBe('POST');
+  expect(JSON.parse(fetch.mock.calls[0][1]?.body as string)).toEqual({ question: 'Explain this alert', use_provider: false });
 });

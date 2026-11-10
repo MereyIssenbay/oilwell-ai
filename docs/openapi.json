@@ -1691,6 +1691,315 @@
           }
         }
       }
+    },
+    "/replays/{id}/predictions/{sequence}/explanation": {
+      "post": {
+        "tags": [
+          "copilot"
+        ],
+        "summary": "Replay Explanation",
+        "operationId": "replay_explanation_replays__id__predictions__sequence__explanation_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          },
+          {
+            "name": "sequence",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "title": "Sequence"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExplanationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Explanation"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/predictions/{id}/explanation": {
+      "post": {
+        "tags": [
+          "copilot"
+        ],
+        "summary": "Prediction Explanation",
+        "operationId": "prediction_explanation_predictions__id__explanation_post",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExplanationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Explanation"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/copilot/sources/{source_id}": {
+      "get": {
+        "tags": [
+          "copilot"
+        ],
+        "summary": "Source Content",
+        "operationId": "source_content_copilot_sources__source_id__get",
+        "parameters": [
+          {
+            "name": "source_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[a-z0-9-]{1,64}$",
+              "title": "Source Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Source"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Too Many Requests"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1815,6 +2124,40 @@
           "next_cursor"
         ],
         "title": "AlertPage"
+      },
+      "Claim": {
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "title": "Claim Id"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          },
+          "evidence_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Evidence Ids"
+          },
+          "citation_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Citation Ids"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "claim_id",
+          "text",
+          "evidence_ids"
+        ],
+        "title": "Claim"
       },
       "CreateReplay": {
         "properties": {
@@ -1967,7 +2310,7 @@
           },
           "sensor_evidence": {
             "items": {
-              "$ref": "#/components/schemas/SensorEvidence"
+              "$ref": "#/components/schemas/backend__app__schemas__SensorEvidence"
             },
             "type": "array",
             "maxItems": 27,
@@ -2162,6 +2505,173 @@
         ],
         "title": "ErrorResponse"
       },
+      "EvidencePacket": {
+        "properties": {
+          "packet_version": {
+            "type": "string",
+            "const": "copilot-evidence-1.0.0",
+            "title": "Packet Version",
+            "default": "copilot-evidence-1.0.0"
+          },
+          "model_version": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]{1,100}$",
+            "title": "Model Version"
+          },
+          "event_type": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "undesirable_event",
+              "unknown"
+            ],
+            "title": "Event Type"
+          },
+          "confidence": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Confidence"
+          },
+          "abnormal_score": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abnormal Score"
+          },
+          "threshold": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Threshold"
+          },
+          "calibration": {
+            "type": "string",
+            "const": "uncalibrated",
+            "title": "Calibration",
+            "default": "uncalibrated"
+          },
+          "alert_status": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "alert",
+              "insufficient_data"
+            ],
+            "title": "Alert Status"
+          },
+          "episode_state": {
+            "type": "string",
+            "enum": [
+              "none",
+              "open",
+              "resolved",
+              "unknown"
+            ],
+            "title": "Episode State",
+            "default": "none"
+          },
+          "source_origin": {
+            "type": "string",
+            "enum": [
+              "real",
+              "simulated",
+              "drawn"
+            ],
+            "title": "Source Origin",
+            "default": "real"
+          },
+          "source_time_basis": {
+            "type": "string",
+            "const": "source_naive_assumed_utc",
+            "title": "Source Time Basis",
+            "default": "source_naive_assumed_utc"
+          },
+          "window_start": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?$",
+            "title": "Window Start"
+          },
+          "window_end": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?$",
+            "title": "Window End"
+          },
+          "sample_count": {
+            "type": "integer",
+            "maximum": 60.0,
+            "minimum": 1.0,
+            "title": "Sample Count"
+          },
+          "expected_sample_count": {
+            "type": "integer",
+            "const": 60,
+            "title": "Expected Sample Count",
+            "default": 60
+          },
+          "sensors": {
+            "items": {
+              "$ref": "#/components/schemas/llm__schemas__SensorEvidence"
+            },
+            "type": "array",
+            "maxItems": 27,
+            "title": "Sensors"
+          },
+          "integrity": {
+            "type": "string",
+            "enum": [
+              "verified",
+              "conflicting"
+            ],
+            "title": "Integrity",
+            "default": "verified"
+          },
+          "abstention_reason": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "insufficient_history",
+                  "missing_required_sensors"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abstention Reason"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "model_version",
+          "event_type",
+          "confidence",
+          "abnormal_score",
+          "threshold",
+          "alert_status",
+          "window_start",
+          "window_end",
+          "sample_count",
+          "sensors"
+        ],
+        "title": "EvidencePacket"
+      },
       "Execution": {
         "properties": {
           "mode": {
@@ -2182,6 +2692,198 @@
           "generated_at"
         ],
         "title": "Execution"
+      },
+      "Explanation": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "copilot-explanation-1.0.0",
+            "title": "Schema Version",
+            "default": "copilot-explanation-1.0.0"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "fallback",
+              "provider",
+              "abstained"
+            ],
+            "title": "Status"
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "deterministic_requested",
+              "provider_disabled",
+              "provider_unavailable",
+              "provider_invalid",
+              "budget_exhausted",
+              "unsupported_question",
+              "missing_evidence",
+              "conflicting_evidence",
+              "provider_refusal",
+              "provider_selected"
+            ],
+            "title": "Reason"
+          },
+          "historical_replay": {
+            "type": "boolean",
+            "const": true,
+            "title": "Historical Replay",
+            "default": true
+          },
+          "diagnostic_only": {
+            "type": "boolean",
+            "const": true,
+            "title": "Diagnostic Only",
+            "default": true
+          },
+          "accepted_for_monitoring": {
+            "type": "boolean",
+            "const": false,
+            "title": "Accepted For Monitoring",
+            "default": false
+          },
+          "observations": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "type": "array",
+            "title": "Observations"
+          },
+          "prediction": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "type": "array",
+            "title": "Prediction"
+          },
+          "possible_interpretations": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "type": "array",
+            "title": "Possible Interpretations"
+          },
+          "limitations": {
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            },
+            "type": "array",
+            "title": "Limitations"
+          },
+          "abstention": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abstention"
+          },
+          "citations": {
+            "items": {
+              "$ref": "#/components/schemas/Source"
+            },
+            "type": "array",
+            "title": "Citations"
+          },
+          "evidence": {
+            "$ref": "#/components/schemas/EvidencePacket"
+          },
+          "evidence_hash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Evidence Hash"
+          },
+          "prompt_version": {
+            "type": "string",
+            "const": "claim-selection-1.0.0",
+            "title": "Prompt Version",
+            "default": "claim-selection-1.0.0"
+          },
+          "kb_version": {
+            "type": "string",
+            "title": "Kb Version"
+          },
+          "provider": {
+            "type": "string",
+            "enum": [
+              "none",
+              "openai"
+            ],
+            "title": "Provider",
+            "default": "none"
+          },
+          "provider_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Provider Model"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "cached": {
+            "type": "boolean",
+            "title": "Cached",
+            "default": false
+          },
+          "usage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TokenUsage"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "reason",
+          "observations",
+          "prediction",
+          "possible_interpretations",
+          "limitations",
+          "abstention",
+          "citations",
+          "evidence",
+          "evidence_hash",
+          "kb_version",
+          "created_at"
+        ],
+        "title": "Explanation"
+      },
+      "ExplanationRequest": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "maxLength": 500,
+            "title": "Question",
+            "default": ""
+          },
+          "use_provider": {
+            "type": "boolean",
+            "title": "Use Provider",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ExplanationRequest"
       },
       "Health": {
         "properties": {
@@ -3617,73 +4319,6 @@
         ],
         "title": "SensorDescription"
       },
-      "SensorEvidence": {
-        "properties": {
-          "evidence_id": {
-            "type": "string",
-            "title": "Evidence Id"
-          },
-          "sensor_name": {
-            "type": "string",
-            "title": "Sensor Name"
-          },
-          "statistic": {
-            "type": "string",
-            "const": "mean",
-            "title": "Statistic",
-            "default": "mean"
-          },
-          "value": {
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Value"
-          },
-          "unit": {
-            "type": "string",
-            "title": "Unit"
-          },
-          "window_start": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Window Start"
-          },
-          "window_end": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Window End"
-          },
-          "missing_fraction": {
-            "type": "number",
-            "maximum": 1.0,
-            "minimum": 0.0,
-            "title": "Missing Fraction"
-          },
-          "method": {
-            "type": "string",
-            "const": "observed_summary",
-            "title": "Method",
-            "default": "observed_summary"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "evidence_id",
-          "sensor_name",
-          "value",
-          "unit",
-          "window_start",
-          "window_end",
-          "missing_fraction"
-        ],
-        "title": "SensorEvidence"
-      },
       "SensorSample": {
         "properties": {
           "timestamp": {
@@ -3746,6 +4381,72 @@
           "sensors"
         ],
         "title": "SensorSample"
+      },
+      "Source": {
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "title": "Source Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "url": {
+            "type": "string",
+            "title": "Url"
+          },
+          "section": {
+            "type": "string",
+            "title": "Section"
+          },
+          "attribution": {
+            "type": "string",
+            "title": "Attribution"
+          },
+          "license": {
+            "type": "string",
+            "title": "License"
+          },
+          "license_url": {
+            "type": "string",
+            "title": "License Url"
+          },
+          "accessed_at": {
+            "type": "string",
+            "title": "Accessed At"
+          },
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "content_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Content Sha256"
+          },
+          "content_kind": {
+            "type": "string",
+            "const": "curated_paraphrase",
+            "title": "Content Kind",
+            "default": "curated_paraphrase"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "source_id",
+          "title",
+          "url",
+          "section",
+          "attribution",
+          "license",
+          "license_url",
+          "accessed_at",
+          "content",
+          "content_sha256"
+        ],
+        "title": "Source"
       },
       "SourceInfo": {
         "properties": {
@@ -3867,6 +4568,27 @@
         ],
         "title": "TelemetrySample"
       },
+      "TokenUsage": {
+        "properties": {
+          "input_tokens": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Input Tokens"
+          },
+          "output_tokens": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Output Tokens"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "input_tokens",
+          "output_tokens"
+        ],
+        "title": "TokenUsage"
+      },
       "WellInfo": {
         "properties": {
           "well_id": {
@@ -3969,6 +4691,157 @@
           "sample_count"
         ],
         "title": "Window"
+      },
+      "backend__app__schemas__SensorEvidence": {
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "title": "Evidence Id"
+          },
+          "sensor_name": {
+            "type": "string",
+            "title": "Sensor Name"
+          },
+          "statistic": {
+            "type": "string",
+            "const": "mean",
+            "title": "Statistic",
+            "default": "mean"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          },
+          "unit": {
+            "type": "string",
+            "title": "Unit"
+          },
+          "window_start": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Window Start"
+          },
+          "window_end": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Window End"
+          },
+          "missing_fraction": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Missing Fraction"
+          },
+          "method": {
+            "type": "string",
+            "const": "observed_summary",
+            "title": "Method",
+            "default": "observed_summary"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "evidence_id",
+          "sensor_name",
+          "value",
+          "unit",
+          "window_start",
+          "window_end",
+          "missing_fraction"
+        ],
+        "title": "SensorEvidence"
+      },
+      "llm__schemas__SensorEvidence": {
+        "properties": {
+          "evidence_id": {
+            "type": "string",
+            "pattern": "^e[0-9]{1,3}$",
+            "title": "Evidence Id"
+          },
+          "sensor": {
+            "type": "string",
+            "maxLength": 30,
+            "title": "Sensor"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 80
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit"
+          },
+          "mean": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mean"
+          },
+          "latest": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latest"
+          },
+          "trend_per_second": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Trend Per Second"
+          },
+          "missing_fraction": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Missing Fraction"
+          },
+          "observed_count": {
+            "type": "integer",
+            "maximum": 60.0,
+            "minimum": 0.0,
+            "title": "Observed Count"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "evidence_id",
+          "sensor",
+          "unit",
+          "mean",
+          "latest",
+          "trend_per_second",
+          "missing_fraction",
+          "observed_count"
+        ],
+        "title": "SensorEvidence"
       }
     }
   }

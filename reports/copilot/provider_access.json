@@ -1,0 +1,7 @@
+{
+  "operation": "non-generating model access check",
+  "http_status": 200,
+  "elapsed_seconds": 1.116,
+  "model_id": "gpt-6-luna",
+  "error_code": null
+}

@@ -1,0 +1,22 @@
+{
+  "check": "Cached live-provider answer displayed with exact usage and no new reservation",
+  "status": "passed",
+  "replay_id": "5a725349-e2c3-42e9-9dd3-4204ddd3ee7c",
+  "sequence": 91,
+  "reserved_before": 2,
+  "paid_calls_by_this_capture": 0,
+  "reserved_after": 2,
+  "additional_reservations": 0,
+  "cached": true,
+  "provider": "openai",
+  "provider_model": "gpt-6-luna",
+  "usage": {
+    "input_tokens": 1331,
+    "output_tokens": 78
+  },
+  "evidence_hash": "2552d544af9b7723e85d41c6961b96fdc656ace861ee4e752a0c496388e49f89",
+  "observations": 6,
+  "interpretations": 2,
+  "browser_errors": [],
+  "screenshot": "reports/copilot/qa/copilot-provider-cached.png"
+}

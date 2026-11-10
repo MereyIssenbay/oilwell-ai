@@ -1,0 +1,56 @@
+{
+  "python": {
+    "passed": 90,
+    "failed": 0,
+    "seconds": 3.62,
+    "command": "python -m pytest tests/qa/test_copilot_integrity.py tests/contract/test_explanation_contract.py -q -p no:cacheprovider --tb=short --basetemp <unique local directory>",
+    "scope": "synthetic fixtures and provider mocks; no paid API calls or model inference"
+  },
+  "browser": {
+    "passed": 11,
+    "failed": 0,
+    "command": "node tests/e2e/copilot.mjs",
+    "scope": "real localhost API, saved replay, 27 actual sensor readings and immutable predictions; paid provider disabled"
+  },
+  "source_checks": {
+    "nist": "Content and reuse policy fetched independently",
+    "nature": "Canonical page fetch blocked by publisher cookie redirect; indexed content checked; LLM owner separately verified full article Rights and permissions via public cookie-error URL (see RAG_SOURCES.md)"
+  },
+  "paid_provider_calls_by_reviewer": 0,
+  "code_sha256": {
+    "tests/qa/test_copilot_integrity.py": "346b7d34165590a0545ae81d8add65026785b21c209a767b5a57ba4c3456ba3b",
+    "tests/contract/test_explanation_contract.py": "25eac2954d7c794b6762eaf0e418ee6f203ae38fe7fecaffeb5997a2ef2f8959",
+    "tests/e2e/copilot.mjs": "70c349c40fcdec0c8f8460d3183b3997cae0e225cc4c04b6ce82f8fba11e6e5d",
+    "backend/app/copilot.py": "930c9c57fb7de15ed7b99d5b6d767fd36088101da651a0df26c7d597cd24b142",
+    "llm/service.py": "4e79829e46ce83c70f82b4ef7c215a1532b42401be497facefa213090d597d80",
+    "llm/store.py": "0ba655ffe9df29022cb9bff9d71e4b3dc6e24078ba9e84ea780fcaeddbfc34ea",
+    "llm/schemas.py": "747bf09a740bca2937378b8f117d8463766e06fa8b286df621dc12fb836ec5d1",
+    "llm/providers/openai.py": "fbc6cd497c28d027a577f888d07e40b65c32d92aef9ddac3cd4054bf12a22dd5",
+    "llm/knowledge.py": "c6ec7da494edde27222aa90623d87cc844de8213a823b35852e4259588339932",
+    "llm/knowledge/sources.json": "1bd06c9404345c226182b00b97b81381419e85601667d90f7a7ab992ca0e13e9",
+    "frontend/src/CopilotPanel.tsx": "8f5675ddf90d86bbfb8bde4009f8dec0eb5e0c3c80f5a60f4dab809e9b309bc6"
+  },
+  "cached_live_provider_browser": {
+    "passed": 1,
+    "failed": 0,
+    "command": "node tests/e2e/copilot_provider.mjs",
+    "provider_model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 1331,
+      "output_tokens": 78
+    },
+    "reserved_before": 2,
+    "reserved_after": 2,
+    "additional_reservations": 0
+  },
+  "review_delta": {
+    "provider_timeout": "Read/write4s; connect2s; pool1s; monotonic6s deadline plus at most4s final blocked read",
+    "scope": "Transport code reviewed after root smoke; prior QA transport tests retained in final full regression. No reviewer-generated provider call.",
+    "header_deadline": "Final source checks monotonic deadline immediately after response headers before body iteration"
+  },
+  "code_sha256_at_cached_capture": {
+    "llm/providers/openai.py": "d975c51f0f9a7071ea6c4345ee3603e740c9cca34ac08d5f2f437799a30d8a99",
+    "tests/e2e/copilot_provider.mjs": "9965323ca9bbcca8eb67a2561a2236b79d85d70bec9f3e1e75a1931034853d99"
+  },
+  "final_transport_review_sha256": "d7c47e1be8858e429047cef6b44cb34dbb08fb4259226fcc6b6ad16241e8ad3d"
+}
