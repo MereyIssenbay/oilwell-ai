@@ -1,0 +1,46 @@
+{
+  "read_only": true,
+  "checks": [
+    "overview-desktop.png",
+    "replay-unknown-normal-desktop.png",
+    "alerts-desktop.png",
+    "model-desktop.png",
+    "model-mobile.png",
+    "replay-mobile.png",
+    "overview-desktop.png"
+  ],
+  "dimensions": [
+    {
+      "view": "overview-desktop.png",
+      "container_width": 767,
+      "plotly_width": 766.703
+    },
+    {
+      "view": "replay-unknown-normal-desktop.png",
+      "container_width": 767,
+      "plotly_width": 766.703
+    },
+    {
+      "view": "replay-unknown-normal-desktop.png",
+      "container_width": 1112,
+      "plotly_width": 1112
+    },
+    {
+      "view": "replay-mobile.png",
+      "container_width": 348,
+      "plotly_width": 348
+    },
+    {
+      "view": "replay-mobile.png",
+      "container_width": 348,
+      "plotly_width": 348
+    },
+    {
+      "view": "overview-desktop.png",
+      "container_width": 767,
+      "plotly_width": 766.703
+    }
+  ],
+  "browser_exceptions": [],
+  "completed_at": "2026-11-10T10:50:37.290Z"
+}

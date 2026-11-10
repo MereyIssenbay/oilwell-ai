@@ -1,0 +1,378 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "ReplayEpisode": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "diagnostic-replay-1.0.0",
+          "default": "diagnostic-replay-1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "mode": {
+          "const": "historical_replay",
+          "default": "historical_replay",
+          "title": "Mode",
+          "type": "string"
+        },
+        "simulated_playback": {
+          "const": true,
+          "default": true,
+          "title": "Simulated Playback",
+          "type": "boolean"
+        },
+        "diagnostic_only": {
+          "const": true,
+          "default": true,
+          "title": "Diagnostic Only",
+          "type": "boolean"
+        },
+        "accepted_for_monitoring": {
+          "const": false,
+          "default": false,
+          "title": "Accepted For Monitoring",
+          "type": "boolean"
+        },
+        "episode_id": {
+          "format": "uuid",
+          "title": "Episode Id",
+          "type": "string"
+        },
+        "replay_id": {
+          "format": "uuid",
+          "title": "Replay Id",
+          "type": "string"
+        },
+        "opened_by_prediction_id": {
+          "format": "uuid",
+          "title": "Opened By Prediction Id",
+          "type": "string"
+        },
+        "opened_at": {
+          "format": "date-time",
+          "title": "Opened At",
+          "type": "string"
+        },
+        "last_prediction_id": {
+          "format": "uuid",
+          "title": "Last Prediction Id",
+          "type": "string"
+        },
+        "last_prediction_at": {
+          "format": "date-time",
+          "title": "Last Prediction At",
+          "type": "string"
+        },
+        "last_data_status": {
+          "enum": [
+            "alert",
+            "insufficient_data"
+          ],
+          "title": "Last Data Status",
+          "type": "string"
+        },
+        "threshold": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Threshold",
+          "type": "number"
+        },
+        "model_version": {
+          "title": "Model Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "episode_id",
+        "replay_id",
+        "opened_by_prediction_id",
+        "opened_at",
+        "last_prediction_id",
+        "last_prediction_at",
+        "last_data_status",
+        "threshold",
+        "model_version"
+      ],
+      "title": "ReplayEpisode",
+      "type": "object"
+    },
+    "ReplaySnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "diagnostic-replay-1.0.0",
+          "default": "diagnostic-replay-1.0.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "mode": {
+          "const": "historical_replay",
+          "default": "historical_replay",
+          "title": "Mode",
+          "type": "string"
+        },
+        "simulated_playback": {
+          "const": true,
+          "default": true,
+          "title": "Simulated Playback",
+          "type": "boolean"
+        },
+        "diagnostic_only": {
+          "const": true,
+          "default": true,
+          "title": "Diagnostic Only",
+          "type": "boolean"
+        },
+        "accepted_for_monitoring": {
+          "const": false,
+          "default": false,
+          "title": "Accepted For Monitoring",
+          "type": "boolean"
+        },
+        "replay_id": {
+          "format": "uuid",
+          "title": "Replay Id",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "created",
+            "running",
+            "paused",
+            "stopped",
+            "completed",
+            "failed"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        },
+        "source_instance_id": {
+          "title": "Source Instance Id",
+          "type": "string"
+        },
+        "source_kind": {
+          "const": "real",
+          "default": "real",
+          "title": "Source Kind",
+          "type": "string"
+        },
+        "well_id": {
+          "title": "Well Id",
+          "type": "string"
+        },
+        "model_version": {
+          "title": "Model Version",
+          "type": "string"
+        },
+        "policy_version": {
+          "const": "replay-episode-ge-no-dwell-v1",
+          "default": "replay-episode-ge-no-dwell-v1",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "source_sha256": {
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "model_artifact_sha256": {
+          "title": "Model Artifact Sha256",
+          "type": "string"
+        },
+        "preprocessor_fingerprint": {
+          "title": "Preprocessor Fingerprint",
+          "type": "string"
+        },
+        "threshold": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Threshold",
+          "type": "number"
+        },
+        "speed_multiplier": {
+          "maximum": 20,
+          "minimum": 0.1,
+          "title": "Speed Multiplier",
+          "type": "number"
+        },
+        "start_position": {
+          "minimum": 0,
+          "title": "Start Position",
+          "type": "integer"
+        },
+        "end_position": {
+          "minimum": 0,
+          "title": "End Position",
+          "type": "integer"
+        },
+        "cursor_position": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cursor Position"
+        },
+        "source_start": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?$",
+          "title": "Source Start",
+          "type": "string"
+        },
+        "source_end": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?$",
+          "title": "Source End",
+          "type": "string"
+        },
+        "cursor_timestamp": {
+          "anyOf": [
+            {
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cursor Timestamp"
+        },
+        "time_basis": {
+          "const": "source_naive_assumed_utc",
+          "default": "source_naive_assumed_utc",
+          "title": "Time Basis",
+          "type": "string"
+        },
+        "last_sequence": {
+          "minimum": 0,
+          "title": "Last Sequence",
+          "type": "integer"
+        },
+        "alert_episode": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ReplayEpisode"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "title": "Updated At",
+          "type": "string"
+        },
+        "failure": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Failure"
+        }
+      },
+      "required": [
+        "replay_id",
+        "state",
+        "version",
+        "source_instance_id",
+        "well_id",
+        "model_version",
+        "source_sha256",
+        "model_artifact_sha256",
+        "preprocessor_fingerprint",
+        "threshold",
+        "speed_multiplier",
+        "start_position",
+        "end_position",
+        "cursor_position",
+        "source_start",
+        "source_end",
+        "cursor_timestamp",
+        "last_sequence",
+        "alert_episode",
+        "created_at",
+        "updated_at",
+        "failure"
+      ],
+      "title": "ReplaySnapshot",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "diagnostic-replay-1.0.0",
+      "default": "diagnostic-replay-1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "mode": {
+      "const": "historical_replay",
+      "default": "historical_replay",
+      "title": "Mode",
+      "type": "string"
+    },
+    "simulated_playback": {
+      "const": true,
+      "default": true,
+      "title": "Simulated Playback",
+      "type": "boolean"
+    },
+    "diagnostic_only": {
+      "const": true,
+      "default": true,
+      "title": "Diagnostic Only",
+      "type": "boolean"
+    },
+    "accepted_for_monitoring": {
+      "const": false,
+      "default": false,
+      "title": "Accepted For Monitoring",
+      "type": "boolean"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/ReplaySnapshot"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "next_cursor": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Next Cursor"
+    }
+  },
+  "required": [
+    "items",
+    "next_cursor"
+  ],
+  "title": "ReplayList",
+  "type": "object"
+}

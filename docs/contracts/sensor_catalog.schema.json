@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "SensorDescription": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "unit_or_domain": {
+          "title": "Unit Or Domain",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "unit_or_domain"
+      ],
+      "title": "SensorDescription",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "items": {
+      "items": {
+        "$ref": "#/$defs/SensorDescription"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "time_basis": {
+      "const": "source_naive_assumed_utc",
+      "default": "source_naive_assumed_utc",
+      "title": "Time Basis",
+      "type": "string"
+    }
+  },
+  "required": [
+    "items"
+  ],
+  "title": "SensorCatalog",
+  "type": "object"
+}

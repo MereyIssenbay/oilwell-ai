@@ -16,6 +16,8 @@ Updated: 2026-11-10 (Asia/Oral).
 
 - **Phase 7 historical replay: complete** (2026-11-10). API controls, causal frozen inference, durable PostgreSQL events/episodes, SSE reconnection, restart/concurrency checks and actual normal-to-transient demo are complete. **511 tests passed**, without failures or skips. Frozen model/threshold and one-attempt test evidence remain immutable; detector acceptance remains rejected. Stop after Phase 7.
 
+- **Phase 8 frontend dashboard: complete** (2026-11-10). Five real-data React/TypeScript/Plotly pages, responsive historical playback UI, generated API types, retrospective comparison and independent browser review are complete. **523 Python tests, 16 frontend tests and 15 browser checks passed**; production build passed. No LLM or model work was performed. Stop after Phase 8.
+
 ## Phase 0 delivered design
 
 - Architecture/MVP scope, component boundaries, replay lifecycle, evidence-only copilot and local deployment plan.
@@ -355,9 +357,50 @@ Remaining local limitations: persisted UTC deadlines provide best-effort pacing;
 
 **Outcome:** Phase 7 acceptance is met for historical diagnostic replay. Stop here; later work requires explicit user authorization.
 
+## Phase 8 deliverables and verified results
+
+The user authorized a five-page frontend dashboard using the real API. Root assigned `frontend_engineer` exclusive frontend/package/lock ownership, `backend_engineer` the API contract review and minimal additive catalog/evaluation routes, and `qa_reviewer` independent browser tests/screenshots. Root retained contracts/exports, ML integration invariants, service startup, documentation and final verification. All ownership was returned at handoff; no LLM work was delegated.
+
+Delivered:
+
+- [React application](../frontend/src/App.tsx), reusable chart/status/error components, responsive dark industrial styling, typed [API client](../frontend/src/api/client.ts), [generated OpenAPI types](../frontend/src/api/generated.ts), bounded stream state and guarded mutation retries.
+- Exact frontend package/lock, Vite proxy/config, five unit-test files and production build; [startup and user flow](FRONTEND.md).
+- [Dashboard backend adapter](../backend/app/dashboard.py), [typed schemas](../backend/app/dashboard_schemas.py), migration 003/list index and 12 new backend tests. `GET /replays` supplies stable cursor pagination, `GET /sensors` supplies exact units, and completed-only `GET /replays/{id}/evaluation` joins stored predictions with verified original targets without running inference.
+- Updated shared API contract/OpenAPI and additive [retrospective](contracts/retrospective.schema.json), [sensor catalog](contracts/sensor_catalog.schema.json) and [replay list](contracts/replay_list.schema.json) schemas. Prior prediction/replay schemas remain unchanged.
+- [Reproducible browser flow](../tests/e2e/dashboard.mjs), [read-only capture checks](../tests/e2e/capture_dashboard.mjs), [demo/screenshots](../reports/frontend/README.md), [verification record](../reports/frontend/verification.json), [independent UI review](reviews/PHASE_8.md) and [backend review](reviews/PHASE_8_BACKEND.md).
+
+The five tested routes are `/#overview`, `/#wells`, `/#replay`, `/#alerts` and `/#model`. Every page retains Historical Replay and diagnostic/rejected-model disclosure. Well/source selection, original sensor charts/units/null gaps, controls, episode status, uncalibrated confidence, event timeline and completed-only predicted-versus-actual comparison use actual backend responses. Unknown targets/abstentions remain unavailable, not normal or correct. Status colors describe diagnostic events, not physical hazard severity. The UI does not claim live SCADA connectivity or operational acceptance.
+
+API types regenerate exactly from reviewed OpenAPI. REST mutations preserve key/body for transport retries and refresh selected snapshot/version on a conflict; stale requests are aborted or ignored when identity changes. The SSE consumer deduplicates durable IDs, backfills gaps, drains terminal tails and restores selected sessions on reload. Buffers are explicitly scoped: at most 2,000 retained events, 600 explorer readings, 100 comparison endpoints per page and 50 synchronous alerts per page. Total operational/fleet statistics are not invented from these pages.
+
+The frontend runs at **http://127.0.0.1:5173**, proxying `/api` to **http://127.0.0.1:8001**. Both bind to loopback. The root environment template now describes the actual proxy/CLI settings and leaves credentials empty. No new public CORS surface, secrets in browser code, service deployment or LLM integration was added. Node 24.18.0/npm 11.16.0 were used; exact installed frontend pins include React 19.3.1, TypeScript 5.9.3, Plotly basic 4.2.0, Vite 8.3.7 and Vitest 5.1.0. The Plotly library is a lazy chunk around 385 KB gzip.
+
+| Verification / command | Actual result | Scope / limitation |
+| --- | --- | --- |
+| Backend-owner regression | **151 passed in 23.86 s**, zero failed/skipped | Includes 12 new dashboard cases, real PostgreSQL, completed-only boundary, unknown labels, byte/metadata checks, exact stored-result joins and no-inference guard |
+| Root full Python suite | **523 passed in 87.72 s**, zero failed/skipped | All previous 511 plus 12 new cases; three dedicated local test databases and frozen QA flag enabled; one pre-existing Starlette/httpx deprecation warning |
+| Frontend unit/component tests | `npm test`: **16 passed**, five files, **4.03 s** | Request errors/idempotency, bounded dedup/terminal recovery, score/unknown presentation, stale mutation completion and UTF-8 source integrity |
+| TypeScript and production build | `npm run build`: passed; Vite build **746 ms** | Includes `tsc --noEmit`; local static bundle, not production hosting acceptance |
+| Dependency installation | 127 packages installed; npm reported zero audit vulnerabilities | Registry result at install time, not a guarantee of future dependency safety |
+| Independent browser flow | **15 checks passed, zero failed**, installed Chrome | All five desktop/mobile routes; actual API data/controls, reload/offline/reconnect, stop, labels, errors/retry, no uncaught exceptions |
+| Actual browser data comparisons | 600 original P-PDG readings/time coordinates and 21 saved normal/transient comparison rows matched API | Asia/Oral browser timezone did not shift original source coordinates; no new model benchmark |
+| UI-created completed replay | **80 readings, 3 predictions, 93 events**; session `5a725349-e2c3-42e9-9dd3-4204ddd3ee7c` | Source positions 3540..3619, unknown target at 3599 retained; start/pause/speed/resume/reload/network recovery completed |
+| UI Stop | Session `c90d000a-6f39-4d68-90a6-a161871bbe7f` stopped at row 1; cursor stable, no predictions, evaluation 409, terminal controls disabled | Only QA-owned sessions were created/controlled; no active QA session remained |
+| Final visual review | Eight saved screenshots reviewed; seven final read-only captures, zero browser exceptions | Desktop Plotly/container width 766.703/767 px; mobile 348/348 px; comparison 1112/1112 px; final capture waits within 2 px after resize |
+| Contract and source checks | Generated TypeScript byte-equal to fresh OpenAPI generation; runtime/export/HTTP OpenAPI and three additive schemas exact; 133 protected files unchanged | Prior model/data/preprocessor/inference/schema/test evidence preserved; QA separately rechecked original hashes and one-attempt test journal |
+| Final static audit | 234 Git-visible files, 215 text files, 377 local links, 56 Python AST checks, 39 strict JSON/notebook files and seven TOML files passed; all 15 frontend pins match installed versions | Both browser harnesses pass Node syntax checks; `git diff --check` exit 0; private state/builds ignored; no database URL or fixture source in production JS; frontend/proxy health 200 |
+
+Review fixes included terminal SSE tail recovery, stale selected-version refresh after 409, retry/callback isolation across source/session changes, persistent Plotly lifecycle, UTF-8 separators/icons, current selected-session labels and mobile legend placement. An early overview screenshot raced async resizing; measured final captures confirmed no persistent width mismatch. No unresolved functional or visual dashboard blocker remains. Tests deliberately inject failures only in test browser contexts; production UI has no fake prediction/statistics fallback.
+
+Commands are in FRONTEND.md. Root full Python regression used the existing isolated-DSN setup and `pytest tests -q -p no:cacheprovider --tb=short --basetemp <unique-workspace-directory>`, with a narrow approved execution escalation for previously established Windows fixture ACL restrictions. Vite and test-browser startup initially encountered restricted-token `spawn EPERM`; narrow approved local execution resolved it. Dependency installation used an approved network scope. These were environment failures, not silently passed checks. No commit was made.
+
+The additional native Computer Use attempt stopped because its tool could not confidently determine the current Windows browser URL. No further native input was issued. The separately planned automated browser tests used their own installed-Chrome context and an explicit localhost URL, providing the actual user-flow and screenshot evidence. No native manual browser demo is claimed.
+
+**Outcome:** Phase 8 acceptance is met for the local historical dashboard. The selected model remains rejected for monitoring; no retraining, test re-inference, fresh acquisition, copilot or public deployment occurred. Cross-browser/accessibility certification, production performance and unbounded retention remain outside this phase. Stop here pending a new user-approved scope.
+
 ## Blockers and unresolved evidence
 
-No selected-model or diagnostic-API integrity blocker remains for the completed Phases 1-7; CatBoost inference timing has the explicitly recorded thread-control deviation. The original roadmap's broader M1 modeling-cohort/evaluation acceptance remains unresolved: most selected undesirable families occur in only one real well group, and no selected real row contains family 9. The executable split, preprocessing and selected binary artifact support development diagnostics; the selected artifact failed its test false-alarm behavior and remains unaccepted. In addition, the inspected subset cannot supply a pristine, class-supported three-way multiclass evaluation. No protected final-test cohort or accepted monitoring detector exists. Further approved data work must establish sufficient independent real groups and usable label/sensor coverage before generalization claims.
+No selected-model or diagnostic-API integrity blocker remains for the completed Phases 1-8; CatBoost inference timing has the explicitly recorded thread-control deviation. The original roadmap's broader M1 modeling-cohort/evaluation acceptance remains unresolved: most selected undesirable families occur in only one real well group, and no selected real row contains family 9. The executable split, preprocessing and selected binary artifact support development diagnostics; the selected artifact failed its test false-alarm behavior and remains unaccepted. In addition, the inspected subset cannot supply a pristine, class-supported three-way multiclass evaluation. No protected final-test cohort or accepted monitoring detector exists. Further approved data work must establish sufficient independent real groups and usable label/sensor coverage before generalization claims.
 
 Residual limitations: unknown source timezone and physical-identity equivalence; structural/origin-dependent sensor missingness; initial null target/status labels; absent steady code 7; documentation-versus-file dtype discrepancy; 40 real filename IDs in pinned inventory versus 42 wells in release notes; possible wider-corpus overlaps/near-duplicates and upstream interpolation. Phase 4 measured fixed diagnostic operating points; Phase 5 performed bounded validation selection and one diagnostic test, which failed normal-exposure control. Operational threshold selection, calibration, protected-cohort performance and provider selection remain future decisions.
 
@@ -365,4 +408,4 @@ The independent review prompted two integrated corrections: snapshots and events
 
 ## Next action
 
-**Stop after Phase 7 and wait for user approval.** The local replay API and persisted historical demonstration are available for inspection. Preserve the rejected model's failure disclosure, immutable artifacts and one-attempt test journal. No frontend, copilot, fresh model/data work or public deployment is authorized by this completed phase.
+**Stop after Phase 8 and wait for user approval.** The local frontend, backend and persisted historical demo are available for inspection. Preserve rejected-model disclosure, immutable artifacts and the one-attempt test journal. The LLM copilot and any later deployment/data/model work require explicit authorization.

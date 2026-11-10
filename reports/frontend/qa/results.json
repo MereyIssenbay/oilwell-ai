@@ -1,0 +1,95 @@
+{
+  "base_url": "http://127.0.0.1:5173",
+  "browser": "installed Chrome",
+  "checks": [
+    {
+      "name": "Overview counts come from real registered catalog",
+      "status": "passed"
+    },
+    {
+      "name": "Overview: route, historical badge and diagnostic disclosure",
+      "status": "passed"
+    },
+    {
+      "name": "Wells & Sensor Explorer: route, historical badge and diagnostic disclosure",
+      "status": "passed"
+    },
+    {
+      "name": "Historical Replay: route, historical badge and diagnostic disclosure",
+      "status": "passed"
+    },
+    {
+      "name": "Alerts & Event History: route, historical badge and diagnostic disclosure",
+      "status": "passed"
+    },
+    {
+      "name": "Model Information: route, historical badge and diagnostic disclosure",
+      "status": "passed"
+    },
+    {
+      "name": "Model identity and threshold match real endpoint",
+      "status": "passed"
+    },
+    {
+      "name": "Real telemetry chart renders source timestamps without local timezone shift",
+      "status": "passed"
+    },
+    {
+      "name": "Existing real normal/transient replay comparison matches persisted endpoint",
+      "status": "passed"
+    },
+    {
+      "name": "UI creates and controls a real bounded replay, reloads and reconnects",
+      "status": "passed"
+    },
+    {
+      "name": "UI Stop is terminal, preserves cursor and withholds retrospective labels",
+      "status": "passed"
+    },
+    {
+      "name": "Alerts and timeline use exact persisted episodes, without counting updates as new alerts",
+      "status": "passed"
+    },
+    {
+      "name": "Mobile routes stay within viewport and retain accessible controls and badge",
+      "status": "passed"
+    },
+    {
+      "name": "Explicit loading, network error and retry restore actual catalog",
+      "status": "passed"
+    },
+    {
+      "name": "No uncaught browser exceptions",
+      "status": "passed"
+    }
+  ],
+  "failures": [],
+  "screenshots": [
+    "reports/frontend/qa/model-desktop.png",
+    "reports/frontend/qa/explorer-desktop.png",
+    "reports/frontend/qa/replay-completed-desktop.png",
+    "reports/frontend/qa/replay-unknown-normal-desktop.png",
+    "reports/frontend/qa/alerts-desktop.png",
+    "reports/frontend/qa/model-mobile.png",
+    "reports/frontend/qa/replay-mobile.png",
+    "reports/frontend/qa/overview-desktop.png"
+  ],
+  "created_replay_id": "5a725349-e2c3-42e9-9dd3-4204ddd3ee7c",
+  "replay_evidence": {
+    "replay_id": "5a725349-e2c3-42e9-9dd3-4204ddd3ee7c",
+    "source_rows": 80,
+    "predictions": 3,
+    "unknown_label_preserved": true,
+    "terminal_sequence": 93
+  },
+  "stopped_replay_id": "c90d000a-6f39-4d68-90a6-a161871bbe7f",
+  "stop_evidence": {
+    "state": "stopped",
+    "cursor_position": 1,
+    "prediction_count": 0,
+    "evaluation_status": 409
+  },
+  "completed_at": "2026-11-10T10:47:24.294Z",
+  "passed": 15,
+  "failed": 0
+}

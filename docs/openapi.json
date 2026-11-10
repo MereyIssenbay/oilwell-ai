@@ -801,6 +801,106 @@
             "description": "Service Unavailable"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "historical dashboard"
+        ],
+        "summary": "List Replays",
+        "operationId": "list_replays_replays_get",
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "maxLength": 256
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplayList"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
       }
     },
     "/replays/{replay_id}": {
@@ -1411,6 +1511,183 @@
               }
             },
             "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/replays/{replay_id}/evaluation": {
+      "get": {
+        "tags": [
+          "historical dashboard"
+        ],
+        "summary": "Evaluation",
+        "operationId": "evaluation_replays__replay_id__evaluation_get",
+        "parameters": [
+          {
+            "name": "replay_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Replay Id"
+            }
+          },
+          {
+            "name": "after_sequence",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "After Sequence"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 1000,
+              "minimum": 1,
+              "default": 100,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetrospectivePage"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/sensors": {
+      "get": {
+        "tags": [
+          "historical dashboard"
+        ],
+        "summary": "Sensors",
+        "operationId": "sensors_sensors_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SensorCatalog"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -2578,6 +2855,65 @@
         ],
         "title": "ReplayFailure"
       },
+      "ReplayList": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "diagnostic-replay-1.0.0",
+            "title": "Schema Version",
+            "default": "diagnostic-replay-1.0.0"
+          },
+          "mode": {
+            "type": "string",
+            "const": "historical_replay",
+            "title": "Mode",
+            "default": "historical_replay"
+          },
+          "simulated_playback": {
+            "type": "boolean",
+            "const": true,
+            "title": "Simulated Playback",
+            "default": true
+          },
+          "diagnostic_only": {
+            "type": "boolean",
+            "const": true,
+            "title": "Diagnostic Only",
+            "default": true
+          },
+          "accepted_for_monitoring": {
+            "type": "boolean",
+            "const": false,
+            "title": "Accepted For Monitoring",
+            "default": false
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ReplaySnapshot"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "title": "ReplayList"
+      },
       "ReplayPrediction": {
         "properties": {
           "schema_version": {
@@ -2997,6 +3333,289 @@
           "source_position"
         ],
         "title": "ReplayTelemetry"
+      },
+      "RetrospectivePage": {
+        "properties": {
+          "schema_version": {
+            "type": "string",
+            "const": "retrospective-1.0.0",
+            "title": "Schema Version",
+            "default": "retrospective-1.0.0"
+          },
+          "mode": {
+            "type": "string",
+            "const": "historical_replay",
+            "title": "Mode",
+            "default": "historical_replay"
+          },
+          "simulated_playback": {
+            "type": "boolean",
+            "const": true,
+            "title": "Simulated Playback",
+            "default": true
+          },
+          "diagnostic_only": {
+            "type": "boolean",
+            "const": true,
+            "title": "Diagnostic Only",
+            "default": true
+          },
+          "accepted_for_monitoring": {
+            "type": "boolean",
+            "const": false,
+            "title": "Accepted For Monitoring",
+            "default": false
+          },
+          "retrospective_only": {
+            "type": "boolean",
+            "const": true,
+            "title": "Retrospective Only",
+            "default": true
+          },
+          "replay_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Replay Id"
+          },
+          "source_instance_id": {
+            "type": "string",
+            "title": "Source Instance Id"
+          },
+          "source_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Source Sha256"
+          },
+          "label_policy_version": {
+            "type": "string",
+            "const": "3w-v2-family-including-transients-v1",
+            "title": "Label Policy Version",
+            "default": "3w-v2-family-including-transients-v1"
+          },
+          "time_basis": {
+            "type": "string",
+            "const": "source_naive_assumed_utc",
+            "title": "Time Basis",
+            "default": "source_naive_assumed_utc"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/RetrospectivePrediction"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "next_after_sequence": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next After Sequence"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "replay_id",
+          "source_instance_id",
+          "source_sha256",
+          "items",
+          "next_after_sequence"
+        ],
+        "title": "RetrospectivePage"
+      },
+      "RetrospectivePrediction": {
+        "properties": {
+          "sequence": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Sequence"
+          },
+          "source_position": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Source Position"
+          },
+          "prediction_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Prediction Id"
+          },
+          "timestamp": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?$",
+            "title": "Timestamp"
+          },
+          "abnormal_score": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 1.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Abnormal Score"
+          },
+          "predicted_event_type": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "undesirable_event",
+              "unknown"
+            ],
+            "title": "Predicted Event Type"
+          },
+          "raw_class": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Class"
+          },
+          "raw_state": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw State"
+          },
+          "actual_event_family": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 9.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual Event Family"
+          },
+          "actual_event_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual Event Name"
+          },
+          "actual_phase": {
+            "type": "string",
+            "enum": [
+              "normal",
+              "event",
+              "transient",
+              "unknown"
+            ],
+            "title": "Actual Phase"
+          },
+          "actual_binary": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "enum": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actual Binary"
+          },
+          "decision_matches": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decision Matches"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "sequence",
+          "source_position",
+          "prediction_id",
+          "timestamp",
+          "abnormal_score",
+          "predicted_event_type",
+          "raw_class",
+          "raw_state",
+          "actual_event_family",
+          "actual_event_name",
+          "actual_phase",
+          "actual_binary",
+          "decision_matches"
+        ],
+        "title": "RetrospectivePrediction"
+      },
+      "SensorCatalog": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/SensorDescription"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "time_basis": {
+            "type": "string",
+            "const": "source_naive_assumed_utc",
+            "title": "Time Basis",
+            "default": "source_naive_assumed_utc"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "SensorCatalog"
+      },
+      "SensorDescription": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "unit_or_domain": {
+            "type": "string",
+            "title": "Unit Or Domain"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "unit_or_domain"
+        ],
+        "title": "SensorDescription"
       },
       "SensorEvidence": {
         "properties": {

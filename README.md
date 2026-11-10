@@ -2,7 +2,7 @@
 
 A production-oriented portfolio MVP for historical oil-well monitoring, ML event detection, telemetry replay and evidence-grounded explanations using the [Petrobras 3W dataset](https://github.com/petrobras/3W).
 
-**Current state: Phase 7 historical replay complete.** The local FastAPI/PostgreSQL service supports start/pause/resume/stop, adjustable speed, causal frozen inference, durable SSE reconnection and deduplicated diagnostic alert episodes. **511 tests passed** with real PostgreSQL and frozen-model checks. The actual 260-row replay produced 21 predictions matching saved offline validation and 306 durable events. Start with [replay instructions](docs/REPLAY.md), [demo evidence/chart](reports/replay/README.md) and [Swagger](http://127.0.0.1:8001/docs). The selected model remains rejected for monitoring; false alarms and missed abnormal intervals are explicitly shown. [Progress](docs/PROGRESS.md) records results and the Phase 7 stop.
+**Current state: Phase 8 dashboard complete.** Open the running [dashboard](http://127.0.0.1:5173) for Overview, Wells & Sensor Explorer, Historical Replay, Alerts & Event History and Model Information. React/TypeScript/Plotly consumes real backend data, with replay controls, durable SSE recovery, historical badges and completed-only predicted-versus-actual comparison. Verification: **523 Python tests, 16 frontend tests and 15 browser checks passed**; production build passed. See [frontend instructions](docs/FRONTEND.md), [screenshots and demo evidence](reports/frontend/README.md), and [progress](docs/PROGRESS.md). The selected model remains rejected for monitoring; no LLM copilot is implemented. Stop after Phase 8.
 
 The planned stack is Python 3.11+, Pandas/PyArrow, scikit-learn and XGBoost, FastAPI/Pydantic, PostgreSQL, React/TypeScript/Plotly, Docker and pytest. CatBoost is a possible later challenger; ChromaDB is deferred until document retrieval is justified. The LLM provider is optional and disabled by default.
 
@@ -15,6 +15,8 @@ The candidate first model covers normal plus two undesirable event families, sel
 3W was verified at dataset **v2.0.0**, commit `914af287b1cf3e5207dce0da1e9dc08361c9adeb`: **Parquet, 27 sensor variables, `class` and `state` labels**. Actual selected files use `float64` sensors and nullable `Int16` labels. Each label has 50,400 unknown values, and four sensors are entirely missing in this subset. Source timezone remains unverified. The [dataset audit](docs/DATASET_AUDIT.md) distinguishes these observations from upstream metadata claims. This project is a historical demo, not a well-control or certified safety system.
 
 ## Documents
+
+- [Dashboard startup and flows](docs/FRONTEND.md), [screenshots and verification](reports/frontend/README.md), [UI review](docs/reviews/PHASE_8.md), and [backend contract review](docs/reviews/PHASE_8_BACKEND.md)
 
 - [Historical replay API and reproduction](docs/REPLAY.md), [observed demo and chart](reports/replay/README.md), [QA review](docs/reviews/PHASE_7.md) and [ML consistency review](docs/reviews/PHASE_7_ML.md)
 

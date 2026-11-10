@@ -16,6 +16,7 @@ class PostgresReplayRepository(PostgresRepository):
         with self._connection() as connection:
             connection.execute('SELECT pg_advisory_xact_lock(%s)', (64934935862810,))
             connection.execute((Path(__file__).resolve().parents[1]/'migrations/002_historical_replay.sql').read_text(), prepare=False)
+            connection.execute((Path(__file__).resolve().parents[1]/'migrations/003_dashboard_indexes.sql').read_text(), prepare=False)
 
     @contextmanager
     def _connection(self):
@@ -78,6 +79,22 @@ class PostgresReplayRepository(PostgresRepository):
         with self._connection() as c:
             return [str(r[0]) for r in c.execute("SELECT replay_id FROM oilwell_replays WHERE state='running'").fetchall()]
 
+    def list_replays(self, cursor: str | None = None, limit: int = 100) -> dict:
+        from backend.app.dashboard import decode_replay_cursor, replay_list_page
+        boundary = decode_replay_cursor(cursor)
+        if type(limit) is not int or not 1 <= limit <= 100:
+            raise ServiceError('INVALID_CURSOR', 'Replay list limit is invalid', 400)
+        with self._connection() as c:
+            if boundary is None:
+                rows = c.execute('SELECT created_at,replay_id,payload FROM oilwell_replays '
+                                 'ORDER BY created_at DESC,replay_id DESC LIMIT %s', (limit + 1,)).fetchall()
+            else:
+                rows = c.execute('SELECT created_at,replay_id,payload FROM oilwell_replays '
+                                 'WHERE (created_at,replay_id)<(%s,%s) '
+                                 'ORDER BY created_at DESC,replay_id DESC LIMIT %s',
+                                 (*boundary, limit + 1)).fetchall()
+        return replay_list_page(rows, limit)
+
     def events(self,replay_id,after_sequence=0,limit=1000,kind=None):
         with self._connection() as c:
             row = c.execute('SELECT payload FROM oilwell_replays WHERE replay_id=%s',(str(replay_id),)).fetchone()
@@ -136,6 +153,20 @@ class MemoryReplayRepository:
     def running(self):
         with self.lock:
             return [rid for rid,s in self.sessions.items() if s['state']=='running']
+    def list_replays(self, cursor: str | None = None, limit: int = 100) -> dict:
+        from datetime import datetime
+        from uuid import UUID
+        from backend.app.dashboard import decode_replay_cursor, replay_list_page
+        boundary = decode_replay_cursor(cursor)
+        if type(limit) is not int or not 1 <= limit <= 100:
+            raise ServiceError('INVALID_CURSOR', 'Replay list limit is invalid', 400)
+        with self.lock:
+            rows = [(datetime.fromisoformat(s['created_at'].replace('Z', '+00:00')), UUID(rid), deepcopy(s))
+                    for rid, s in self.sessions.items()]
+            rows.sort(key=lambda row: (row[0], row[1]), reverse=True)
+            if boundary is not None:
+                rows = [row for row in rows if (row[0], row[1]) < boundary]
+            return replay_list_page(rows[:limit + 1], limit)
     def events(self,replay_id,after_sequence=0,limit=1000,kind=None):
         with self.lock:
             s=self.get(replay_id); _cursor(s,after_sequence,limit)

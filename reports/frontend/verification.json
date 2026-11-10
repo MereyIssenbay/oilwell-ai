@@ -1,0 +1,117 @@
+{
+  "phase": 8,
+  "status": "complete",
+  "python_regression": {
+    "passed": 523,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 1,
+    "seconds": 87.72,
+    "warning": "Pre-existing Starlette/httpx deprecation"
+  },
+  "backend_owner_regression": {
+    "passed": 151,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 23.86
+  },
+  "protected_files_unchanged": 133,
+  "openapi_live_runtime_export_exact": true,
+  "retraining": false,
+  "test_reinference": false,
+  "llm_implemented": false,
+  "typescript_contract_generated_exact": true,
+  "frontend_tests": {
+    "passed": 16,
+    "failed": 0,
+    "files": 5,
+    "seconds": 4.03
+  },
+  "production_build": {
+    "typecheck": "passed",
+    "build": "passed",
+    "vite_milliseconds": 746,
+    "plotly_lazy_gzip_kb_approx": 385
+  },
+  "browser_acceptance": {
+    "passed": 15,
+    "failed": 0,
+    "routes": [
+      "overview",
+      "wells",
+      "replay",
+      "alerts",
+      "model"
+    ],
+    "report": "reports/frontend/qa/results.json",
+    "created_replay_id": "5a725349-e2c3-42e9-9dd3-4204ddd3ee7c",
+    "stopped_replay_id": "c90d000a-6f39-4d68-90a6-a161871bbe7f"
+  },
+  "visual_captures": {
+    "count": 7,
+    "browser_exceptions": [],
+    "report": "reports/frontend/qa/capture_results.json"
+  },
+  "native_computer_use": {
+    "status": "stopped",
+    "reason": "Tool could not confidently determine the current Windows browser URL; no further native actions"
+  },
+  "live_frontend": "http://127.0.0.1:5173",
+  "live_backend": "http://127.0.0.1:8001",
+  "node_version": "24.18.0",
+  "npm_version": "11.16.0",
+  "final_static_audit": {
+    "git_visible_files": 234,
+    "text_files": 215,
+    "local_markdown_links": 377,
+    "python_ast": 56,
+    "strict_json_notebooks": 39,
+    "toml": 7,
+    "exact_installed_frontend_pins": 15,
+    "protected_files_unchanged": 133,
+    "private_state_and_build_ignored": true,
+    "frontend_and_proxy_health": 200,
+    "errors": []
+  },
+  "generated_at": "2026-11-10T10:55:01.280486+00:00",
+  "implementation_sha256": {
+    "backend/app/dashboard.py": "43acb1c550743595d1def7ebd9c980025837b7c669fd129847c22767ecca8d78",
+    "backend/app/dashboard_schemas.py": "7b3461e6d72fb4ead4cf1967d61a9d15e8ddebd5ebd1cb2931be69c4f967c2c0",
+    "backend/migrations/003_dashboard_indexes.sql": "5dffb05c8dd3da00737d6aca2e6ffa0384427c42df82d3fd6c1b9c6b17910bf9",
+    "frontend/index.html": "f66d2fe3639151b4631277525cf6c2a14d7384efeb438cd751ac79a35bc54735",
+    "frontend/package-lock.json": "4caf0eb24ce52ca78ce16c2b5e116d0866d44d2c24916b189e9fb2924e04eb0a",
+    "frontend/package.json": "86910234212726c2ee6ab9cbe49c092eee8f6235a9b4c87213db4f6ef5bc2edc",
+    "frontend/src/App.tsx": "885cf2e9487cc78fc7e45c7d0640e5d895c60c16081bf6955b195e30c1e2bc9e",
+    "frontend/src/api/client.test.ts": "b480d19d0994ece156f37a7374716c03e5e6d5916b142c505d5d96e03874606c",
+    "frontend/src/api/client.ts": "c178f7131bf1894b85ee8facf0224a027a7120e62949f3a011f26fc6b88ed1bb",
+    "frontend/src/api/generated.ts": "bff0541fd8ba61618ea56079e0b9757767e45a5f4163feea8a9f9c2c4adbe21e",
+    "frontend/src/components.test.tsx": "9cec8f8f2c3daae5efc8311bf4380aca2b5b13cd6b301cad3bf54d32764b91cf",
+    "frontend/src/components.tsx": "07d83952cbf515faa930aade367c198a62ef0df6a933c0adb64bd7686eb545a3",
+    "frontend/src/encoding.test.ts": "c5fa5d549d5c8f3e36fbc3febc5414796eacaff98becbe0dcf4e23e0e0794926",
+    "frontend/src/main.tsx": "35f6687f0047963874af0e81a5f450fd4c7508e519c9e1d8558c9b88ca5568a0",
+    "frontend/src/mutations.test.tsx": "8217c4eb51c343d46a3ea0c97d67b2e0ec38e5d45fdd2261b9f016e59e326074",
+    "frontend/src/mutations.ts": "763a61b3e70a308a1a55a9b414335e1fdf16bdbfa0dfd334be391dba08669c47",
+    "frontend/src/plotly.d.ts": "1861d2d85321f957324d973f1a484fe5feb9075126349415ea6e32f184b0868d",
+    "frontend/src/state.test.tsx": "784165a244707f543e8cd4be34d4ff55613bd03aa1d1c97de3a974c337fb47c2",
+    "frontend/src/state.ts": "ba28206687c2d03da0df4d7ea16af7f1c5a03dbc6619dd8c2041b0875fbf415d",
+    "frontend/src/styles.css": "585d43b13bb106dc726339969473bd90bc39c80897f99668234834035b755cb8",
+    "frontend/src/test-setup.ts": "ae4b6b92c8c0f06526032b2dedeb4fb0e93b85af2a138a423386f2e36894a685",
+    "frontend/tsconfig.json": "d976931a89e431273cb55befabc6b5f698913b4bfc9341826986f86df6e53545",
+    "frontend/vite.config.ts": "eb7fb4b1b49c176112d6f31f3e81e4dca433b999f4c1dbecaf214e3146fc0eea",
+    "backend/__init__.py": "034fbc250933af7208f567d5fecf9b2c45dfa17fc0f4ef0c8434b3d139700213",
+    "backend/app/__init__.py": "434c6356fd3ddee695f93473d5d7a038c134ab4bf8f9b7355f1a9204b3a56c6a",
+    "backend/app/errors.py": "c9b3496732c1a552215438b6b360274ece98bcd8356db689406c813da008cb19",
+    "backend/app/inference.py": "78eb21e1ec1dd8d894a7e8adf63f7090f0209df370563c06c186b6858bf0329f",
+    "backend/app/main.py": "98a3c8826663eec0c5fbeb11c12fa69e8963f1d175d71f2a1fc4262ce7dd2990",
+    "backend/app/pagination.py": "773077445a5150fb7962b6f5ebeed0a21e475bdb43605f19c33607bf87784913",
+    "backend/app/registry.py": "ecb768932b1a5f88bfa2236220316e64ddd02997d0fa724c2a138be01cd0937a",
+    "backend/app/replay.py": "c9be916b47f5dd49a9aa29e146bb15ed495524c7e2e6177f6eda3ec6e0c01038",
+    "backend/app/replay_repository.py": "845ab3da2282d42348648979db6a05adefaf6810b0be77f18a4368bb9266dd8c",
+    "backend/app/replay_schemas.py": "d3c2d7131c2540383b44942993f58eaa8afb594b81cdd21ba7697d3c8798e280",
+    "backend/app/repository.py": "7fbc1b3581393d219a527447b10f817aa2f7264c427a15930788be7c1d3d20a0",
+    "backend/app/schemas.py": "10ef07df7819218cb5a0950b9ecb75dde4d9d659623edd49fc80aa03577c3430",
+    "backend/app/settings.py": "d0e0efab18d5eefd716d4499d4ee6cc7fc5b1dc4314cf6e3e8b3fd0f7d01e555",
+    "backend/migrations/001_diagnostic_predictions.sql": "994486fbb81235ffd8712a5cb40e89a1824298019dd052b01dc0bf1b6f86d10d",
+    "backend/migrations/002_historical_replay.sql": "e589b1b4094eeca441c11c36de8997f9a2e438d5f496981baadc993336ef73a9"
+  }
+}

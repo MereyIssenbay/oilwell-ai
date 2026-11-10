@@ -248,6 +248,8 @@ def create_app(settings: Settings | None = None, *, runtime=None, registry=None,
 
     from backend.app.replay import replay_router
     app.include_router(replay_router(app))
+    from backend.app.dashboard import dashboard_router
+    app.include_router(dashboard_router(app))
     return app
 
 

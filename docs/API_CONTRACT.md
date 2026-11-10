@@ -2,6 +2,22 @@
 
 Status: canonical event-family design v1.0.0 is retained below and remains unimplemented. Phase 6 adds the separately versioned **diagnostic-1.0.0** synchronous API described first. Phase 7 adds the separately enveloped historical replay surface described below; neither API implements event-family classification. [prediction.schema.json](contracts/prediction.schema.json) and its synthetic fixture remain byte-for-byte unchanged. The additive [diagnostic prediction schema](contracts/diagnostic_prediction.schema.json) and [OpenAPI export](openapi.json) govern the implemented routes.
 
+## Phase 8 dashboard additions
+
+The React/TypeScript consumer generates API types from [OpenAPI](openapi.json), uses a local same-origin `/api` proxy, and preserves the existing diagnostic/replay schemas. Additive read-only endpoints are:
+
+| Route | Request | Response / meaning |
+| --- | --- | --- |
+| `GET /replays` | Optional opaque `cursor`, `limit` 1..100 | [Replay list](contracts/replay_list.schema.json), newest first using a stable created-time/UUID keyset; items are existing replay snapshots, `next_cursor` marks another page |
+| `GET /sensors` | None | [Sensor catalog](contracts/sensor_catalog.schema.json), exact sensor names and original units/domains; explicit source time basis |
+| `GET /replays/{id}/evaluation` | `after_sequence` >=0, `limit` 1..1000 | [Retrospective page](contracts/retrospective.schema.json), schema `retrospective-1.0.0`; only completed replays, otherwise structured 409 `REPLAY_NOT_COMPLETED` |
+
+Retrospective items join an already persisted prediction ID, sequence, source position/time, abnormal score and binary event type with original `raw_class`, `raw_state`, documented event family/name/phase, binary target and nullable `decision_matches`. The service verifies source/metadata bytes and prediction boundaries before reading original target columns. It never runs inference or modifies predictions. Unknown labels or abstaining predictions yield null comparison, never a fabricated correct/normal outcome. Comparison scope is the returned sampled prediction endpoints, not all seconds or a new model evaluation cohort.
+
+Original labels remain excluded from inference, sensor streams and ongoing replay. Only this separately requested completed-replay endpoint exposes retrospective targets. It supersedes the Phase 7 offline-tool-only display restriction for the user-authorized retrospective dashboard, without weakening the prediction/worker boundary. Train/validation registration remains unchanged; no test source is admitted.
+
+The UI must keep historical playback and rejected-model indicators visible, label confidence as uncalibrated selected-class probability, and distinguish diagnostic episode status from physical hazard severity. Counts describe loaded pages/session events with their scope rather than invented fleet totals. Pagination, loading failures, missing sensors, unknown labels and abstention remain visible. A live-updating chart means playback progress, not SCADA connectivity.
+
 ## Phase 7 additive historical replay API
 
 The implemented replay surface is `/replays`, under **diagnostic-replay-1.0.0** ([prediction envelope](contracts/replay_prediction.schema.json), [snapshot](contracts/replay_snapshot.schema.json), [event](contracts/replay_event.schema.json)), with the exact route/request/lifecycle/paging rules in [REPLAY.md](REPLAY.md). It supports create, start, pause, resume, stop, speed changes, durable snapshots, event history, prediction/episode pages and SSE reconnection. Commands commit synchronously at a row boundary and return 200; creation returns 201. The older `/api/v1` event-family/replay design below is retained as a future design, not implemented routes. Its `cancel` command corresponds to `stop` on this additive diagnostic surface, and telemetry events contain one `telemetry` observation rather than a canonical `telemetry_batch`.

@@ -1,0 +1,244 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "RetrospectivePrediction": {
+      "additionalProperties": false,
+      "properties": {
+        "sequence": {
+          "minimum": 1,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "source_position": {
+          "minimum": 0,
+          "title": "Source Position",
+          "type": "integer"
+        },
+        "prediction_id": {
+          "format": "uuid",
+          "title": "Prediction Id",
+          "type": "string"
+        },
+        "timestamp": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?$",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "abnormal_score": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Abnormal Score"
+        },
+        "predicted_event_type": {
+          "enum": [
+            "normal",
+            "undesirable_event",
+            "unknown"
+          ],
+          "title": "Predicted Event Type",
+          "type": "string"
+        },
+        "raw_class": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Raw Class"
+        },
+        "raw_state": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Raw State"
+        },
+        "actual_event_family": {
+          "anyOf": [
+            {
+              "maximum": 9,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Actual Event Family"
+        },
+        "actual_event_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Actual Event Name"
+        },
+        "actual_phase": {
+          "enum": [
+            "normal",
+            "event",
+            "transient",
+            "unknown"
+          ],
+          "title": "Actual Phase",
+          "type": "string"
+        },
+        "actual_binary": {
+          "anyOf": [
+            {
+              "enum": [
+                0,
+                1
+              ],
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Actual Binary"
+        },
+        "decision_matches": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Decision Matches"
+        }
+      },
+      "required": [
+        "sequence",
+        "source_position",
+        "prediction_id",
+        "timestamp",
+        "abnormal_score",
+        "predicted_event_type",
+        "raw_class",
+        "raw_state",
+        "actual_event_family",
+        "actual_event_name",
+        "actual_phase",
+        "actual_binary",
+        "decision_matches"
+      ],
+      "title": "RetrospectivePrediction",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "retrospective-1.0.0",
+      "default": "retrospective-1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "mode": {
+      "const": "historical_replay",
+      "default": "historical_replay",
+      "title": "Mode",
+      "type": "string"
+    },
+    "simulated_playback": {
+      "const": true,
+      "default": true,
+      "title": "Simulated Playback",
+      "type": "boolean"
+    },
+    "diagnostic_only": {
+      "const": true,
+      "default": true,
+      "title": "Diagnostic Only",
+      "type": "boolean"
+    },
+    "accepted_for_monitoring": {
+      "const": false,
+      "default": false,
+      "title": "Accepted For Monitoring",
+      "type": "boolean"
+    },
+    "retrospective_only": {
+      "const": true,
+      "default": true,
+      "title": "Retrospective Only",
+      "type": "boolean"
+    },
+    "replay_id": {
+      "format": "uuid",
+      "title": "Replay Id",
+      "type": "string"
+    },
+    "source_instance_id": {
+      "title": "Source Instance Id",
+      "type": "string"
+    },
+    "source_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Source Sha256",
+      "type": "string"
+    },
+    "label_policy_version": {
+      "const": "3w-v2-family-including-transients-v1",
+      "default": "3w-v2-family-including-transients-v1",
+      "title": "Label Policy Version",
+      "type": "string"
+    },
+    "time_basis": {
+      "const": "source_naive_assumed_utc",
+      "default": "source_naive_assumed_utc",
+      "title": "Time Basis",
+      "type": "string"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/RetrospectivePrediction"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "next_after_sequence": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Next After Sequence"
+    }
+  },
+  "required": [
+    "replay_id",
+    "source_instance_id",
+    "source_sha256",
+    "items",
+    "next_after_sequence"
+  ],
+  "title": "RetrospectivePage",
+  "type": "object"
+}
