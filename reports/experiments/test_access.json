@@ -1,0 +1,11 @@
+{
+  "completed_at": "2026-11-10T08:50:29.376679+00:00",
+  "metrics_sha256": "bc52de53d4fcd9f37a66f8db6586637c29678e51d7e45bc9c1a8e5abb831b860",
+  "prediction_path": "ml/runs/phase5/c4e1835a82620306778a/test_predictions.parquet",
+  "prediction_sha256": "523c2f720a9c7a7a00b8d0c4ea7a64294eaf593b2fc93fd294436b1aa5c7afbb",
+  "schema_version": "1.0.0",
+  "selection_sha256": "dfbe88250db8808d58730ab6f0010da3c548cb4b1c26715ba4a4b78057e7130b",
+  "started_at": "2026-11-10T08:50:26.679964+00:00",
+  "status": "COMPLETE",
+  "test_attempts": 1
+}

@@ -1,0 +1,66 @@
+{
+  "actual_boosted_fits": 8,
+  "candidate_predictions_sha256": "c86fd19b29c9a9442edac877a9f258d7a75e526c2c039e755869ca433380306f",
+  "candidate_reload_validation": {
+    "catboost_d3_lr0.05": {
+      "available_validation_windows": 17583,
+      "decisions_exact": true,
+      "scores_exact": true
+    },
+    "catboost_d3_lr0.1": {
+      "available_validation_windows": 17583,
+      "decisions_exact": true,
+      "scores_exact": true
+    },
+    "catboost_d6_lr0.05": {
+      "available_validation_windows": 17583,
+      "decisions_exact": true,
+      "scores_exact": true
+    },
+    "catboost_d6_lr0.1": {
+      "available_validation_windows": 17583,
+      "decisions_exact": true,
+      "scores_exact": true
+    },
+    "isolation_forest_retuned": {
+      "available_validation_windows": 17583,
+      "decisions_exact": true,
+      "scores_exact": true
+    },
+    "logistic_regression_retuned": {
+      "available_validation_windows": 17583,
+      "decisions_exact": true,
+      "scores_exact": true
+    },
+    "xgboost_d3_lr0.05": {
+      "available_validation_windows": 17583,
+      "decisions_exact": true,
+      "scores_exact": true
+    },
+    "xgboost_d3_lr0.1": {
+      "available_validation_windows": 17583,
+      "decisions_exact": true,
+      "scores_exact": true
+    },
+    "xgboost_d6_lr0.05": {
+      "available_validation_windows": 17583,
+      "decisions_exact": true,
+      "scores_exact": true
+    },
+    "xgboost_d6_lr0.1": {
+      "available_validation_windows": 17583,
+      "decisions_exact": true,
+      "scores_exact": true
+    }
+  },
+  "owner_plus_qa_tests": {
+    "duration_seconds": 4.16,
+    "failed": 0,
+    "passed": 89,
+    "skipped": 0
+  },
+  "run_id": "c4e1835a82620306778a",
+  "scope": "validation-only numeric reproducibility; timing measurements are not deterministic; no additional candidate fits",
+  "selection_sha256": "dfbe88250db8808d58730ab6f0010da3c548cb4b1c26715ba4a4b78057e7130b",
+  "test_access_started": false
+}

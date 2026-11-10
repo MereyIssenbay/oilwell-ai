@@ -1,0 +1,13 @@
+{
+  "approved": true,
+  "independent_review": "qa_reviewer approved exact selection after all 1481 thresholds and temporal metrics reconciliation",
+  "pretest_regression": {
+    "failed": 0,
+    "passed": 309,
+    "seconds": 12.31,
+    "skipped": 0
+  },
+  "raw_validation_decisions_exact": 17583,
+  "scope": "one selected-model diagnostic test evaluation; no retuning",
+  "selection_sha256": "dfbe88250db8808d58730ab6f0010da3c548cb4b1c26715ba4a4b78057e7130b"
+}

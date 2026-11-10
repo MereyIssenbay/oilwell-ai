@@ -6,6 +6,8 @@ Phase 3 authorizes reusable preprocessing and feature implementation under [FEAT
 
 Phase 4 subsequently authorizes [fixed diagnostic reference models](../reports/baseline/PROTOCOL.md). That comparison supplies baseline observations but does not execute the controlled ablations needed to establish the five hypotheses below. The Phase 2/3 scope statements remain historical.
 
+Phase 5 compared boosted models on unchanged features and selected a binary threshold, then observed a failed diagnostic test. It did not execute the controlled feature/source ablations below; no hypothesis is promoted to an established effect.
+
 The [acquisition manifest](../data/manifests/subset.json) fixes 3W v2.0.0 at revision `914af287b1cf3e5207dce0da1e9dc08361c9adeb`. The [measured audit](DATASET_AUDIT.md), [per-file summary](../reports/data_summary.json) and [EDA summary](../reports/eda/eda_summary.json) distinguish actual source measurements from metadata assumptions. The orchestrator's [split strategy](SPLIT_STRATEGY.md) governs all future experiments. All 23 inspected files and their 12 real well IDs are EDA-exposed development data, not a clean final test set.
 
 ## Input, target and evaluation boundary

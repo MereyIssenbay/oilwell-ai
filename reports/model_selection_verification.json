@@ -1,0 +1,67 @@
+{
+  "accepted_for_monitoring": false,
+  "final_static_audit": {
+    "errors": [],
+    "frozen_selection_and_test_hashes_match": true,
+    "git_visible_files": 144,
+    "installed_pins": 65,
+    "new_python_syntax_checks": 5,
+    "phase5_ignored_generated_files": 32,
+    "prior_phase_artifacts_unchanged": true,
+    "raw_ignored_files": 31,
+    "strict_json_notebooks": 20,
+    "test_attempts": 1,
+    "text_files": 134,
+    "toml": 7,
+    "valid_local_links": 262
+  },
+  "full_regression": {
+    "failed": 0,
+    "passed": 309,
+    "seconds": 12.31,
+    "skipped": 0
+  },
+  "independent_saved_test_audit": {
+    "eligible": 3060,
+    "estimator_calls": 0,
+    "passed": true,
+    "rows": 4480
+  },
+  "independent_thresholds_verified": 1481,
+  "installed_dependency_pins_verified": 65,
+  "latency_deviation": "CatBoost predict_proba native thread_count=-1 not explicitly overridden; selected LR unaffected",
+  "phase": 5,
+  "raw_score_tolerance": {
+    "absolute": 1e-14,
+    "relative": 0
+  },
+  "raw_validation_audit": [
+    {
+      "binary_decisions_exact": true,
+      "max_absolute_score_difference": 3.1086244689504383e-15,
+      "scores_bitwise_equal": false,
+      "well_id": "WELL-00011",
+      "windows": 722
+    },
+    {
+      "binary_decisions_exact": true,
+      "max_absolute_score_difference": 2.145701662201152e-28,
+      "scores_bitwise_equal": false,
+      "well_id": "WELL-00006",
+      "windows": 2144
+    },
+    {
+      "binary_decisions_exact": true,
+      "max_absolute_score_difference": 2.3869795029440866e-15,
+      "scores_bitwise_equal": false,
+      "well_id": "WELL-00029",
+      "windows": 14717
+    }
+  ],
+  "selection_sha256": "dfbe88250db8808d58730ab6f0010da3c548cb4b1c26715ba4a4b78057e7130b",
+  "test_access_at_pretest_audit": false,
+  "test_attempts": 1,
+  "test_journal_status": "COMPLETE",
+  "test_metrics_sha256": "bc52de53d4fcd9f37a66f8db6586637c29678e51d7e45bc9c1a8e5abb831b860",
+  "test_predictions_sha256": "523c2f720a9c7a7a00b8d0c4ea7a64294eaf593b2fc93fd294436b1aa5c7afbb"
+}

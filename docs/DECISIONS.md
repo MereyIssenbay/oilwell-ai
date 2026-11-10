@@ -40,7 +40,18 @@ Recorded 2026-11-09. These are design decisions, not implementation claims. Revi
 | ADR-034 | Freeze naive, weighted Logistic Regression and normal-trained Isolation Forest parameters before results | Positive weight 2 expresses recall preference; thresholds 0.5 and the training-derived IF offset are fixed. No threshold/hyperparameter sweep, calibration or test-driven selection. AP and trapezoidal PR-AUC are named separately | Accepted; see reports/baseline/PROTOCOL.md |
 | ADR-035 | Evaluate predictive alert continuity independently of target labels and show normal-time occupancy | Unknown labels never reset episodes; file/gap/abstention starts are censored. Observed normal onsets per covered hour can understate an always-active alarm, so normal occupancy and false-positive decision fraction are mandatory companions | Accepted for offline sampled baseline evaluation |
 
+## Phase 5 outcome decisions
+
+- **ADR-039:** Retain the validation-selected LR artifact (`oilwell-binary-phase5-c4e1835a82620306778a`) and exact threshold after its one-time diagnostic test failed normal-time alarm control. Monitoring acceptance is rejected; no post-test replacement, refit or threshold adjustment. Selection completion is distinct from detector acceptance.
+- **ADR-040:** Disclose the discovered CatBoost inference-thread deviation without rewriting frozen code or rerunning benchmarks after test. Its native prediction default is not guaranteed single-thread; all fits were single-thread, timing did not select the model and selected LR inference is unaffected.
+
 ## Configuration evidence
+
+Phase 5 decisions (2026-11-10), recorded before candidate fitting:
+
+- **ADR-036:** User-authorized eight fixed CatBoost/XGBoost configurations and two saved learned incumbents, identical frozen features/groups, seed 42, CPU thread 1. Select validation recall under a 5% exact normal-time alarm-occupancy cap, then AP and deterministic ties. This cap is an exploratory engineering constraint, not an operational acceptance requirement; all trials remain visible.
+- **ADR-037:** Defer calibration, multiclass fitting and deep models because independent support/sequence-benefit evidence is inadequate. Preserve uncalibrated score semantics, evaluate probability losses only where meaningful, and report synthetic-origin metrics as unsupported rather than manufacturing a domain comparison.
+- **ADR-038:** Lock selection/code/bundle/provenance before a root-released single test inference. Persist exclusive access journal before any test read, refuse repeats even after partial failure, and independently audit saved outputs without re-inference. Existing test is EDA-exposed diagnostic; no production/generalization acceptance follows from it.
 
 The original project configuration already used the current `agents.enabled` and `agents.max_concurrent_threads_per_session` keys. It was retained and augmented with `features.multi_agent=true`, rather than replaced with older role-registration syntax. Official sources: [subagent configuration](https://learn.chatgpt.com/docs/agent-configuration/subagents) and [configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference). The configured limit of three excludes the primary orchestrator. Models inherit session settings; no model availability or price assumptions are embedded in the profiles.
 

@@ -2,7 +2,7 @@
 
 A production-oriented portfolio MVP for historical oil-well monitoring, ML event detection, telemetry replay and evidence-grounded explanations using the [Petrobras 3W dataset](https://github.com/petrobras/3W).
 
-**Current state: Phase 4 diagnostic baseline complete.** Naive references, Logistic Regression and a normal-trained Isolation Forest use the same frozen real validation cohort. Logistic Regression achieves precision 0.956609485 and recall 0.539003866; Isolation Forest reaches recall 1.0 while alarming during 98.67% of monitored normal time. These are development results on an EDA-exposed cohort, and no model is accepted as a reliable monitoring detector. All 214 tests passed; two repeated runs produced 14 byte-identical artifacts. Current verification and phase status are recorded in [PROGRESS.md](docs/PROGRESS.md), with an [independent review](docs/reviews/PHASE_4.md). Work stops at Phase 4 pending user approval.
+**Current state: Phase 5 model selection complete; monitoring acceptance rejected.** Eight CatBoost/XGBoost configurations were compared with saved baselines. Validation selected Logistic Regression with a frozen threshold of `1.1881945293311268e-14`: recall 0.971344098 at 4.930106% normal alarm occupancy. Its one-time diagnostic test flagged every normal window (100% normal alarm occupancy; AP 0.452854833). No model or threshold changed after test. All 309 tests passed; this verifies software behavior, not detector reliability. See [final evaluation](reports/final_evaluation.md), [model card](docs/MODEL_CARD.md) and [progress](docs/PROGRESS.md). Stop after Phase 5 pending user approval.
 
 The planned stack is Python 3.11+, Pandas/PyArrow, scikit-learn and XGBoost, FastAPI/Pydantic, PostgreSQL, React/TypeScript/Plotly, Docker and pytest. CatBoost is a possible later challenger; ChromaDB is deferred until document retrieval is justified. The LLM provider is optional and disabled by default.
 
@@ -23,6 +23,7 @@ The candidate first model covers normal plus two undesirable event families, sel
 - [EDA notebook](notebooks/01_eda.ipynb), [chart and findings guide](reports/eda/README.md), [ML hypotheses](docs/ML_HYPOTHESES.md) and [split strategy](docs/SPLIT_STRATEGY.md)
 - [Feature engineering and reproduction](docs/FEATURE_ENGINEERING.md), [preprocessing summary](reports/preprocessing_summary.json) and [development split](data/manifests/development_split.json)
 - [Baseline comparison and failures](reports/baseline/README.md), [fixed experiment protocol](reports/baseline/PROTOCOL.md) and [exact validation metrics](reports/baseline/metrics.json)
+- [Phase 5 comparison](reports/model_comparison.csv), [final evaluation](reports/final_evaluation.md), [model card](docs/MODEL_CARD.md) and [independent evaluation review](docs/reviews/PHASE_5.md)
 - [Architecture decisions](docs/DECISIONS.md)
 - [API contract](docs/API_CONTRACT.md), [prediction JSON Schema](docs/contracts/prediction.schema.json) and [synthetic abstention example](docs/contracts/prediction.example.json)
 - [Engineering rules and ownership](AGENTS.md)
@@ -48,10 +49,12 @@ oilwell-ai/
 |-- requirements-eda.txt
 |-- requirements-pipeline.txt
 |-- requirements-baseline.txt
+|-- requirements-models.txt
 |-- notebooks/01_eda.ipynb
 |-- data/{raw,interim,processed,manifests}/
 |-- ml/{data_pipeline,features,training,inference,artifacts,runs}/
-|-- ml/{train_baseline.py,evaluate.py}
+|-- ml/{train_baseline.py,evaluate.py,predict.py}
+|-- ml/training/phase5.py
 |-- backend/{app,migrations}/
 |-- frontend/src/{components,features,api}/
 |-- llm/{evidence,prompts,providers,index}/
@@ -63,6 +66,10 @@ oilwell-ai/
 |-- reports/preprocessing_summary.json
 |-- reports/eda/                 # actual-data charts, descriptive CSVs and provenance
 |-- reports/baseline/            # validation metrics, figures, protocol and provenance
+|-- reports/experiments/         # bounded search, selection and one-shot test evidence
+|-- reports/model_comparison.csv
+|-- reports/final_evaluation.md
+|-- reports/model_selection_verification.json
 `-- docs/
     |-- ARCHITECTURE.md
     |-- ROADMAP.md
@@ -74,11 +81,12 @@ oilwell-ai/
     |-- ML_HYPOTHESES.md
     |-- SPLIT_STRATEGY.md
     |-- FEATURE_ENGINEERING.md
+    |-- MODEL_CARD.md
     |-- contracts/{prediction.schema.json,prediction.example.json}
-    `-- reviews/{PHASE_0.md,PHASE_1.md,PHASE_2.md,PHASE_3.md,PHASE_4.md}
+    `-- reviews/{PHASE_0.md,PHASE_1.md,PHASE_2.md,PHASE_3.md,PHASE_4.md,PHASE_5_FEATURES.md,PHASE_5.md}
 ```
 
-Data acquisition/validation, descriptive EDA, reusable preprocessing/features and diagnostic baseline training/evaluation are implemented. Original/processed data, row-level predictions and fitted model binaries remain ignored. Production inference, backend, frontend and LLM components remain planned. Binary baseline outputs are not canonical event-family API predictions. Docker Compose and application startup commands belong to later approved milestones. Do not attempt to launch services yet.
+Data acquisition/validation, EDA, preprocessing/features, bounded model selection and internal binary inference are implemented. Original/processed data, predictions, checkpoints and model binaries remain ignored. Backend, frontend, LLM and accepted monitoring integration remain planned. Binary inference results are not canonical event-family API predictions. Docker Compose and application startup commands belong to later approved milestones. Do not attempt to launch services yet.
 
 ## Agent workflow
 
@@ -119,3 +127,9 @@ For the fixed baseline comparison, after preprocessing:
 The command verifies frozen inputs, fits train only, scores validation only, checks artifact reload, and writes compact reports plus ignored model/prediction bundles. It does not tune thresholds or score test rows. AP and trapezoidal PR-AUC are reported separately; source/family/phase/well support and normal-time alarm occupancy accompany pooled metrics. The [baseline report](reports/baseline/README.md) records observed failures and remaining readiness requirements.
 
 Upstream code is Apache-2.0 and the dataset files are CC BY 4.0. Future acquisition and demo artifacts must preserve Petrobras/3W attribution, source/version and transformation details; the project does not imply endorsement.
+
+## Selected diagnostic artifact
+
+Install `requirements-models.txt` for the Phase 5 environment. The selected local bundle is `ml/artifacts/phase5/c4e1835a82620306778a/`. Load it through `ml.predict.load_bundle`, then call `predict_instance` with one ordered sensor-only instance; exact schema, score and abstention semantics are in the model card. The bundle contains the saved estimator, frozen preprocessing, split, threshold and provenance. It is retained as a failed diagnostic experiment and must not be presented as a reliable monitoring detector.
+
+The bounded search and one selected-model test evaluation are complete. Their CLI commands refuse another search/test attempt once `reports/experiments/test_access.json` exists. Inspect saved reports; do not reset that journal to obtain another test result. Future experiments need a separately approved protocol and suitable independent data. CatBoost inference timing has a documented thread-control deviation; no post-test rerun or model change was made.

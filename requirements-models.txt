@@ -1,0 +1,7 @@
+# Phase 5 CPU experimentation; prior pins preserved.
+-r requirements-baseline.txt
+xgboost==3.2.0
+catboost==1.2.10
+graphviz==0.21
+plotly==7.1.0
+six==1.17.0

@@ -4,6 +4,8 @@ Phase 2 EDA recommendation, 2026-11-10, retained as the evaluation policy. Phase
 
 The user subsequently authorized Phase 4 baseline fitting on the frozen diagnostic split. The [baseline protocol](../reports/baseline/PROTOCOL.md) defines binary detection, fixed model settings and validation-only comparison. The existing test partition is not scored or used for model selection. This limited experiment does not satisfy the protected-cohort requirements below.
 
+Phase 5 subsequently authorizes bounded boosted-model search and validation threshold selection, followed by **one selected-model evaluation on the existing diagnostic test partition**. The [Phase 5 protocol](../reports/experiments/PROTOCOL.md) freezes the search and access gate. This supersedes Phase 4's no-test-scoring rule only after selection is locked; it does not make previously EDA-exposed groups pristine. Split membership, source/feature policy and preprocessing remain unchanged. No test outcome may drive another model or threshold choice.
+
 ## Decision
 
 Use **disjoint published real well IDs**, strengthened by duplicate/overlap relationships, as the primary partition unit. Retain all observations and instances of a group in one partition before generating any windows. Keep simulated and hand-drawn sources out of the primary real validation and test sets. Use them only in a later explicitly compared training-augmentation arm, with generator-family limitations documented.
