@@ -6,7 +6,7 @@ Updated: 2026-11-10 (Asia/Oral).
 
 - **Phase 0: complete.** Architecture, contracts, configuration, scaffolding, static verification and independent review are complete.
 - **Phase 1: complete**, authorized and executed on 2026-11-10. Bounded acquisition, inspection, automated validation, provenance documentation and independent integrity review only.
-- Phases 2-5: planned only. No model, application, Docker stack or application tests exist.
+- **Phase 2 EDA: complete**, authorized and executed on 2026-11-10. Actual-data exploration, charts, hypotheses, split recommendation and independent leakage review only. This user request supersedes the original roadmap's Phase 2 model-training schedule. Work stops here; additional acquisition, production preprocessing, training and application implementation require a new approval.
 
 ## Phase 0 delivered design
 
@@ -74,9 +74,50 @@ Final report provenance includes the base Git revision plus dirty-working-tree s
 
 QA found and verified four implementation corrections: retry interrupted HTTP responses; reject a raw-root symlink escape; constrain report output and use unique temporary files; handle malformed root manifest types with documented exit codes. No source data was changed to satisfy a test. Initial sandbox network/temp-fixture permission failures were resolved by narrow approved execution escalation; no external access blocker remains. Generated failed-test cache directories were removed after checking their exact workspace paths.
 
+## Phase 2 deliverables and verified results
+
+The orchestrator assigned EDA to `data_engineer`, testable hypotheses to `ml_engineer`, and an independent leakage/integrity review to `qa_reviewer`, with three disjoint assignments. The orchestrator retained the split recommendation, dependencies, shared phase records and integration. All owners returned their files at handoff; no nested delegation was used.
+
+Delivered:
+
+- [Executed notebook](../notebooks/01_eda.ipynb) and [reproducible EDA module](../scripts/data/eda.py).
+- [Chart and methods guide](../reports/eda/README.md), eight actual-data PNGs, eight CSV tables and [EDA summary/provenance](../reports/eda/eda_summary.json).
+- [Five testable ML hypotheses](ML_HYPOTHESES.md), with controls, falsifying outcomes, metrics and support limitations. These are proposed experiments, not demonstrated model results.
+- [Split strategy](SPLIT_STRATEGY.md), including published well-ID evidence, development exposure, class support, future protected-test requirements and leakage controls.
+- [Independent review](reviews/PHASE_2.md), three EDA tests, 16 independent QA tests and [pinned EDA dependencies](../requirements-eda.txt). Phase 1 dependency pins remain unchanged.
+
+Measured findings use all 582,220 rows from the same 23 immutable files:
+
+| Question | Observed finding and interpretation |
+| --- | --- |
+| Class imbalance | Real rows: 125,940 normal, 107,094 transient, 39,291 steady event and 50,400 unknown. Family 8 contributes 86,422 / 146,385 real abnormal rows (59.04%) from one published well ID; row volume is not independent event support |
+| Missingness and variation | Four sensors are entirely missing; availability varies by origin and class/well mixture. P-PDG is observed but constant zero in the three selected WELL-00002 files. No zeros were reclassified or missing values filled |
+| Normal/event comparison | The event-1 WELL-00002 P-TPT median is 17.09 MPa over 4,754 known-normal rows versus 14.56 MPa over 9,617 abnormal rows. This descriptive association does not establish causality or predictive transfer |
+| Correlations and origins | P-PDG/P-TPT within-instance correlation is defined in only 2/14 real files, with median -0.3107; simulated median is 0.9868 across 7/7 files, with a wide range. Pair counts, valid-instance support, constants and undefined values are retained; no causal or independence claim is made |
+| Transitions | 61 raw-label runs; 38 within-file changes, comprising 24 known-label changes and 14 unknown boundaries. Four of 14 transient runs are censored. Unknown-to-abnormal boundaries are not verified onsets |
+| Grouping and class coverage | The public manuscript documents stable real well IDs across directories. Twelve real IDs are present; most undesirable families have one supporting real ID, family 4 has two and family 9 has none. No undesirable family supports three disjoint real groups in this subset |
+
+`class` and `state` remain labels, never sensor inputs. Only the exact 27-sensor allowlist enters correlations. Statistical summaries use full-resolution observations; only sensor line display is decimated, to at most 1,500 positions per contiguous finite segment, preserving missing/time gaps and full-resolution label shading. Pressure scaling is display-only. Raw timestamps remain in their unknown source timezone basis.
+
+| Verification | Actual result | Scope / limitation |
+| --- | --- | --- |
+| EDA module and notebook execution | Eight PNGs, eight CSVs and summary produced; notebook has 17 cells, eight executed code cells, zero stored errors | Executed on Windows/Python 3.13.3 in project `.venv`; no training or application execution |
+| Notebook/report consistency | All eight embedded PNGs byte-match saved report images; script and dependency provenance hashes match | Reproducible descriptive artifact, not model evaluation |
+| Independent raw-derived reconciliation | QA reconciled 52 class records, 837 missingness records, 621 availability records, 8,073 pair records, 1,053 correlation summaries, 158 condition summaries, 61 runs and 38 boundaries | Independent inline audit without EDA aggregation functions; details in review |
+| Source integrity | All 23 original Parquet SHA-256 values unchanged after EDA and independent rereads | No additional telemetry acquired; existing original metadata and source selection retained |
+| Combined pytest suite | **74 passed in 1.00 seconds, zero failed/skipped**: 55 Phase 1 tests, three EDA tests and 16 independent EDA QA tests | Offline acquisition/integrity/descriptive-analysis checks; no predictive performance, application or deployment claims |
+| Dependency check | `.venv/Scripts/python.exe -m pip check`: no broken requirements found | Phase 1 pins preserved; EDA additions pinned separately |
+| Visual and independent review | All eight charts inspected during integration; corrected footer spacing and selected final figures rechecked; no unresolved Phase 2 review blocker | Review resolved display-point bounds, timestamp-gap segmentation, axis comparisons, censoring and metric-support wording |
+| Final repository/provenance audit | PASS: 87 Git-visible project files, 127 valid local links, seven strict JSON/notebook files, valid notebook schema, 50 installed dependency pins and three changed Python sources compiled | All 23 Parquet hashes match; originals remain ignored; Phase 1 scripts/manifests/report/pins unchanged; application and processed-data directories contain placeholders only |
+| `git diff --check` | Exit 0; separate UTF-8/newline/whitespace audit also passed for tracked and new text files | Git emitted LF-to-CRLF conversion notices only; no commit was made |
+
+Combined test command: `.venv/Scripts/python.exe -m pytest tests/data tests/qa -q -p no:cacheprovider --basetemp <unique-workspace-temp-path> --tb=short`. Initial notebook connection-file and pytest fixture ACL restrictions were resolved by narrow execution escalation. The successful notebook kernel was shut down; no services were installed or started.
+
+The five future hypotheses compare values against availability shortcuts, trailing changes against absolute levels, multiple sensors against a single-channel baseline, transient supervision against steady-only supervision, and synthetic augmentation against real-only training. Their effects are untested. All 23 instances and all 12 published real well IDs are recorded as development-exposed, including future files from those same IDs for an unseen-well evaluation.
+
 ## Blockers and unresolved evidence
 
-No blocker remains for the requested Phase 1 acquisition/audit. The original roadmap's broader M1 modeling-cohort/split acceptance remains unresolved: most selected undesirable families occur in only one real well group, and no selected real row contains family 9. No split manifest, final model scope, preprocessing or training was created. Further approved data work must establish sufficient independent real groups and usable label/sensor coverage before model work.
+No blocker remains for the requested Phase 1 acquisition/audit or Phase 2 EDA. The original roadmap's broader M1 modeling-cohort/split acceptance remains unresolved: most selected undesirable families occur in only one real well group, and no selected real row contains family 9. The inspected subset cannot supply a pristine, class-supported three-way multiclass evaluation. No split manifest, final model scope, preprocessing or training was created. Further approved data work must establish sufficient independent real groups and usable label/sensor coverage before model work.
 
 Residual limitations: unknown source timezone and physical-identity equivalence; structural/origin-dependent sensor missingness; initial null target/status labels; absent steady code 7; documentation-versus-file dtype discrepancy; 40 real filename IDs in pinned inventory versus 42 wells in release notes; possible wider-corpus overlaps/near-duplicates and upstream interpolation. Thresholds, calibration, model performance and provider selection remain future decisions.
 
@@ -84,4 +125,4 @@ The independent review prompted two integrated corrections: snapshots and events
 
 ## Next action
 
-**Stopped after Phase 1. Await explicit approval for the next scoped work.** A sensible next step is a targeted data-cohort expansion and split-feasibility decision, because this audit subset is not a training/evaluation cohort. Do not proceed automatically to preprocessing, features, model training or application implementation.
+**Stop: Phase 2 is complete. Await the user's next phase approval.** The recommended next scope is cohort/split readiness: select a supportable task, obtain adequate independent real groups if authorized, and freeze disjoint published-well groups plus duplicate/overlap relationships before windows. Reserve fresh real groups for final testing before exploratory access; keep synthetic sources out of primary real validation/test. Only after that gate should a separately authorized modeling phase test small scikit-learn baselines and the five hypotheses before considering XGBoost. No training is authorized by this handoff.

@@ -2,7 +2,7 @@
 
 ## Phase gate and source of truth
 
-- Current authorization: **Phase 1 only**, approved by the user on 2026-11-10: bounded dataset acquisition, inspection, automated validation and provenance reporting. Stop after Phase 1; do not implement preprocessing, features or model training. Later phases require explicit approval.
+- Current authorization: **Phase 2 EDA only**, approved by the user on 2026-11-10: analyze the acquired subset, create actual-data plots and a reproducible notebook, formulate testable hypotheses, and recommend a leakage-aware split. Do not train models, create production preprocessing/features, or download additional telemetry. Stop after this phase. This EDA request supersedes the original roadmap's Phase 2 training schedule.
 - Do not download, clone, sample, or ingest the 3W telemetry, train models, install application services, or implement product features during Phase 0. Reading upstream documentation and metadata is allowed.
 - Read `docs/PROGRESS.md`, `docs/DECISIONS.md`, and the relevant contract before work. Record unresolved assumptions instead of silently converting them into facts.
 - Upstream dataset metadata and a pinned acquisition manifest govern ingestion. Never assume the historical CSV/eight-sensor layout. Preserve original names, labels, units, time semantics, origins, and source checksums.
@@ -23,6 +23,7 @@ The main orchestrator owns integration, task assignment, interface decisions, ro
 
 - Ownership grants no automatic permission to begin a later phase. Restrict each turn to its assigned files and approved milestone.
 - Phase 1 assignment exception: the orchestrator may assign `scripts/download_data.py` to `data_engineer`; `scripts/validate_data.py`, `reports/data_summary.json`, root dependency files and consolidated audit/progress documents remain orchestrator-owned. QA owns its independent review/tests. Record any subsequent transfer explicitly.
+- Phase 2 ownership exceptions: `data_engineer` owns `notebooks/01_eda.ipynb`, `scripts/data/eda.py`, `reports/eda/` and `tests/data/test_eda.py`; `ml_engineer` owns `docs/ML_HYPOTHESES.md`; `qa_reviewer` owns `docs/reviews/PHASE_2.md` and `tests/qa/test_eda_integrity.py`. The orchestrator owns `docs/SPLIT_STRATEGY.md`, root dependencies, shared phase records and integration. All acquired instances inspected during EDA are development data, not an untouched final test set.
 - Never assign concurrent writers to the same file. Reserve files before editing; release ownership at handoff. Separate test ownership by the table above. All shared contract and root configuration changes go through the orchestrator.
 - All agents share the working tree. Do not revert, overwrite, clean, reset, or remove another contributor's work. Read current files before editing and report conflicting changes.
 - Subagents do not spawn further agents. Report cross-boundary needs to the orchestrator; propose a patch or contract change without editing the other owner's files.

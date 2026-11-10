@@ -2,7 +2,7 @@
 
 A production-oriented portfolio MVP for historical oil-well monitoring, ML event detection, telemetry replay and evidence-grounded explanations using the [Petrobras 3W dataset](https://github.com/petrobras/3W).
 
-**Current state: Phase 1 acquisition and audit complete.** A pinned subset of 23 original Parquet files (582,220 rows) was downloaded and inspected. Reproducible download/validation scripts and 55 passing acquisition/integrity tests are available. No preprocessing, splits, features, model training or application implementation has been performed. Further work requires explicit approval.
+**Current state: Phase 2 exploratory analysis complete.** The acquired 23-file subset (582,220 rows) now has an executed EDA notebook, eight actual-data charts, descriptive tables, five testable ML hypotheses and a split recommendation. No model has been trained and no production preprocessing, feature pipeline, partition or application implementation has been created. Current verification and phase status are recorded in [PROGRESS.md](docs/PROGRESS.md). Further work requires a new phase approval.
 
 The planned stack is Python 3.11+, Pandas/PyArrow, scikit-learn and XGBoost, FastAPI/Pydantic, PostgreSQL, React/TypeScript/Plotly, Docker and pytest. CatBoost is a possible later challenger; ChromaDB is deferred until document retrieval is justified. The LLM provider is optional and disabled by default.
 
@@ -20,6 +20,7 @@ The candidate first model covers normal plus two undesirable event families, sel
 - [Milestone graph and acceptance criteria](docs/ROADMAP.md)
 - [Current progress and verification](docs/PROGRESS.md)
 - [Dataset audit](docs/DATASET_AUDIT.md), [acquisition instructions](data/README.md) and [machine-readable summary](reports/data_summary.json)
+- [EDA notebook](notebooks/01_eda.ipynb), [chart and findings guide](reports/eda/README.md), [ML hypotheses](docs/ML_HYPOTHESES.md) and [split strategy](docs/SPLIT_STRATEGY.md)
 - [Architecture decisions](docs/DECISIONS.md)
 - [API contract](docs/API_CONTRACT.md), [prediction JSON Schema](docs/contracts/prediction.schema.json) and [synthetic abstention example](docs/contracts/prediction.example.json)
 - [Engineering rules and ownership](AGENTS.md)
@@ -42,6 +43,8 @@ oilwell-ai/
 |-- .gitignore
 |-- .env.example
 |-- requirements-data.txt
+|-- requirements-eda.txt
+|-- notebooks/01_eda.ipynb
 |-- data/{raw,interim,processed,manifests}/
 |-- ml/{features,training,inference,artifacts,runs}/
 |-- backend/{app,migrations}/
@@ -50,6 +53,7 @@ oilwell-ai/
 |-- tests/{data,ml,backend,frontend,llm,contract,integration,e2e,qa}/
 |-- scripts/{download_data.py,validate_data.py,data/,ml/}
 |-- reports/data_summary.json
+|-- reports/eda/                 # actual-data charts, descriptive CSVs and provenance
 `-- docs/
     |-- ARCHITECTURE.md
     |-- ROADMAP.md
@@ -58,11 +62,13 @@ oilwell-ai/
     |-- API_CONTRACT.md
     |-- DATASET_METADATA.md
     |-- DATASET_AUDIT.md
+    |-- ML_HYPOTHESES.md
+    |-- SPLIT_STRATEGY.md
     |-- contracts/{prediction.schema.json,prediction.example.json}
-    `-- reviews/{PHASE_0.md,PHASE_1.md}
+    `-- reviews/{PHASE_0.md,PHASE_1.md,PHASE_2.md}
 ```
 
-Data acquisition/validation, manifests and their tests are implemented. Raw files live under ignored `data/raw/`; backend, frontend, ML and LLM directories remain placeholders. Docker Compose and application startup commands belong to later approved milestones. Do not attempt to launch services yet.
+Data acquisition/validation and descriptive EDA, their manifests/reports and tests are implemented. Raw files live under ignored `data/raw/`; backend, frontend, ML and LLM directories remain placeholders. Docker Compose and application startup commands belong to later approved milestones. Do not attempt to launch services yet.
 
 ## Agent workflow
 
@@ -81,5 +87,7 @@ python -m venv .venv
 ```
 
 The saved manifest fixes the exact bounded selection. Original files are hash-verified and never silently replaced. The audit is size-biased and is not an ML cohort; later approved work must establish sufficient independent real groups and row-label coverage before preprocessing or training. `.env.example` remains proposed application configuration with blank credentials; neither data script needs secrets.
+
+For EDA, install `requirements-eda.txt` into the same project environment and follow the [reproduction instructions](reports/eda/README.md). Descriptive class/run summaries and plot-only unit scaling do not modify source files or provide trained features. The publisher's stable real `WELL` IDs support grouping across event directories. All 23 inspected files and their 12 real well IDs are development-exposed; a future final evaluation must reserve fresh groups. Current per-family well support is insufficient for the planned multiclass train/validation/test split.
 
 Upstream code is Apache-2.0 and the dataset files are CC BY 4.0. Future acquisition and demo artifacts must preserve Petrobras/3W attribution, source/version and transformation details; the project does not imply endorsement.

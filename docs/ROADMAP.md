@@ -2,6 +2,8 @@
 
 Phase 0 is complete. The user approved a bounded Phase 1 acquisition/audit on 2026-11-10, now completed; preprocessing and training were explicitly excluded. All subsequent implementation remains gated. The orchestrator records scope approvals in [PROGRESS.md](PROGRESS.md).
 
+The subsequent user request defines **Phase 2 as exploratory data analysis**, not training: an executed notebook, actual-data charts, five testable hypotheses, leakage review and a split recommendation. This supersedes the original Phase 2 schedule below; M2/M3 and all application work remain unapproved future milestones. EDA is inserted before the model-readiness gate, and all explored files/well IDs become development-exposed.
+
 The original M1 below includes later modeling-cohort/split readiness. The requested Phase 1 audit does not satisfy those additional gates: the size-biased subset has sparse real groups, missing target phases and unknown labels. No split or final model scope was created. A further approved data expansion/cohort decision must resolve these prerequisites before M2; Phase 1 completion is not authorization to proceed automatically.
 
 ## Dependency graph
@@ -10,8 +12,10 @@ The original M1 below includes later modeling-cohort/split readiness. The reques
 flowchart TD
     M0["M0 / Phase 0: design, contracts, agents"] --> G1{"User approves Phase 1"}
     G1 --> M1["M1 / Phase 1: data foundation and scope audit"]
-    M1 --> M2["M2 / Phase 2: baseline and evaluated artifact"]
-    M1 --> M3["M3 / Phase 2: persistence and replay API"]
+    M1 --> E2["Phase 2: EDA, hypotheses and split strategy"]
+    E2 --> COHORT["Further approval: feasible cohort and protected test groups"]
+    COHORT --> M2["M2 / Future: baseline and evaluated artifact"]
+    COHORT --> M3["M3 / Future: persistence and replay API"]
     M3 --> M4["M4 / Phase 3: dashboard and replay UX"]
     M2 --> M5["M5 / Phase 3: inference integration and alert policy"]
     M3 --> M5
