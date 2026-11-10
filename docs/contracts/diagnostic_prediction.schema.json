@@ -1,0 +1,403 @@
+{
+  "$defs": {
+    "Execution": {
+      "additionalProperties": false,
+      "properties": {
+        "generated_at": {
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "mode": {
+          "const": "historical_inference",
+          "default": "historical_inference",
+          "title": "Mode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "generated_at"
+      ],
+      "title": "Execution",
+      "type": "object"
+    },
+    "Provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "dataset_name": {
+          "const": "3W",
+          "default": "3W",
+          "title": "Dataset Name",
+          "type": "string"
+        },
+        "dataset_revision": {
+          "pattern": "^[0-9a-f]{40}$",
+          "title": "Dataset Revision",
+          "type": "string"
+        },
+        "dataset_version": {
+          "title": "Dataset Version",
+          "type": "string"
+        },
+        "model_artifact_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Model Artifact Sha256",
+          "type": "string"
+        },
+        "preprocessor_fingerprint": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Preprocessor Fingerprint",
+          "type": "string"
+        },
+        "request_window_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Request Window Sha256",
+          "type": "string"
+        },
+        "source_instance_id": {
+          "title": "Source Instance Id",
+          "type": "string"
+        },
+        "source_kind": {
+          "const": "real",
+          "default": "real",
+          "title": "Source Kind",
+          "type": "string"
+        },
+        "source_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Sha256",
+          "type": "string"
+        },
+        "source_timestamp": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?$",
+          "title": "Source Timestamp",
+          "type": "string"
+        },
+        "time_basis": {
+          "const": "source_naive_assumed_utc",
+          "default": "source_naive_assumed_utc",
+          "title": "Time Basis",
+          "type": "string"
+        },
+        "well_identity_kind": {
+          "const": "anonymized_well",
+          "default": "anonymized_well",
+          "title": "Well Identity Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "dataset_version",
+        "dataset_revision",
+        "source_instance_id",
+        "source_sha256",
+        "source_timestamp",
+        "preprocessor_fingerprint",
+        "model_artifact_sha256",
+        "request_window_sha256"
+      ],
+      "title": "Provenance",
+      "type": "object"
+    },
+    "Quality": {
+      "additionalProperties": false,
+      "properties": {
+        "missing_fraction": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Missing Fraction",
+          "type": "number"
+        },
+        "status": {
+          "enum": [
+            "valid",
+            "degraded",
+            "invalid"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 16,
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status",
+        "missing_fraction",
+        "warnings"
+      ],
+      "title": "Quality",
+      "type": "object"
+    },
+    "SensorEvidence": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_id": {
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "method": {
+          "const": "observed_summary",
+          "default": "observed_summary",
+          "title": "Method",
+          "type": "string"
+        },
+        "missing_fraction": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Missing Fraction",
+          "type": "number"
+        },
+        "sensor_name": {
+          "title": "Sensor Name",
+          "type": "string"
+        },
+        "statistic": {
+          "const": "mean",
+          "default": "mean",
+          "title": "Statistic",
+          "type": "string"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "window_end": {
+          "format": "date-time",
+          "title": "Window End",
+          "type": "string"
+        },
+        "window_start": {
+          "format": "date-time",
+          "title": "Window Start",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "sensor_name",
+        "value",
+        "unit",
+        "window_start",
+        "window_end",
+        "missing_fraction"
+      ],
+      "title": "SensorEvidence",
+      "type": "object"
+    },
+    "Window": {
+      "additionalProperties": false,
+      "properties": {
+        "end": {
+          "format": "date-time",
+          "title": "End",
+          "type": "string"
+        },
+        "expected_sample_count": {
+          "const": 60,
+          "default": 60,
+          "title": "Expected Sample Count",
+          "type": "integer"
+        },
+        "sample_count": {
+          "maximum": 60,
+          "minimum": 1,
+          "title": "Sample Count",
+          "type": "integer"
+        },
+        "start": {
+          "format": "date-time",
+          "title": "Start",
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "sample_count"
+      ],
+      "title": "Window",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "abnormal_score": {
+      "anyOf": [
+        {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Abnormal Score"
+    },
+    "abstention_reason": {
+      "anyOf": [
+        {
+          "enum": [
+            "insufficient_history",
+            "missing_required_sensors"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Abstention Reason"
+    },
+    "accepted_for_monitoring": {
+      "const": false,
+      "default": false,
+      "title": "Accepted For Monitoring",
+      "type": "boolean"
+    },
+    "alert_status": {
+      "enum": [
+        "normal",
+        "alert",
+        "insufficient_data"
+      ],
+      "title": "Alert Status",
+      "type": "string"
+    },
+    "confidence": {
+      "anyOf": [
+        {
+          "maximum": 1,
+          "minimum": 0,
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Confidence"
+    },
+    "confidence_kind": {
+      "enum": [
+        "raw_probability",
+        "unavailable"
+      ],
+      "title": "Confidence Kind",
+      "type": "string"
+    },
+    "diagnostic_only": {
+      "const": true,
+      "default": true,
+      "title": "Diagnostic Only",
+      "type": "boolean"
+    },
+    "event_type": {
+      "enum": [
+        "normal",
+        "undesirable_event",
+        "unknown"
+      ],
+      "title": "Event Type",
+      "type": "string"
+    },
+    "execution": {
+      "$ref": "#/$defs/Execution"
+    },
+    "feature_spec_version": {
+      "title": "Feature Spec Version",
+      "type": "string"
+    },
+    "model_version": {
+      "title": "Model Version",
+      "type": "string"
+    },
+    "policy_version": {
+      "title": "Policy Version",
+      "type": "string"
+    },
+    "prediction_id": {
+      "format": "uuid",
+      "title": "Prediction Id",
+      "type": "string"
+    },
+    "provenance": {
+      "$ref": "#/$defs/Provenance"
+    },
+    "quality": {
+      "$ref": "#/$defs/Quality"
+    },
+    "schema_version": {
+      "const": "diagnostic-1.0.0",
+      "default": "diagnostic-1.0.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sensor_evidence": {
+      "items": {
+        "$ref": "#/$defs/SensorEvidence"
+      },
+      "maxItems": 27,
+      "title": "Sensor Evidence",
+      "type": "array"
+    },
+    "threshold": {
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Threshold",
+      "type": "number"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "well_id": {
+      "title": "Well Id",
+      "type": "string"
+    },
+    "window": {
+      "$ref": "#/$defs/Window"
+    }
+  },
+  "required": [
+    "prediction_id",
+    "timestamp",
+    "well_id",
+    "event_type",
+    "confidence",
+    "confidence_kind",
+    "abnormal_score",
+    "threshold",
+    "model_version",
+    "feature_spec_version",
+    "policy_version",
+    "sensor_evidence",
+    "alert_status",
+    "abstention_reason",
+    "window",
+    "quality",
+    "provenance",
+    "execution"
+  ],
+  "title": "DiagnosticPrediction",
+  "type": "object"
+}

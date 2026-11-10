@@ -1,6 +1,49 @@
 # API and prediction contract
 
-Status: design v1.0.0, Phase 0. Routes, Pydantic models, OpenAPI generation, TypeScript types and transports are **not implemented**. [prediction.schema.json](contracts/prediction.schema.json) is the normative shape of a persisted prediction; the invariants below are also mandatory. [prediction.example.json](contracts/prediction.example.json) is a synthetic abstention fixture, not a dataset observation or model result.
+Status: canonical event-family design v1.0.0 is retained below and remains unimplemented. Phase 6 adds the separately versioned **diagnostic-1.0.0** synchronous API described first. It wraps the selected binary model without pretending to implement an event-family classifier or replay worker. [prediction.schema.json](contracts/prediction.schema.json) and its synthetic fixture remain byte-for-byte unchanged. The additive [diagnostic prediction schema](contracts/diagnostic_prediction.schema.json) and [OpenAPI export](openapi.json) govern the implemented routes.
+
+## Phase 6 diagnostic API: compatibility and scope
+
+The requested routes are unprefixed and distinct from the planned `/api/v1` replay API below. `/docs` serves Swagger UI; `/openapi.json` serves its typed schema. The selected model was rejected for monitoring after alarming throughout normal diagnostic test time. Every prediction/model record declares `diagnostic_only=true` and `accepted_for_monitoring=false`. This API demonstrates actual frozen inference and persistence, not operational reliability.
+
+| Route | Request | Response |
+| --- | --- | --- |
+| `GET /health` | None | Typed readiness of model, registered data and PostgreSQL; diagnostics remain available in degraded startup |
+| `GET /wells` | Bounded cursor/limit | `{items,next_cursor}` containing registered real well IDs and source-instance bounds |
+| `GET /wells/{id}/telemetry` | Required `source_instance_id`; `offset` >=0, `limit` 1..1000; optional registered sensor list | `{well_id,source_instance_id,source_kind,time_basis,mode,items,next_offset}`; sensor-only observations, no labels |
+| `POST /predict` | Required `Idempotency-Key`; `source_instance_id`, strict integer `endpoint_position`; optional exact `model_version` and `samples` | One persisted diagnostic prediction, including actual score, frozen threshold, provenance and source/processing timestamps |
+| `GET /alerts` | Bounded cursor/limit, optional well ID | Persisted diagnostic positive-prediction events, linked to immutable prediction IDs |
+| `GET /models/info` | None | Immutable version, threshold, exact sensors/window/stride, fingerprints, score semantics and known limitations |
+
+The immutable registry exposes only the ten existing real train/validation instances. Test and excluded synthetic sources are unregistered and return 404; no Phase 5 test prediction is repeated for API checks. Caller input cannot choose a filesystem path, split, feature mask, target, model binary or threshold. Registry startup checks pinned source bytes and decodes sensor columns only; prediction never loads training code or fits an estimator.
+
+Prediction endpoints follow the frozen window alignment: `endpoint_position=59+10*k` for complete windows. Prefix endpoints 0..58 return an explicit `insufficient_history` abstention. Each operation uses at most the trailing 60 source rows; no window spans source boundaries. Optional `samples` must have exactly `min(60,endpoint_position+1)` entries, exact source-naive timestamps and all 27 registered sensor names. Values are finite numbers or null, with Boolean/string/nonfinite values and extra `class`/`state` keys rejected. Samples must exactly match the registered original window, including missing values; otherwise 422 `SOURCE_WINDOW_MISMATCH`. This prevents attaching an original checksum to altered client telemetry. Arbitrary uploaded/live sensor streams require a future provenance contract.
+
+### Diagnostic prediction schema and semantics
+
+The schema identity is `diagnostic-1.0.0`, deliberately distinct from event-family `1.0.0`. Required shared fields remain timestamp, well_id, event_type, confidence, model_version, sensor_evidence and alert_status, with typed window, quality, provenance and execution metadata.
+
+- `event_type` is `normal`, `undesirable_event` (binary positive, no family inferred), or `unknown` for abstention. `abnormal_score` is the frozen uncalibrated positive-class probability, not certainty. `confidence` is the score for the selected binary class (`p` when positive, `1-p` when normal); both are null on abstention.
+- `threshold` is exactly `1.1881945293311268e-14`; positive decisions use `>=`. It is not rounded, recalibrated or selected inside a handler. `alert_status` is `alert`, `normal` or `insufficient_data`, consistent with the binary decision and abstention reason.
+- `confidence_kind` is `raw_probability` or `unavailable`. `feature_spec_version`, `policy_version`, selected model version, preprocessing fingerprint and model artifact SHA-256 are immutable identifiers, not `latest` aliases.
+- `sensor_evidence` contains one observed mean per exact sensor, with units/domain, missing fraction and causal window bounds. Null summaries remain null. Summaries are not feature attribution or physical explanation.
+- `timestamp` and window coordinates use UTC-tagged transport with `source_naive_assumed_utc`. `provenance.source_timestamp` preserves original naive coordinates; source timezone is unverified. `execution.generated_at` is actual processing UTC, separately persisted.
+- Provenance binds dataset revision/version, opaque registered instance ID, original Parquet SHA-256, origin/identity kind, preprocessing/model hashes and a canonical label-free request-window SHA-256. Internal absolute paths and label-bearing source filenames are not returned.
+- `execution.mode=historical_inference`. No replay ID, speed, cursor lifecycle or stream sequence is fabricated for synchronous calls. This is not the planned durable replay worker.
+
+### Persistence, errors and logging
+
+Production persistence uses PostgreSQL only. A successful prediction and its optional diagnostic alert are committed atomically with the idempotency key/request hash. Same-key/same-request retries return the original prediction; same-key/different-request returns 409. Keys remain stored for the lifetime of this local database. Fresh keys intentionally represent distinct prediction operations. Fixture repositories exist only through explicit test injection; database unavailability returns 503 and never silently switches storage.
+
+`GET /alerts` returns per-prediction diagnostic events, not ongoing operational episodes. It makes no dwell/recovery, episode closure, acknowledgement or replay-restart guarantee. Future replay integration must implement the separate episode policy described below; it cannot silently reinterpret these diagnostic rows.
+
+Errors use the existing `{error:{code,message,details,request_id}}` envelope with bounded sanitized details. Validation messages do not echo submitted sensor payloads or credentials. Invalid input is 422, missing registry resources 404, idempotency conflicts 409, oversized payloads 413, saturated prediction capacity 429, dependency failure 503, unexpected exceptions 500. Request IDs appear in response headers and structured logs. Logs record identifiers/status/version and alert creation, excluding raw samples, request bodies, secrets, database URLs and client-facing tracebacks.
+
+The service binds to loopback by default and limits request bodies, telemetry pages and inference concurrency. PostgreSQL connection/statement/lock timeouts are bounded. Startup loads the frozen model once. Missing dependencies leave health/docs inspectable while affected routes fail explicitly. No public hosting, authentication deployment, continuous replay, SSE, frontend or copilot is part of Phase 6.
+
+### Migration note
+
+This is an additive diagnostic surface, not a backwards-compatible widening of canonical event-family predictions. Existing canonical schema/example bytes and planned routes remain intact. Future consumers must select the diagnostic schema explicitly; they cannot parse `undesirable_event` as one of nine known physical event families. A future accepted event-family model and replay implementation require a separate reviewed migration. The typed Pydantic schema and OpenAPI exports are checked for drift; any frontend must generate types from that exported contract.
 
 ## Conventions and ownership
 

@@ -60,3 +60,7 @@ The local bundle contains the estimator, frozen preprocessing, split and manifes
 Further deployment, API integration, calibration, data acquisition or result-driven model changes require a separately approved phase. Model selection alone does not establish operational readiness.
 
 Selected LR latency: feature-to-score wrapper p50/p95 3.588300/4.230460 ms; raw 60-row window through inference 6.993650/8.761235 ms. These exclude disk/model loading and are local validation measurements. CatBoost prediction latency has a recorded protocol deviation: native `thread_count=-1` was not explicitly overridden, so its timing is not a strict single-thread comparison. Training used one thread and latency did not affect selection. No frozen code/artifact was changed after this late finding.
+
+## Phase 6 serving scope
+
+The user subsequently authorized a local backend around this exact frozen artifact. [Diagnostic API integration](BACKEND.md) serves only registered train/validation sensor windows and preserves the model, threshold, preprocessing, provenance and Phase 5 test journal. No test inference or retraining occurred. `diagnostic-1.0.0` explicitly reports binary scores and rejected-monitoring status; it does not implement the original event-family prediction contract or promote this model's reliability. API/software acceptance does not change the failed model-quality conclusion above.

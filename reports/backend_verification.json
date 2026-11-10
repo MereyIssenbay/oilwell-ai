@@ -1,0 +1,60 @@
+{
+  "backend_code_sha256": {
+    "backend/__init__.py": "034fbc250933af7208f567d5fecf9b2c45dfa17fc0f4ef0c8434b3d139700213",
+    "backend/app/__init__.py": "434c6356fd3ddee695f93473d5d7a038c134ab4bf8f9b7355f1a9204b3a56c6a",
+    "backend/app/errors.py": "c9b3496732c1a552215438b6b360274ece98bcd8356db689406c813da008cb19",
+    "backend/app/inference.py": "78eb21e1ec1dd8d894a7e8adf63f7090f0209df370563c06c186b6858bf0329f",
+    "backend/app/main.py": "044821d03a549c09669f79e8e9e9e93b2c8bcdcc7c7d72d500ab639b1e94b170",
+    "backend/app/pagination.py": "773077445a5150fb7962b6f5ebeed0a21e475bdb43605f19c33607bf87784913",
+    "backend/app/registry.py": "ecb768932b1a5f88bfa2236220316e64ddd02997d0fa724c2a138be01cd0937a",
+    "backend/app/repository.py": "7fbc1b3581393d219a527447b10f817aa2f7264c427a15930788be7c1d3d20a0",
+    "backend/app/schemas.py": "10ef07df7819218cb5a0950b9ecb75dde4d9d659623edd49fc80aa03577c3430",
+    "backend/app/settings.py": "d0e0efab18d5eefd716d4499d4ee6cc7fc5b1dc4314cf6e3e8b3fd0f7d01e555"
+  },
+  "canonical_event_family_contract_unchanged": true,
+  "component_tests": {
+    "backend_owner": 30,
+    "independent_qa": 86,
+    "prior_regression": 309,
+    "real_frozen_root": 4
+  },
+  "database": {
+    "host": "127.0.0.1",
+    "isolated_test_databases": 3,
+    "live_linked_alerts": 1,
+    "live_prediction_payload_matches_response": true,
+    "port": 55436,
+    "product": "PostgreSQL",
+    "version": "18.3"
+  },
+  "dependency_pins_verified": 79,
+  "final_static_audit": {
+    "errors": [],
+    "git_visible_files": 169,
+    "installed_pins": 79,
+    "live_health_status": 200,
+    "new_python_syntax_checks": 17,
+    "prior_artifacts_unchanged": true,
+    "private_runtime_credentials_data_logs_ignored": true,
+    "schema_and_openapi_match": true,
+    "strict_json_notebooks": 24,
+    "test_attempts": 1,
+    "text_files": 159,
+    "toml_files": 7,
+    "valid_local_links": 292
+  },
+  "frozen_model_version": "oilwell-binary-phase5-c4e1835a82620306778a",
+  "full_regression": {
+    "duration_seconds": 29.51,
+    "failed": 0,
+    "passed": 429,
+    "skipped": 0,
+    "warning": "Upstream Starlette TestClient httpx deprecation",
+    "warnings": 1
+  },
+  "live_http_smoke": "reports/backend_smoke.json",
+  "model_accepted_for_monitoring": false,
+  "phase": 6,
+  "structured_prediction_and_alert_logs_observed": true,
+  "test_inference_performed": false
+}

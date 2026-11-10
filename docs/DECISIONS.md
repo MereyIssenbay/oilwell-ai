@@ -70,3 +70,9 @@ All seven TOML files were parsed with Python `tomllib`, and installed Codex `0.1
 | Is document retrieval or public hosting required? | Outside current MVP; separate scope decision and approval |
 
 Metadata evidence, licensing and caveats are in [DATASET_METADATA.md](DATASET_METADATA.md). Progress and actual verification results are in [PROGRESS.md](PROGRESS.md).
+
+## Phase 6 integration decisions
+
+- **ADR-041:** The user authorizes a local backend around the selected model despite its rejected monitoring status. Preserve the exact model, preprocessing, threshold and test evidence. API acceptance measures functioning diagnostic software, not detector quality.
+- **ADR-042:** Add `diagnostic-1.0.0` for binary historical inference with explicit score/threshold/provenance. Retain canonical event-family v1.0 unchanged; do not fabricate event identities, replay sessions or operational episodes.
+- **ADR-043:** Serve only registered train/validation sources; optional sensor payloads must match immutable raw windows. Exclude test/synthetic sources and labels from serving. Persist each prediction and optional diagnostic alert atomically in PostgreSQL with idempotency.

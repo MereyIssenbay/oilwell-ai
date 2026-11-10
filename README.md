@@ -2,7 +2,7 @@
 
 A production-oriented portfolio MVP for historical oil-well monitoring, ML event detection, telemetry replay and evidence-grounded explanations using the [Petrobras 3W dataset](https://github.com/petrobras/3W).
 
-**Current state: Phase 5 model selection complete; monitoring acceptance rejected.** Eight CatBoost/XGBoost configurations were compared with saved baselines. Validation selected Logistic Regression with a frozen threshold of `1.1881945293311268e-14`: recall 0.971344098 at 4.930106% normal alarm occupancy. Its one-time diagnostic test flagged every normal window (100% normal alarm occupancy; AP 0.452854833). No model or threshold changed after test. All 309 tests passed; this verifies software behavior, not detector reliability. See [final evaluation](reports/final_evaluation.md), [model card](docs/MODEL_CARD.md) and [progress](docs/PROGRESS.md). Stop after Phase 5 pending user approval.
+**Current state: Phase 6 backend complete.** The local FastAPI service provides six typed endpoints, frozen-model inference, PostgreSQL prediction/alert persistence, idempotency, structured errors/logs and Swagger documentation. **429 tests passed**, including real PostgreSQL and frozen-artifact integration. Start with [backend instructions](docs/BACKEND.md); the acceptance instance is available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs). The selected binary model remains rejected for monitoring after its Phase 5 test failure; every API result declares its diagnostic status. [Progress](docs/PROGRESS.md) records evidence and the Phase 6 stop.
 
 The planned stack is Python 3.11+, Pandas/PyArrow, scikit-learn and XGBoost, FastAPI/Pydantic, PostgreSQL, React/TypeScript/Plotly, Docker and pytest. CatBoost is a possible later challenger; ChromaDB is deferred until document retrieval is justified. The LLM provider is optional and disabled by default.
 
@@ -16,6 +16,7 @@ The candidate first model covers normal plus two undesirable event families, sel
 
 ## Documents
 
+- [Backend startup and examples](docs/BACKEND.md), [typed OpenAPI](docs/openapi.json), [live smoke evidence](reports/backend_smoke.json) and [backend verification](reports/backend_verification.json)
 - [Architecture and scope](docs/ARCHITECTURE.md)
 - [Milestone graph and acceptance criteria](docs/ROADMAP.md)
 - [Current progress and verification](docs/PROGRESS.md)
@@ -50,18 +51,21 @@ oilwell-ai/
 |-- requirements-pipeline.txt
 |-- requirements-baseline.txt
 |-- requirements-models.txt
+|-- requirements-backend.txt
 |-- notebooks/01_eda.ipynb
 |-- data/{raw,interim,processed,manifests}/
 |-- ml/{data_pipeline,features,training,inference,artifacts,runs}/
 |-- ml/{train_baseline.py,evaluate.py,predict.py}
 |-- ml/training/phase5.py
-|-- backend/{app,migrations}/
+|-- backend/app/{main,schemas,settings,errors,pagination,repository,registry,inference}.py
+|-- backend/migrations/001_diagnostic_predictions.sql
 |-- frontend/src/{components,features,api}/
 |-- llm/{evidence,prompts,providers,index}/
 |-- tests/{data,ml,backend,frontend,llm,contract,integration,e2e,qa}/
 |-- tests/test_data_pipeline.py
 |-- tests/test_training.py
 |-- scripts/{download_data.py,validate_data.py,prepare_data.py,data/,ml/}
+|-- scripts/{run_backend.py,local_postgres.py}
 |-- reports/data_summary.json
 |-- reports/preprocessing_summary.json
 |-- reports/eda/                 # actual-data charts, descriptive CSVs and provenance
@@ -70,6 +74,7 @@ oilwell-ai/
 |-- reports/model_comparison.csv
 |-- reports/final_evaluation.md
 |-- reports/model_selection_verification.json
+|-- reports/{backend_smoke,backend_verification}.json
 `-- docs/
     |-- ARCHITECTURE.md
     |-- ROADMAP.md
@@ -82,11 +87,13 @@ oilwell-ai/
     |-- SPLIT_STRATEGY.md
     |-- FEATURE_ENGINEERING.md
     |-- MODEL_CARD.md
-    |-- contracts/{prediction.schema.json,prediction.example.json}
-    `-- reviews/{PHASE_0.md,PHASE_1.md,PHASE_2.md,PHASE_3.md,PHASE_4.md,PHASE_5_FEATURES.md,PHASE_5.md}
+    |-- BACKEND.md
+    |-- openapi.json
+    |-- contracts/{prediction.schema.json,prediction.example.json,diagnostic_prediction.schema.json}
+    `-- reviews/{PHASE_0.md,PHASE_1.md,PHASE_2.md,PHASE_3.md,PHASE_4.md,PHASE_5_FEATURES.md,PHASE_5.md,PHASE_6.md}
 ```
 
-Data acquisition/validation, EDA, preprocessing/features, bounded model selection and internal binary inference are implemented. Original/processed data, predictions, checkpoints and model binaries remain ignored. Backend, frontend, LLM and accepted monitoring integration remain planned. Binary inference results are not canonical event-family API predictions. Docker Compose and application startup commands belong to later approved milestones. Do not attempt to launch services yet.
+Data acquisition/validation, EDA, preprocessing/features, model selection, internal binary inference and the local diagnostic API/PostgreSQL store are implemented. Raw/processed data, model binaries, database volumes and local credentials remain ignored. The additive diagnostic API is distinct from the planned canonical event-family/replay contract. Continuous replay, frontend, LLM and deployment remain future work.
 
 ## Agent workflow
 

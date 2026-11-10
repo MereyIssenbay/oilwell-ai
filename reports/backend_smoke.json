@@ -1,0 +1,27 @@
+{
+  "abnormal_score": 0.9999803020883076,
+  "accepted_for_monitoring": false,
+  "alert_status": "alert",
+  "base_url": "http://127.0.0.1:8000",
+  "confidence": 0.9999803020883076,
+  "event_type": "undesirable_event",
+  "idempotent_replay_exact": true,
+  "linked_alerts": 1,
+  "model_version": "oilwell-binary-phase5-c4e1835a82620306778a",
+  "prediction_id": "3f5484e0-d02c-485d-a778-1e5ef9e0fd03",
+  "routes": {
+    "alerts": 200,
+    "docs": 200,
+    "health": 200,
+    "invalid_input": 422,
+    "models_info": 200,
+    "predict": 200,
+    "telemetry": 200,
+    "wells": 200
+  },
+  "schema_valid": true,
+  "scope": "loopback HTTP smoke with immutable validation source; not model evaluation",
+  "source_instance_id": "3w:3b7750afe480cb1d04361795d4a5cded832ae3a05d5ef30f533d440c81bfb4cf",
+  "test_inference_performed": false,
+  "threshold": 1.1881945293311268e-14
+}
